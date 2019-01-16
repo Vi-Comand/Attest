@@ -1,0 +1,48 @@
+﻿@model Attest.Models.User
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <form method="post" asp-controller="User" asp-action="Edit">
+        <table>
+            <tr>
+                <td>Name</td>
+                <td>
+                    <input type="text" asp-for="Name" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>Fam</td>
+                <td>
+                    <input type="text" asp-for="Fam" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>Otch</td>
+                <td>
+                    <input type="text" asp-for="Otch" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>Snils</td>
+                <td>
+                    <input type="text" asp-for="Snils" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="submit" value="Save" />
+                    <input type="hidden" asp-for="Id" />
+                </td>
+            </tr>
+        </table>
+
+    </form>
+</body>
+</html>

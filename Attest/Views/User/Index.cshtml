@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <a asp-controller="User" asp-action="Add">Add user</a>
+    <table>
+        @foreach (var row in ViewBag.User)
+        {
+            <tr>
+                <td>@row.Id</td>
+                <td>@row.Name</td>
+                <td>@row.Otch</td>
+                <td>@row.Fam</td>
+                <td>@row.Snils</td>
+                <td> <a asp-controller="User" asp-action="edit" asp-route-id="@row.Id">Edit</a> | <a asp-controller="User" asp-action="Delete" asp-route-id="@row.Id" onclick="return confirm('Ты Серьезно ?')">Delete</a></td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
