@@ -11,6 +11,7 @@ namespace Attest.Controllers
 {
     public class HomeController : Controller
     {
+
         public IActionResult Index()
         {
             return View("index");
@@ -21,9 +22,12 @@ namespace Attest.Controllers
             return View("Login");
         }
 
-        public IActionResult Lk()
+        public IActionResult Lk(string email)
         {
+            ViewData["Message"] = "Привет " + email;
+
             return View("Lk");
+
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
