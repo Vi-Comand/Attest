@@ -22,8 +22,12 @@ namespace Attest.Models
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().ToTable("User");
+            
         }
-        public DbSet<User> User { get; set; }
+        public DbSet<Users> Users { get; set; }
+        public DbSet<File> Files { get; set; }
+        public DbSet<Nauch_deyat> NauchDeyats { get; set; }
+        public DbSet<Zayavlen> Zayavlens { get; set; }
+        public DbSet<Obrazovan> Obrazovans { get; set; }
     }
 }

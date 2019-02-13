@@ -1,40 +1,33 @@
-﻿using Attest.Models;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Mvc;
+using  Attest.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Attest.Controllers
 {
+    
     public class HomeController : Controller
     {
-
-        public IActionResult Index()
+        private DataContext db = new DataContext();
+      
+        public IActionResult login()
         {
-            return View("index");
+            ViewBag.User = db.Users.ToList();
+            return View();
         }
-
-        public IActionResult Login()
+        public async Task<IActionResult> Auto(string Email,string pass)
         {
-            return View("Login");
-        }
+         
+            
 
-        public IActionResult Lk(string email)
-        {
-            ViewData["Message"] = "Привет " + email;
+            Users user = await db.Users.FirstOrDefaultAsync(p => p.Email == Email);
+            if (user != null && user.pass==pass)
+                return Redirect(Url.Action("View/"+user.Id, "User"));
 
-            return View("Lk");
-
-        }
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View("ненорм");
         }
     }
-
-
 }
