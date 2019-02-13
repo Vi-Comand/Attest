@@ -6,59 +6,52 @@ using Microsoft.AspNetCore.Mvc;
 using Attest.Models;
 
 namespace Attest.Controllers
-{[Route("user")]
+{
     public class UserController : Controller
     {
 
         private DataContext db = new DataContext();
-        [Route("")]
-        [Route("index")]
-        [Route("~/")]
+       
 
-        public IActionResult Index()
+     
+        public IActionResult User(int id)
         {
-            ViewBag.User = db.User.ToList();
+            ViewBag.User = db.Users.ToList();
             return View();
         }
 
         [HttpGet]
-        [Route("Add")]
-        public IActionResult Add()
+    
+        public IActionResult view(int id,Users users)
         {
 
-            return View("Add");
+            return View("View",db.Users.Find(id));
         }
-        [HttpPost]
-        [Route("Add")]
-        public IActionResult Add(User user)
-        {
-            db.User.Add(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+
+      
         [HttpGet]
-        [Route("delete/{id}")]
-        public IActionResult Delete(int id)
+        [Route("red")]
+        public IActionResult red(int id)
         {
-            db.User.Remove(db.User.Find(id));
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit",new{id});
+           
         }
+
         [HttpGet]
         [Route("edit/{id}")]
         public IActionResult Edit(int id)
         {
 
-            return View("Edit", db.User.Find(id));
+            return View("Edit", db.Users.Find(id));
         }
 
         [HttpPost]
         [Route("edit/{id}")]
-        public IActionResult Edit(int id, User user)
+        public IActionResult Edit(int id, Users users)
         {
-            db.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.Entry(users).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("User");
         }
     }
 }

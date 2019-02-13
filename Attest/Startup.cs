@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Attest.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Attest
 {
@@ -24,7 +26,12 @@ namespace Attest
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddMvc();
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            //{
+            //    options.LoginPath=new Microsoft.AspNetCore.Http.PathString("Home/Login");
+            //});
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
 
@@ -38,15 +45,18 @@ namespace Attest
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-name: "default",
-template: "{controller=User}/{action=Index}/{id?}");
+                    name: "areas",
+                    template: "{area:exists}/{controller=User}/{action=user}");
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=login}/{id?}");
             });
+        
 
-
-        }
+    }
     }
 }

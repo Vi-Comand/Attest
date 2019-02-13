@@ -6,39 +6,43 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
+    <title>view</title>
 </head>
 <body>
-    <form method="post" asp-controller="User" asp-action="Edit">
+
+    <form method="get" asp-controller="User" asp-action="View">
+
+
+        <input type="submit" value="Редактировать" asp-controller="User" asp-action="red" asp-route-id="Id" onclick="1" />
         <table>
             <tr>
                 <td>ФИО</td>
                 <td>
-                    <input type="text" asp-for="FIO" required="required" />
+                    <input type="text" asp-for="FIO" readonly required="required" />
                 </td>
             </tr>
             <tr>
                 <td>Электронный адрес</td>
                 <td>
-                    <input type="text" asp-for="Email" required="required" />
+                    <input type="text" asp-for="Email" readonly required="required" />
                 </td>
             </tr>
             <tr>
                 <td>Телефон</td>
                 <td>
-                    <input type="text" asp-for="tel" required="required" />
+                    <input type="text" asp-for="tel" readonly required="required" />
                 </td>
             </tr>
             <tr>
                 <td>СНИЛС</td>
                 <td>
-                    <input type="text" asp-for="Snils" required="required" />
+                    <input type="text" asp-for="Snils" readonly required="required" />
                 </td>
             </tr>
             <tr>
                 <td>МО</td>
                 <td>
-                    <input type="text" asp-for="mo" required="required" />
+                    <input type="text" asp-for="mo" readonly required="required" />
                 </td>
             </tr>
 
@@ -47,11 +51,11 @@
                 <td>
 
                     <input type="hidden" asp-for="Id" />
-                    <input type="submit" value="Сохранить" />
                 </td>
             </tr>
         </table>
     </form>
+
 
 </body>
 </html>
