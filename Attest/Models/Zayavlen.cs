@@ -10,7 +10,7 @@ namespace Attest.Models
 
         public int Id { get; set; }
         public int id_user { get; set; }
-        public string mo { get; set; }
+        public int mo { get; set; }
         public string oo { get; set; }
         public string dolgnost_imeyu { get; set; }
         public string dolgnost_att { get; set; }

@@ -27,7 +27,7 @@ namespace Attest.Models
         public DbSet<Users> Users { get; set; }
         public DbSet<File> Files { get; set; }
         public DbSet<Nauch_deyat> NauchDeyats { get; set; }
-        public DbSet<Zayavlen> Zayavlens { get; set; }
+        public DbSet<Zayavlen> Zayavlen { get; set; }
         public DbSet<Obrazovan> Obrazovans { get; set; }
     }
 }

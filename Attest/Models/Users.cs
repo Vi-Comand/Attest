@@ -17,7 +17,7 @@ namespace Attest.Models
         public DateTime data_sozd { get; set; }
         public DateTime data_izm { get; set; }
         public string role { get; set; }
-        public string mo { get; set; }
+        public int mo { get; set; }
         public string special_exp { get; set; }
 
 
