@@ -20,7 +20,7 @@ namespace Attest.Models
         public string nazv_doc { get; set; }
         public string ser_doc { get; set; }
         public string nom_doc { get; set; }
-        public string data_doc { get; set; }
+        public DateTime data_doc { get; set; }
         public string reg_nom { get; set; }
         public string vid_obuch { get; set; }
 

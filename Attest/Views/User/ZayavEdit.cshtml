@@ -1,0 +1,98 @@
+﻿
+@model Attest.Models.Zayavlen
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <form method="post" asp-controller="User" asp-action="ZayavSaveEdit">
+        <table>
+            <tr>
+                <td>ФИО</td>
+                <td>
+                    <input type="text" asp-for="Id" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>Электронный адрес</td>
+                <td>
+                    <input type="text" asp-for="mo" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>Телефон</td>
+                <td>
+                    <input type="text" asp-for="oo" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>СНИЛС</td>
+                <td>
+                    <input type="text" asp-for="dolgnost_imeyu" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>МО</td>
+                <td>
+                    <input type="text" asp-for="kategor" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>МО</td>
+                <td>
+                    <input type="text" asp-for="data_last_att" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>МО</td>
+                <td>
+                    <input type="text" asp-for="kategor_rabot" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>МО</td>
+                <td>
+                    <input type="text" asp-for="uch_stepen" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>МО</td>
+                <td>
+                    <input type="text" asp-for="data_podachi" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>МО</td>
+                <td>
+                    <input type="text" asp-for="data_obnovl" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>МО</td>
+                <td>
+                    <input type="text" asp-for="status" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>МО</td>
+                <td>
+                    <input type="text" asp-for="ball" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+
+                    <input type="hidden" asp-for="id_user" />
+                    <input type="submit" value="Сохранить" />
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+</html>

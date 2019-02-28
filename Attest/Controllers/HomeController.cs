@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using  Attest.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Attest.Controllers
 {
@@ -12,7 +14,16 @@ namespace Attest.Controllers
     public class HomeController : Controller
     {
         private DataContext db = new DataContext();
-      
+
+
+
+        [Authorize]
+        public IActionResult Index()
+        {
+            return Content(User.Identity.Name);
+        }
+
+
         public IActionResult login()
         {
             ViewBag.User = db.Users.ToList();
