@@ -22,6 +22,7 @@ namespace Attest.Models
         public DateTime data_obnovl { get; set; }
         public string status { get; set; }
         public string ball { get; set; }
-    
+        public int spec { get; set; }
+
     }
 }

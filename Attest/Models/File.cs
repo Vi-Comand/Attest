@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Attest.Models
 {
-    public class File
+    public class FileModel
     {
         public int Id { get; set; }
         public int id_zayavl { get; set; }

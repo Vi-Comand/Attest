@@ -1,10 +1,12 @@
-﻿using Attest.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using  Attest.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Attest.Controllers
 {
@@ -12,6 +14,15 @@ namespace Attest.Controllers
     public class HomeController : Controller
     {
         private DataContext db = new DataContext();
+
+
+
+        [Authorize]
+        public IActionResult Index()
+        {
+            return Content(User.Identity.Name);
+        }
+
 
         public IActionResult login()
         {

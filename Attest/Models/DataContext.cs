@@ -10,8 +10,16 @@ namespace Attest.Models
 {
     public class DataContext: DbContext
     {
+        public DataContext()
+        {
+           
+        }
+        public DataContext(DbContextOptionsBuilder optionsBuilder)
+        {
+            OnConfiguring(optionsBuilder);
+        }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+       protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json");
@@ -20,14 +28,12 @@ namespace Attest.Models
             optionsBuilder.UseMySql(configuration["ConnectionStrings:DefaultConnection"]);
 
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            
-        }
+      
         public DbSet<Users> Users { get; set; }
-        public DbSet<File> Files { get; set; }
-        public DbSet<Nauch_deyat> NauchDeyats { get; set; }
+        public DbSet<FileModel> File { get; set; }
+        public DbSet<Nauch_deyat> Naucn_deyat { get; set; }
         public DbSet<Zayavlen> Zayavlen { get; set; }
-        public DbSet<Obrazovan> Obrazovans { get; set; }
+        public DbSet<Obrazovan> Obrazovan { get; set; }
+        public object Files { get; internal set; }
     }
 }
