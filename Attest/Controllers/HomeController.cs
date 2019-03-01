@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Attest.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using  Attest.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Attest.Controllers
 {
@@ -17,24 +17,31 @@ namespace Attest.Controllers
 
 
 
-        [Authorize]
+        // [Authorize]
         public IActionResult Index()
         {
-            return Content(User.Identity.Name);
-        }
-
-
-        public IActionResult login()
-        {
-            ViewBag.User = db.Users.ToList();
-            return View();
-        }
-
-        public IActionResult Index()
-        {
-
+            //return Content(User.Identity.Name);
             return View("index");
         }
+
+
+        public IActionResult Login()
+        {
+            ViewBag.User = db.Users.ToList();
+            return View("Login");
+        }
+
+        public IActionResult Register()
+        {
+            // ViewBag.User = db.Users.ToList();
+            return View("Register");
+        }
+
+        /*   public IActionResult Index()
+           {
+
+               return View("index");
+           }*/
         public async Task<IActionResult> Auto(string Email, string pass)
         {
 

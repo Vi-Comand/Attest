@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
     <link rel="stylesheet" href="~/assets/bootstrap/css/bootstrap.min.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
 
     <link rel="stylesheet" href="~/assets/css/main.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
@@ -18,26 +20,32 @@
     <title>@ViewData["Title"] - Аттестация</title>
 </head>
 <body>
+
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="padding-top: 11px;padding-right: 7px;padding-bottom: 10px;padding-left: 3px;">
         <div class="container">
             <table style=" border: solid 0px #dbdbdb; margin: 0;">
                 <tr style=" border: solid 0px #dbdbdb; margin: 0;">
-                    <td><span class="navbar-expand-sm"><img class="rounded-circle" src="~/assets/img/лого%20ИРО%20КК%20и%20текст.png" width="150"></span><a class="navbar-brand logo" href="#">Аттестация ИРО КК</a></td>
+                    <td><span class="navbar-expand-sm"><img class="rounded-circle" src="~/assets/img/logo60.png" width="60" style="margin-right:40px; margin-left:10px"></span><a class="navbar-brand logo" href="#">Аттестация ИРО КК</a></td>
                 </tr>
                 <tr style=" border: solid 0px #dbdbdb; margin: 0;">
                     <td>
-                        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="sr-only sr-only-focusable"><img class="rounded-circle" src="~/assets/img/лого%20ИРО%20КК%20и%20текст.png" width="150"></span><span class="navbar-toggler-icon"></span></button>
+                        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="sr-only sr-only-focusable"><img class="rounded-circle" src="~/assets/img/logo60.png" width="60"></span><span class="navbar-toggler-icon"></span></button>
 
                         <div class="collapse navbar-collapse text-left " id="navbarNav">
 
-                            <ul class="nav navbar-nav ml  align-items-xl-center" padding-right: 20px;">
-                                <li class="nav-item" role="img"></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="Index">Главная</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Lk" asp-action="Lk">Личный кабинет</a></li>
-                            </ul><button type="button" class="button" style="margin-left:auto;" asp-area="" asp-controller="Home" asp-action="Login">Войти</button><br />
-                            <button type="button" class="button" style="margin:5px;"> Зарегистрироваться</button>
-                            <button type="button" class="sr-only" style="margin-left:auto; ">Моя учетная запись</button><br />
-                            <button type="button" class="sr-only" style="margin:5px;"> Выйти</button>
+                            <form method="post" class="navbar" style="margin:initial; position:fixed">
+                                <ul class="nav navbar-nav ml  align-items-xl-center">
+
+                                    <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="index">Главная</a></li>
+                                    <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Lk" asp-action="lk">Личный кабинет</a></li>
+                                </ul>
+
+                                <button type="submit" class="button" style="margin-left:auto;" asp-controller="Home" asp-action="login">Войти</button><br />
+                                <button type="submit" class="button" style="margin:5px;" asp-area="" asp-controller="Home" asp-action="Register"> Зарегистрироваться</button>
+
+                                <button type="submit" class="button sr-only" style="margin-left:auto; ">Моя учетная запись</button><br />
+                                <button type="submit" class="button sr-only" style="margin:5px;"> Выйти</button>
+                            </form>
                         </div>
                     </td>
                 </tr>
@@ -46,7 +54,7 @@
     </nav>
 
     <div class="container body-content">
-        <br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br />
         @RenderBody()
         <hr />
     </div>
@@ -113,5 +121,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
 
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>
