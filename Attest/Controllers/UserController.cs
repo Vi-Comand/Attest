@@ -44,12 +44,13 @@ namespace Attest.Controllers
           // users.FIO = nameUser.OrganizationData.Municipality;
            db.Entry(users).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             db.SaveChanges();
-            Obrazovan obraz=new Obrazovan();
-            obraz.id_zayavl = 3;
+         
             
           for (int i = 0; i < nameUser.EducationData.Length; i++)
           {
-              obraz.id_zayavl = 1;
+              Obrazovan obraz = new Obrazovan();
+            
+                obraz.id_zayavl = 1;
               obraz.tip_obr = 1;
               obraz.oo = nameUser.EducationData[i].Organization;
               obraz.mo = nameUser.EducationData[i].Municipality;
@@ -61,12 +62,15 @@ namespace Attest.Controllers
               obraz.nom_doc = nameUser.EducationData[i].CompletionDocument.Number;
               obraz.data_doc = Convert.ToDateTime(nameUser.EducationData[i].CompletionDocument.IssueDate);
               obraz.reg_nom = nameUser.EducationData[i].CompletionDocument.RegNumber;
-               
+              db.Entry(obraz).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+              db.SaveChanges();
 
             }
 
             for (int i = 0; i < nameUser.StaffTrainingsData.Length; i++)
             {
+                Obrazovan obraz = new Obrazovan();
+
                 obraz.id_zayavl = 1;
                 obraz.tip_obr = 2;
                 obraz.oo = nameUser.StaffTrainingsData[i].Organization;
@@ -81,12 +85,15 @@ namespace Attest.Controllers
                 obraz.data_doc = Convert.ToDateTime(nameUser.StaffTrainingsData[i].CompletionDocument.IssueDate);
                 obraz.reg_nom = nameUser.StaffTrainingsData[i].CompletionDocument.RegNumber;
                 obraz.vid_obuch= nameUser.StaffTrainingsData[i].Level.ToString();
-
+                db.Entry(obraz).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                db.SaveChanges();
 
             }
 
             for (int i = 0; i < nameUser.StaffRetrainingsData.Length; i++)
             {
+                Obrazovan obraz = new Obrazovan();
+
                 obraz.id_zayavl = 1;
                 obraz.tip_obr = 2;
                 obraz.oo = nameUser.StaffRetrainingsData[i].Organization;
@@ -101,16 +108,16 @@ namespace Attest.Controllers
                 obraz.data_doc = Convert.ToDateTime(nameUser.StaffRetrainingsData[i].CompletionDocument.IssueDate);
                 obraz.reg_nom = nameUser.StaffRetrainingsData[i].CompletionDocument.RegNumber;
                 obraz.vid_obuch = nameUser.StaffRetrainingsData[i].RetrainingType.ToString();
-
+                db.Entry(obraz).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                db.SaveChanges();
 
             }
 
-            db.Entry(obraz).State = Microsoft.EntityFrameworkCore.EntityState.Added;
-            db.SaveChanges();
+           
 
-            Nauch_deyat nauch = new Nauch_deyat();
             for (int i = 0; i < nameUser.StaffMethodicalActivityData.Length; i++)
             {
+                Nauch_deyat nauch = new Nauch_deyat();
                 nauch.id_zayavl = 1;
            
                 nauch.nazv = nameUser.StaffMethodicalActivityData[i].WorkName;
@@ -120,13 +127,13 @@ namespace Attest.Controllers
                 nauch.status = nameUser.StaffMethodicalActivityData[i].Participation.ToString();
                 nauch.realiz = nameUser.StaffMethodicalActivityData[i].ImplementedIn;
                 nauch.el_adr = nameUser.StaffMethodicalActivityData[i].HostingAddress;
-              
-           
 
+
+                db.Entry(nauch).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                db.SaveChanges();
 
             }
-            db.Entry(nauch).State = Microsoft.EntityFrameworkCore.EntityState.Added;
-            db.SaveChanges();
+           
 
 
            
@@ -173,7 +180,7 @@ namespace Attest.Controllers
 
 
 
-               for (int i = 0; i < nameUser.AcademicAwardsData.Length; i++)
+              /* for (int i = 0; i < nameUser.AcademicAwardsData.Length; i++)
                   {
                       nauch.id_zayavl = 1;
 
@@ -189,7 +196,7 @@ namespace Attest.Controllers
 
 
 
-        }
+        //}
          /*   db.Entry(nauch).State = Microsoft.EntityFrameworkCore.EntityState.Added;
             db.SaveChanges();
             /*var a = client.GetStaffInfoBySnils(Snils: snils).OrganizationData.Email;
