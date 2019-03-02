@@ -16,7 +16,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     border: 0;
     font-size: 100%;
     font: inherit;
-    vertical-align: baseline;
+    /*vertical-align: baseline;*/
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
@@ -1574,7 +1574,7 @@ body {
 /* Type */
 
 body, input, select, textarea {
-    color: #9a9a9a;
+    /*color: #9a9a9a;*/
     font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
     font-size: 14pt;
     font-weight: 400;
@@ -1584,42 +1584,49 @@ body, input, select, textarea {
 @media screen and (max-width: 1680px) {
 
     body, input, select, textarea {
-        font-size: 12pt;
+        font-size: 16pt;
     }
 }
 
 @media screen and (max-width: 1280px) {
 
     body, input, select, textarea {
-        font-size: 12pt;
+        font-size: 16pt;
     }
 }
 
 @media screen and (max-width: 980px) {
 
     body, input, select, textarea {
-        font-size: 12pt;
+        font-size: 16pt;
     }
 }
 
 @media screen and (max-width: 736px) {
 
     body, input, select, textarea {
-        font-size: 12pt;
+        font-size: 20pt;
     }
 }
 
 @media screen and (max-width: 480px) {
 
     body, input, select, textarea {
-        font-size: 12pt;
+        font-size: 20pt;
     }
 }
 
-a {
+.a {
     color: #0fffa7;
     /* font-weight: 600; */
     text-shadow: 1px 1px 1px #114e09, 0 0 1em #ece9e99e;
+    text-decoration: underline;
+}
+
+a {
+    color: #04a067;
+    font-weight: 600;
+    /*text-shadow: 1px 1px 1px #114e09, 0 0 1em #ece9e99e;*/
     text-decoration: underline;
 }
 
@@ -1627,10 +1634,16 @@ a {
         text-decoration: none;
     }
 
-strong, b {
+b {
     color: #0fffa7;
     font-weight: 600;
     text-shadow: 2px 1px 1px #114e09, 0 0 1em #ece9e99e;
+}
+
+strong {
+    /*color: #0fffa7;*/
+    font-weight: 600;
+    /*text-shadow: 2px 1px 1px #114e09, 0 0 1em #ece9e99e;*/
 }
 
 em, i {
@@ -1638,7 +1651,7 @@ em, i {
 }
 
 p {
-    margin: 0 0 2em 0;
+    margin: 0 0 1em 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1952,11 +1965,11 @@ textarea {
     -webkit-appearance: none;
     -ms-appearance: none;
     appearance: none;
-    background: #6cc091;
+    background: #cdffe5;
     border-radius: 10px;
     border: none;
     border: solid 2px #8dcca9;
-    color: #fff;
+    color: #000;
     display: block;
     outline: 0;
     padding: 0 1em;
@@ -2427,7 +2440,7 @@ dl {
 }
 
 table {
-    margin: 0 0 2em 0;
+    margin: 0 0 1em 0;
     width: 100%;
 }
 
@@ -2442,14 +2455,14 @@ table {
         }
 
     table td {
-        padding: 0.75em 0.75em;
+        padding: 0.25em 0.25em;
     }
 
     table th {
         color: #555;
-        font-size: 0.9em;
+        font-size: 0.8em;
         font-weight: 600;
-        padding: 0 0.75em 0.75em 0.75em;
+        padding: 0.25em;
         text-align: left;
     }
 
@@ -2487,12 +2500,46 @@ table {
             border-top: 0;
         }
 
+
+
+
+
+
+
 /* Button */
 
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
-button,
+button {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    background-color: #07ff7e33;
+    box-shadow: inset 0 0 0 3px #8dcca9;
+    color: #000000 !important;
+    border-radius: 30px;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: 400;
+    height: 2.75em;
+    line-height: 2.85em;
+    letter-spacing: 1px;
+    padding: 0 2em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin: 8px;
+}
+
 .button {
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -2509,12 +2556,12 @@ button,
     border: 0;
     cursor: pointer;
     display: inline-block;
-    font-size: .75em;
+    font-size: .85em;
     font-weight: 400;
-    height: 3.75em;
-    line-height: 3.85em;
+    height: 2.75em;
+    line-height: 2.85em;
     letter-spacing: 2px;
-    padding: 0 4em;
+    padding: 0 2em;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
@@ -3075,7 +3122,7 @@ button,
 /* Footer */
 
 footer {
-    padding: 6em 0;
+    padding: 2em 0;
     background: linear-gradient(90deg,#0aa76b,#164271);
     color: #fff;
     text-align: center;
