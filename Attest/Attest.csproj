@@ -19,7 +19,7 @@
     <Content Update="Views\Account\Register.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Account\Login.cshtml">
+    <Content Update="Views\Account\Login1.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\LK\otv.cshtml">

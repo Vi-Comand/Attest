@@ -14,7 +14,7 @@ namespace Attest.Models
         public string period { get; set; }
         public string mo { get; set; }
         public string oo { get; set; }
-        public string kol_chas { get; set; }
+        public int kol_chas { get; set; }
         public string special { get; set; }
         public string kvalif { get; set; }
         public string nazv_doc { get; set; }

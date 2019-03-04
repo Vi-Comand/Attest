@@ -29,27 +29,55 @@ namespace Attest.Controllers
             ViewBag.User = db.Users.ToList();
             return View();
         }
-
-        public async Task<IActionResult> Update(int id)
+       
+        public async Task<IActionResult> Update(int id_user,int id,Users users)
         {
             StaffPortfolioServiceClient client = new StaffPortfolioServiceClient();
 
-            string snils = "00812870630";
+              string snils =db.Users.Find(id_user).Snils.ToString();
             //02332960826     15234126527  12962899413
             var nameUser = client.GetStaffInfoBySnilsAsync(snils).Result.staffPortfolio;
 
-            Users users = new Users();
-            users.Id = 5;
+          
+           
             users.FIO = nameUser.PersonData.FirstName + " " + nameUser.PersonData.MiddleName + " " + nameUser.PersonData.LastName;
+           
             // users.FIO = nameUser.OrganizationData.Municipality;
             db.Entry(users).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             db.SaveChanges();
-            Obrazovan obraz = new Obrazovan();
-            obraz.id_zayavl = 3;
+           // List<Obrazovan> obr = db.Obrazovan.Where(p => p.id_zayavl == id);
+           
+
+            Zayavlen zayav=new Zayavlen();
+            zayav.Id = id;
+            zayav.id_user = id_user;
+            zayav.data_last_att=Convert.ToDateTime(nameUser.MainPosition.AttestDate);
+            zayav.data_obnovl=DateTime.Now;
+            zayav.dolgnost_imeyu = nameUser.MainPosition.Position;
+            zayav.kategor = nameUser.MainPosition.Category;
+            zayav.kategor_rabot = nameUser.MainPosition.WorkerCategory;
+            //zayav.mo
+            zayav.oo = nameUser.OrganizationData.ShortName;
+            //zayav.uch_stepen
+            db.Entry(zayav).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.SaveChanges();
+            var obr = db.Obrazovan.Where(w => w.id_zayavl == id);
+
+            foreach (Obrazovan obrz in obr)
+            {
+                db.Obrazovan.Remove(obrz);
+            }
+            db.SaveChanges();
+            // _context.Obrazovan.stRemoveRange(db.Obrazovan.Where(p => p.id_zayavl == id).ToList());
+            //_context.SaveChanges();
+            
+                
+            
 
             for (int i = 0; i < nameUser.EducationData.Length; i++)
             {
-                obraz.id_zayavl = 1;
+                Obrazovan obraz = new Obrazovan();
+                obraz.id_zayavl = id;
                 obraz.tip_obr = 1;
                 obraz.oo = nameUser.EducationData[i].Organization;
                 obraz.mo = nameUser.EducationData[i].Municipality;
@@ -61,17 +89,19 @@ namespace Attest.Controllers
                 obraz.nom_doc = nameUser.EducationData[i].CompletionDocument.Number;
                 obraz.data_doc = Convert.ToDateTime(nameUser.EducationData[i].CompletionDocument.IssueDate);
                 obraz.reg_nom = nameUser.EducationData[i].CompletionDocument.RegNumber;
-
+                db.Entry(obraz).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                db.SaveChanges();
 
             }
 
             for (int i = 0; i < nameUser.StaffTrainingsData.Length; i++)
             {
-                obraz.id_zayavl = 1;
+                Obrazovan obraz = new Obrazovan();
+                obraz.id_zayavl = id;
                 obraz.tip_obr = 2;
                 obraz.oo = nameUser.StaffTrainingsData[i].Organization;
                 obraz.mo = nameUser.StaffTrainingsData[i].Place;
-                obraz.kol_chas = nameUser.StaffTrainingsData[i].Hours.ToString();
+                obraz.kol_chas = Convert.ToInt32(nameUser.StaffTrainingsData[i].Hours);
                 obraz.period = nameUser.StaffTrainingsData[i].Period.Start + " - " + nameUser.StaffTrainingsData[i].Period.End;
                 obraz.special = nameUser.StaffTrainingsData[i].Theme;
                 obraz.kvalif = nameUser.StaffTrainingsData[i].Form.ToString();
@@ -81,17 +111,19 @@ namespace Attest.Controllers
                 obraz.data_doc = Convert.ToDateTime(nameUser.StaffTrainingsData[i].CompletionDocument.IssueDate);
                 obraz.reg_nom = nameUser.StaffTrainingsData[i].CompletionDocument.RegNumber;
                 obraz.vid_obuch = nameUser.StaffTrainingsData[i].Level.ToString();
-
+                db.Entry(obraz).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                db.SaveChanges();
 
             }
 
             for (int i = 0; i < nameUser.StaffRetrainingsData.Length; i++)
             {
-                obraz.id_zayavl = 1;
+                Obrazovan obraz = new Obrazovan();
+                obraz.id_zayavl = id;
                 obraz.tip_obr = 2;
                 obraz.oo = nameUser.StaffRetrainingsData[i].Organization;
                 obraz.mo = nameUser.StaffRetrainingsData[i].Place;
-                obraz.kol_chas = nameUser.StaffRetrainingsData[i].Hours.ToString();
+                obraz.kol_chas = Convert.ToInt32(nameUser.StaffRetrainingsData[i].Hours);
                 obraz.period = nameUser.StaffRetrainingsData[i].Period.Start + " - " + nameUser.StaffRetrainingsData[i].Period.End;
                 obraz.special = nameUser.StaffRetrainingsData[i].Speciality;
                 obraz.kvalif = nameUser.StaffRetrainingsData[i].Qualification;
@@ -101,17 +133,18 @@ namespace Attest.Controllers
                 obraz.data_doc = Convert.ToDateTime(nameUser.StaffRetrainingsData[i].CompletionDocument.IssueDate);
                 obraz.reg_nom = nameUser.StaffRetrainingsData[i].CompletionDocument.RegNumber;
                 obraz.vid_obuch = nameUser.StaffRetrainingsData[i].RetrainingType.ToString();
-
+                db.Entry(obraz).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                db.SaveChanges();
 
             }
 
-            db.Entry(obraz).State = Microsoft.EntityFrameworkCore.EntityState.Added;
-            db.SaveChanges();
+          
 
-            Nauch_deyat nauch = new Nauch_deyat();
+         
             for (int i = 0; i < nameUser.StaffMethodicalActivityData.Length; i++)
             {
-                nauch.id_zayavl = 1;
+                Nauch_deyat nauch = new Nauch_deyat();
+                nauch.id_zayavl = id;
 
                 nauch.nazv = nameUser.StaffMethodicalActivityData[i].WorkName;
                 nauch.nazv_p = nameUser.StaffMethodicalActivityData[i].ProductName;
@@ -122,18 +155,37 @@ namespace Attest.Controllers
                 nauch.el_adr = nameUser.StaffMethodicalActivityData[i].HostingAddress;
 
 
+                db.Entry(nauch).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                db.SaveChanges();
 
 
             }
-            db.Entry(nauch).State = Microsoft.EntityFrameworkCore.EntityState.Added;
-            db.SaveChanges();
 
+
+            var fl = db.File.Where(w => w.id_zayavl == id);
+
+            foreach (FileModel file in fl)
+            {
+
+                string path = Directory.GetCurrentDirectory() + "/wwwroot/Files/" +id+"/"+file.name_f;
+                FileInfo fileInf = new FileInfo(path);
+                if (fileInf.Exists)
+                {
+                    fileInf.Delete();
+                    // альтернатива с помощью класса File
+                    // File.Delete(path);
+                }
+
+
+                db.File.Remove(file);
+            }
+            db.SaveChanges();
 
 
             for (int i = 0; i < nameUser.StaffPortfolioFilesData.Length; i++)
             {
                 FileModel file = new FileModel();
-                file.id_zayavl = 1;
+                file.id_zayavl = id;
 
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/wwwroot/Files/" + file.id_zayavl);
 
@@ -173,7 +225,7 @@ namespace Attest.Controllers
 
 
 
-            for (int i = 0; i < nameUser.AcademicAwardsData.Length; i++)
+         /*   for (int i = 0; i < nameUser.AcademicAwardsData.Length; i++)
             {
                 nauch.id_zayavl = 1;
 
@@ -189,7 +241,7 @@ namespace Attest.Controllers
 
 
 
-            }
+            //}
             /*   db.Entry(nauch).State = Microsoft.EntityFrameworkCore.EntityState.Added;
                db.SaveChanges();
                /*var a = client.GetStaffInfoBySnils(Snils: snils).OrganizationData.Email;
@@ -214,12 +266,11 @@ namespace Attest.Controllers
 
         }
 
-        [HttpGet]
 
-        public IActionResult view(int id, Users users)
+        public IActionResult view(int id_user, Users users)
         {
 
-            return View("View", db.Users.Find(id));
+            return View("View", db.Zayavlen.Find(id_user));
         }
 
 
@@ -227,7 +278,7 @@ namespace Attest.Controllers
         [Route("red")]
         public IActionResult red(int id)
         {
-            return RedirectToAction("Edit", new { id });
+            return RedirectToAction("ZayavEdit", new { id });
 
         }
 
@@ -237,7 +288,7 @@ namespace Attest.Controllers
         public IActionResult Edit(int id)
         {
 
-            return View("Edit", db.Users.Find(id));
+            return View("ZayavEdit", db.Zayavlen.Find(id));
         }
 
         [HttpPost]

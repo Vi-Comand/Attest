@@ -14,73 +14,73 @@
             <tr>
                 <td>ФИО</td>
                 <td>
-                    <input type="text" asp-for="Id" required="required" />
+                    <input type="text" asp-for="Id"  />
                 </td>
             </tr>
             <tr>
                 <td>Электронный адрес</td>
                 <td>
-                    <input type="text" asp-for="mo" required="required" />
+                    <input type="text" asp-for="mo"  />
                 </td>
             </tr>
             <tr>
                 <td>Телефон</td>
                 <td>
-                    <input type="text" asp-for="oo" required="required" />
+                    <input type="text" asp-for="oo"  />
                 </td>
             </tr>
             <tr>
                 <td>СНИЛС</td>
                 <td>
-                    <input type="text" asp-for="dolgnost_imeyu" required="required" />
+                    <input type="text" asp-for="dolgnost_imeyu"  />
                 </td>
             </tr>
             <tr>
                 <td>МО</td>
                 <td>
-                    <input type="text" asp-for="kategor" required="required" />
+                    <input type="text" asp-for="kategor"  />
                 </td>
             </tr>
             <tr>
                 <td>МО</td>
                 <td>
-                    <input type="text" asp-for="data_last_att" required="required" />
+                    <input type="text" asp-for="data_last_att"  />
                 </td>
             </tr>
             <tr>
                 <td>МО</td>
                 <td>
-                    <input type="text" asp-for="kategor_rabot" required="required" />
+                    <input type="text" asp-for="kategor_rabot"  />
                 </td>
             </tr>
             <tr>
                 <td>МО</td>
                 <td>
-                    <input type="text" asp-for="uch_stepen" required="required" />
+                    <input type="text" asp-for="uch_stepen"  />
                 </td>
             </tr>
             <tr>
                 <td>МО</td>
                 <td>
-                    <input type="text" asp-for="data_podachi" required="required" />
+                    <input type="text" asp-for="data_podachi"  />
                 </td>
             </tr>
             <tr>
                 <td>МО</td>
                 <td>
-                    <input type="text" asp-for="data_obnovl" required="required" />
+                    <input type="text" asp-for="data_obnovl"  />
                 </td>
             </tr>
             <tr>
                 <td>МО</td>
                 <td>
-                    <input type="text" asp-for="status" required="required" />
+                    <input type="text" asp-for="status"  />
                 </td>
             </tr>
             <tr>
                 <td>МО</td>
                 <td>
-                    <input type="text" asp-for="ball" required="required" />
+                    <input type="text" asp-for="ball"  />
                 </td>
             </tr>
             <tr>
@@ -88,6 +88,7 @@
                 <td>
 
                     <input type="hidden" asp-for="id_user" />
+                    <input type="submit" asp-controller="User" asp-action="Update" value="Обновить" />
                     <input type="submit" value="Сохранить" />
                 </td>
             </tr>

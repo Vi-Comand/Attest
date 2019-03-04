@@ -15,14 +15,15 @@
             {
             <tr>
                 <td>@row.Id</td>
+                <td><a asp-controller="User" asp-action="edit" asp-route-id="@row.Id">@row.data_podachi</a> </td>
                 <td>@row.dolgnost_att</td>
-                <td>@row.data_podachi</td>
+
                 <td>@row.data_obnovl</td>
                 <td>@row.status</td>
                 <td>@row.ball</td>
 
 
-                <td> <a asp-controller="User" asp-action="view" asp-route-id="@row.Id">View</a> |<a asp-controller="User" asp-action="edit" asp-route-id="@row.Id">Edit</a> | <a asp-controller="User" asp-action="Delete" asp-route-id="@row.Id" onclick="return confirm('Ты Серьезно ?')">Delete</a></td>
+                <td> <a asp-controller="User" asp-action="edit" asp-route-id="@row.Id">Edit</a> | <a asp-controller="User" asp-action="Delete" asp-route-id="@row.Id" onclick="return confirm('Ты Серьезно ?')">Delete</a></td>
             </tr>
             }
         </table>
