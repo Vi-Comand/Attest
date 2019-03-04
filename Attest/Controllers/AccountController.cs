@@ -59,7 +59,7 @@ namespace Attest.Controllers
                 {
                     await Authenticate(model.Email); // аутентификация
 
-                    return RedirectToAction("Lk", "Lk");
+                    return RedirectToAction("Lk", "Lk", new{id=user.Id});
                 }
 
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
@@ -109,7 +109,7 @@ namespace Attest.Controllers
 
                     await Authenticate(model.Email); // аутентификация
 
-                    return RedirectToAction("Lk", "Lk");
+                    return RedirectToAction("Lk", "Lk", new { id = user.Id });
                 }
                 else
                     ModelState.AddModelError("", "Некорректные логин и(или) пароль");
@@ -135,7 +135,7 @@ namespace Attest.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

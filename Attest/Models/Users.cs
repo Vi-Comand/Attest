@@ -13,7 +13,7 @@ namespace Attest.Models
         public string Email { get; set; }
         public string tel { get; set; }
         public string pass { get; set; }
-        public int Snils { get; set; }
+        public string Snils { get; set; }
         public DateTime data_sozd { get; set; }
         public DateTime data_izm { get; set; }
         public string role { get; set; }

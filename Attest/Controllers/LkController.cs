@@ -14,7 +14,7 @@ namespace Attest.Controllers
         [Authorize]
         public IActionResult Lk(int id)
         {
-             ViewBag.LK = db.Zayavlen.Where(p=>p.id_user==5).ToList();
+             ViewBag.LK = db.Zayavlen.Where(p=>p.id_user==id).ToList();
              return View("user");
             /* ViewBag.LK = db.Zayavlen.Where(p=>p.mo==1).ToList();
            return View("otv");*/
