@@ -24,5 +24,6 @@ namespace Attest.Models
         public string ball { get; set; }
         public int spec { get; set; }
 
+
     }
 }

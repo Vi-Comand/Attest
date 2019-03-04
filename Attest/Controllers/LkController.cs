@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Attest.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Attest.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Attest.Controllers
 {
@@ -12,14 +12,17 @@ namespace Attest.Controllers
     {
         private DataContext db = new DataContext();
         [Authorize]
-        public IActionResult Lk(int id)
+        public IActionResult Lk()
         {
-             ViewBag.LK = db.Zayavlen.Where(p=>p.id_user==id).ToList();
-             return View("user");
+            var Email = HttpContext.User.Identity.Name;
+            Users user = db.Users.Where(p => p.Email == Email).First();
+            ViewBag.LK = db.Zayavlen.Where(p => p.id_user == user.Id).ToList();
+
+            return View("user");
             /* ViewBag.LK = db.Zayavlen.Where(p=>p.mo==1).ToList();
            return View("otv");*/
-          /*  ViewBag.LK = db.Zayavlen.Where(p => p.spec == 1).ToList();
-            return View("spec");*/
+            /*  ViewBag.LK = db.Zayavlen.Where(p => p.spec == 1).ToList();
+              return View("spec");*/
         }
     }
 }

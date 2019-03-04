@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
+﻿using Attest.Models;
 //using Attest.Views; // пространство имен моделей RegisterModel и LoginModel
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Attest.Models;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using System.Security.Cryptography;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Attest.Controllers
 {
@@ -43,7 +43,7 @@ namespace Attest.Controllers
                 string a = "Соль";
 
                 byte[] salt = Encoding.Default.GetBytes(a);
-               
+
                 // derive a 256-bit subkey (use HMACSHA1 with 10,000 iterations)
                 string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                     password: password,
@@ -59,7 +59,7 @@ namespace Attest.Controllers
                 {
                     await Authenticate(model.Email); // аутентификация
 
-                    return RedirectToAction("Lk", "Lk", new{id=user.Id});
+                    return RedirectToAction("Lk", "Lk", new { id = user.Id });
                 }
 
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
@@ -102,13 +102,14 @@ namespace Attest.Controllers
                         prf: KeyDerivationPrf.HMACSHA1,
                         iterationCount: 10000,
                         numBytesRequested: 256 / 8));
-             
+
                     // добавляем пользователя в бд
-                    db.Users.Add(new Users {Email = model.Email, pass = hashed });
+                    db.Users.Add(new Users { Email = model.Email, pass = hashed });
                     await db.SaveChangesAsync();
 
                     await Authenticate(model.Email); // аутентификация
-
+                    user =
+                    await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
                     return RedirectToAction("Lk", "Lk", new { id = user.Id });
                 }
                 else

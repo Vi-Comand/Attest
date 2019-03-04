@@ -42,22 +42,22 @@
                                     <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="info">Информация</a></li>
                                 </ul>
 
-                               @if (User.Identity.IsAuthenticated == false)
-                               {
-                                   <button type="submit" class="button" style="margin-left:auto;" asp-controller="Account" asp-action="login">Войти</button>
-                                   <br/>
-                                   <button type="submit" class="button" style="margin:5px;" asp-area="" asp-controller="Home" asp-action="Register"> Зарегистрироваться</button>
-                               }
-                               else
-                               {
+                                @if (User.Identity.IsAuthenticated == false)
+                                {
+                                    <button type="submit" class="button" style="margin-left:auto;" asp-controller="Account" asp-action="login">Войти</button>
+                                    <br />
+                                    <button type="submit" class="button" style="margin:5px;" asp-area="" asp-controller="Account" asp-action="Register"> Зарегистрироваться</button>
+                                }
+                                else
+                                {
 
 
-                                   <button type="submit" class="button" style="margin-left:auto; ">Моя учетная запись</button>
-                                   <br/>
-                                   <button type="submit" class="button" style="margin:5px; "asp-controller="Account" asp-action="Logout"> Выйти</button>
+                                    <button type="submit" class="button" style="margin-left:auto; ">Моя учетная запись</button>
+                                    <br />
+                                    <button type="submit" class="button" style="margin:5px; " asp-controller="Account" asp-action="Logout"> Выйти</button>
 
-                               }
-                                </form>
+                                }
+                            </form>
                         </div>
                     </td>
                 </tr>

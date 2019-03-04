@@ -9,22 +9,22 @@
 </head>
 <body>
     <form method="post" asp-controller="User" asp-action="Add">
-       
+        <button type="submit" class="button" style="margin:5px;" asp-area="" asp-controller="User" asp-action="Add"> Подать заявление</button>
         <table>
             @foreach (var row in ViewBag.LK)
             {
-            <tr>
-                <td>@row.Id</td>
-                <td><a asp-controller="User" asp-action="edit" asp-route-id="@row.Id">@row.data_podachi</a> </td>
-                <td>@row.dolgnost_att</td>
+                <tr>
+                    <td>@row.Id</td>
+                    <td><a asp-controller="User" asp-action="edit" asp-route-id="@row.Id">@row.data_podachi</a> </td>
+                    <td>@row.dolgnost_att</td>
 
-                <td>@row.data_obnovl</td>
-                <td>@row.status</td>
-                <td>@row.ball</td>
+                    <td>@row.data_obnovl</td>
+                    <td>@row.status</td>
+                    <td>@row.ball</td>
 
 
-                <td> <a asp-controller="User" asp-action="edit" asp-route-id="@row.Id">Edit</a> | <a asp-controller="User" asp-action="Delete" asp-route-id="@row.Id" onclick="return confirm('Ты Серьезно ?')">Delete</a></td>
-            </tr>
+                    <td> <a asp-controller="User" asp-action="edit" asp-route-id="@row.Id">Edit</a> | <a asp-controller="User" asp-action="Delete" asp-route-id="@row.Id" onclick="return confirm('Ты Серьезно ?')">Delete</a></td>
+                </tr>
             }
         </table>
 

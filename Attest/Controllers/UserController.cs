@@ -29,37 +29,38 @@ namespace Attest.Controllers
             ViewBag.User = db.Users.ToList();
             return View();
         }
-       
-        public async Task<IActionResult> Update(int id_user,int id,Users users)
+
+        public async Task<IActionResult> Update(int id_user, int id, Users users)
         {
             StaffPortfolioServiceClient client = new StaffPortfolioServiceClient();
 
-              string snils =db.Users.Find(id_user).Snils.ToString();
+            string snils = db.Users.Find(id_user).Snils.ToString();
             //02332960826     15234126527  12962899413
             var nameUser = client.GetStaffInfoBySnilsAsync(snils).Result.staffPortfolio;
 
-          
-           
+
+
             users.FIO = nameUser.PersonData.FirstName + " " + nameUser.PersonData.MiddleName + " " + nameUser.PersonData.LastName;
-           
+
             // users.FIO = nameUser.OrganizationData.Municipality;
             db.Entry(users).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             db.SaveChanges();
-           // List<Obrazovan> obr = db.Obrazovan.Where(p => p.id_zayavl == id);
-           
+            // List<Obrazovan> obr = db.Obrazovan.Where(p => p.id_zayavl == id);
 
-            Zayavlen zayav=new Zayavlen();
-            zayav.Id = id;
+
+            Zayavlen zayav = db.Zayavlen.Find(id);
+            // zayav.Id = id;
             zayav.id_user = id_user;
-            zayav.data_last_att=Convert.ToDateTime(nameUser.MainPosition.AttestDate);
-            zayav.data_obnovl=DateTime.Now;
+            zayav.data_last_att = Convert.ToDateTime(nameUser.MainPosition.AttestDate);
+            zayav.data_obnovl = DateTime.Now;
             zayav.dolgnost_imeyu = nameUser.MainPosition.Position;
             zayav.kategor = nameUser.MainPosition.Category;
             zayav.kategor_rabot = nameUser.MainPosition.WorkerCategory;
             //zayav.mo
             zayav.oo = nameUser.OrganizationData.ShortName;
             //zayav.uch_stepen
-            db.Entry(zayav).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            // db.Set<Zayavlen>().Attach(zayav);
+            //  db.Zayavlen.Update(zayav).;
             db.SaveChanges();
             var obr = db.Obrazovan.Where(w => w.id_zayavl == id);
 
@@ -70,9 +71,9 @@ namespace Attest.Controllers
             db.SaveChanges();
             // _context.Obrazovan.stRemoveRange(db.Obrazovan.Where(p => p.id_zayavl == id).ToList());
             //_context.SaveChanges();
-            
-                
-            
+
+
+
 
             for (int i = 0; i < nameUser.EducationData.Length; i++)
             {
@@ -138,9 +139,9 @@ namespace Attest.Controllers
 
             }
 
-          
 
-         
+
+
             for (int i = 0; i < nameUser.StaffMethodicalActivityData.Length; i++)
             {
                 Nauch_deyat nauch = new Nauch_deyat();
@@ -167,7 +168,7 @@ namespace Attest.Controllers
             foreach (FileModel file in fl)
             {
 
-                string path = Directory.GetCurrentDirectory() + "/wwwroot/Files/" +id+"/"+file.name_f;
+                string path = Directory.GetCurrentDirectory() + "/wwwroot/Files/" + id + "/" + file.name_f;
                 FileInfo fileInf = new FileInfo(path);
                 if (fileInf.Exists)
                 {
@@ -225,18 +226,18 @@ namespace Attest.Controllers
 
 
 
-         /*   for (int i = 0; i < nameUser.AcademicAwardsData.Length; i++)
-            {
-                nauch.id_zayavl = 1;
+            /*   for (int i = 0; i < nameUser.AcademicAwardsData.Length; i++)
+               {
+                   nauch.id_zayavl = 1;
 
-                nauch.nazv = nameUser.AcademicAwardsData[i].AcademicDegree;
-                nauch.nazv_p = nameUser.AcademicAwardsData[i].AcademicTitle;
-                nauch.urov = nameUser.AcademicAwardsData[i].Speciality;
-                nauch.urov = nameUser.AcademicAwardsData[i].AwardDocument.Number;
-                /*   nauch.period = nameUser.AcademicAwardsData[i].Period.Start + " - " + nameUser.StaffMethodicalActivityData[i].Period.End;
-                   nauch.status = nameUser.StaffMethodicalActivityData[i].Participation.ToString();
-                   nauch.realiz = nameUser.StaffMethodicalActivityData[i].ImplementedIn;
-                   nauch.el_adr = nameUser.StaffMethodicalActivityData[i].HostingAddress;*/
+                   nauch.nazv = nameUser.AcademicAwardsData[i].AcademicDegree;
+                   nauch.nazv_p = nameUser.AcademicAwardsData[i].AcademicTitle;
+                   nauch.urov = nameUser.AcademicAwardsData[i].Speciality;
+                   nauch.urov = nameUser.AcademicAwardsData[i].AwardDocument.Number;
+                   /*   nauch.period = nameUser.AcademicAwardsData[i].Period.Start + " - " + nameUser.StaffMethodicalActivityData[i].Period.End;
+                      nauch.status = nameUser.StaffMethodicalActivityData[i].Participation.ToString();
+                      nauch.realiz = nameUser.StaffMethodicalActivityData[i].ImplementedIn;
+                      nauch.el_adr = nameUser.StaffMethodicalActivityData[i].HostingAddress;*/
 
 
 
@@ -246,7 +247,7 @@ namespace Attest.Controllers
                db.SaveChanges();
                /*var a = client.GetStaffInfoBySnils(Snils: snils).OrganizationData.Email;
                var b = client.GetStaffInfoBySnils(Snils: snils).MainPosition.AttestDate;*/
-            return View();
+            return View("ZayavEdit");
         }
 
         public void SGO()
@@ -287,9 +288,52 @@ namespace Attest.Controllers
         [Route("edit/{id}")]
         public IActionResult Edit(int id)
         {
-
+            ViewBag.Obr = db.Obrazovan.Where(p => p.id_zayavl == id).ToList();
+            ViewBag.File = db.File.Where(p => p.id_zayavl == id).ToList();
             return View("ZayavEdit", db.Zayavlen.Find(id));
         }
+
+        public IActionResult file(int id, string name_f)
+        {
+            string path = Directory.GetCurrentDirectory() + "/wwwroot/Files/" + id + "/" + name_f;
+            FileStream fs = new FileStream(path, FileMode.Open);
+            string file_type = " multipart/form-data";
+            string file_name = name_f;
+            return File(fs, file_type, file_name);
+
+        }
+
+
+        public IActionResult Add()
+        {
+
+            return View();
+        }
+
+        public async Task<IActionResult> Creat(string dolgnost_imeyu, string dolgnost_att)
+        {
+
+
+            var Email = HttpContext.User.Identity.Name;
+            Users user = db.Users.Where(p => p.Email == Email).First();
+            Zayavlen zayav = new Zayavlen();
+            zayav.id_user = user.Id;
+            zayav.dolgnost_att = dolgnost_att;
+            zayav.dolgnost_imeyu = dolgnost_imeyu;
+            zayav.data_podachi = DateTime.Now;
+
+            db.Entry(zayav).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+            db.SaveChanges();
+
+
+
+
+
+            await Update(user.Id, zayav.Id, user);
+
+            return View();
+        }
+
 
         [HttpPost]
         [Route("edit/{id}")]

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
 
 namespace Attest.Models
@@ -19,5 +19,9 @@ namespace Attest.Models
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Пароль введен неверно")]
         public string ConfirmPassword { get; set; }
+
+
+        [Compare("Snils", ErrorMessage = "Не указан снилс")]
+        public string Snils { get; set; }
     }
 }
