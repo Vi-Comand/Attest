@@ -24,6 +24,11 @@ namespace Attest.Controllers
             return View("index");
         }
 
+        public IActionResult Info()
+        {
+            //return Content(User.Identity.Name);
+            return View("info");
+        }
 
         public IActionResult Login()
         {

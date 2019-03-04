@@ -7,7 +7,7 @@
 
 
     <link rel="stylesheet" href="~/assets/bootstrap/css/bootstrap.min.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
-
+    <link rel="stylesheet" href="~/assets/bootstrap/css/bootstrap31.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
     <link rel="stylesheet" href="~/assets/css/main.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
@@ -33,11 +33,12 @@
 
                         <div class="collapse navbar-collapse text-left " id="navbarNav">
 
-                            <form method="post" class="navbar" style="margin:initial; position:fixed">
+                            <form method="post" class="navbar" style="margin:initial; display:contents">
                                 <ul class="nav navbar-nav ml  align-items-xl-center">
 
                                     <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="index">Главная</a></li>
                                     <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Lk" asp-action="lk">Личный кабинет</a></li>
+                                    <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="info">Информация</a></li>
                                 </ul>
 
                                 <button type="submit" class="button" style="margin-left:auto;" asp-controller="Home" asp-action="login">Войти</button><br />
@@ -117,7 +118,7 @@
     </div>
 
     <script src="~/assets/js/jquery.min.js"></script>
-    <script src="~/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/assets/bootstrap/js/bootstrap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
 
     @RenderSection("Scripts", required: false)

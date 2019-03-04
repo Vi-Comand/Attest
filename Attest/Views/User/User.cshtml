@@ -5,11 +5,20 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Управление пользователями</title>
 </head>
 <body>
-    <a asp-controller="User" asp-action="Add">Add user</a>
+    <a asp-controller="User" asp-action="Add">Добавить пользователя</a>
     <table>
+        <tr>
+            <th>№ заявления</th>
+            <th>ФИО</th>
+            <th>Email</th>
+            <th>Телефон</th>
+            <th>СНИЛС</th>
+            <th colspan="2">Управление</th>
+
+        </tr>
         @foreach (var row in ViewBag.User)
         {
             <tr>
@@ -18,7 +27,7 @@
                 <td>@row.Email</td>
                 <td>@row.tel</td>
                 <td>@row.Snils</td>
-                <td> <a asp-controller="User" asp-action="view" asp-route-id="@row.Id">View</a> |<a asp-controller="User" asp-action="edit" asp-route-id="@row.Id">Edit</a> | <a asp-controller="User" asp-action="Delete" asp-route-id="@row.Id" onclick="return confirm('Ты Серьезно ?')">Delete</a></td>
+                <td> <a asp-controller="User" asp-action="view" asp-route-id="@row.Id">Посмотреть</a> |<a asp-controller="User" asp-action="edit" asp-route-id="@row.Id">Изменить</a> | <a asp-controller="User" asp-action="Delete" asp-route-id="@row.Id" onclick="return confirm('Ты Серьезно ?')">Удалить</a></td>
             </tr>
         }
     </table>
