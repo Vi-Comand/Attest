@@ -17,8 +17,7 @@ namespace Attest.Controllers
 {
     public class UserController : Controller
     {
-        DataContext _context;
-        IHostingEnvironment _appEnvironment;
+ 
 
         private DataContext db = new DataContext();
 
@@ -61,6 +60,7 @@ namespace Attest.Controllers
             zayav.kategor = nameUser.MainPosition.Category;
             zayav.kategor_rabot = nameUser.MainPosition.WorkerCategory;
             //zayav.mo
+           
             zayav.oo = nameUser.OrganizationData.ShortName;
             //zayav.uch_stepen
             // db.Set<Zayavlen>().Attach(zayav);
@@ -205,7 +205,7 @@ namespace Attest.Controllers
                 {
                     stream.Write(nameUser.StaffPortfolioFilesData[i].File, 0, nameUser.StaffPortfolioFilesData[i].File.Length);
                 }
-                // FileStream stream = new FileStream(path,FileMode.Create);
+                
                 using (FileStream s = System.IO.File.Create(path))
                 {
                     await s.WriteAsync(nameUser.StaffPortfolioFilesData[i].File);
@@ -254,22 +254,7 @@ namespace Attest.Controllers
             return View("ZayavEdit", db.Zayavlen.Find(id));
         }
 
-        public void SGO()
-        {
-            StaffPortfolioServiceClient client = new StaffPortfolioServiceClient();
-
-            string snils = "01696788202";
-            //02332960826     15234126527  12962899413
-            var nameUser = client.GetStaffInfoBySnilsAsync(snils).Result.staffPortfolio.PersonData.FirstName;
-            Users users = new Users();
-            users.Id = 1;
-            users.FIO = nameUser;
-            db.Entry(users).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            db.SaveChanges();
-            /*var a = client.GetStaffInfoBySnils(Snils: snils).OrganizationData.Email;
-            var b = client.GetStaffInfoBySnils(Snils: snils).MainPosition.AttestDate;*/
-
-        }
+     
 
 
         public IActionResult view(int id_user, Users users)
@@ -314,7 +299,7 @@ namespace Attest.Controllers
             return View();
         }
 
-        public IActionResult Creat(string dolgnost_imeyu, string dolgnost_att)
+        public IActionResult Creat()
         {
 
 
@@ -322,9 +307,10 @@ namespace Attest.Controllers
             Users user = db.Users.Where(p => p.Email == Email).First();
             Zayavlen zayav = new Zayavlen();
             zayav.id_user = user.Id;
-            zayav.dolgnost_att = dolgnost_att;
-            zayav.dolgnost_imeyu = dolgnost_imeyu;
+        
+            zayav.data_obnovl=DateTime.Now;
             zayav.data_podachi = DateTime.Now;
+            zayav.status = "Заявление на расмотрении";
 
             db.Entry(zayav).State = Microsoft.EntityFrameworkCore.EntityState.Added;
             db.SaveChanges();
@@ -351,15 +337,15 @@ namespace Attest.Controllers
 
         
         [Route("zayavEditFirst/{id}/{id_user}")]
-        public IActionResult ZayavEditFirst(int id,int id_user,Users user)
+        public async Task<IActionResult> ZayavEditFirst(int id,int id_user,Users user)
         {
          
 
-            Update(id_user, id, user);
+            await Update(id_user, id, user);
 
 
-            return RedirectToAction("Lk","lk", new{id=id_user});
-           
+            return RedirectToAction("Edit", "User", new { id });
+
 
 
 
@@ -368,25 +354,13 @@ namespace Attest.Controllers
         }
 
 
-        //[HttpGet]
-        //[Route("zayav/{id_user}")]
-        //public IActionResult Zayav(int id_user)
-        //{
-
-        //    return View("ZayavEdit", db.Zayavlen.Find(id_user));
-        //}
-
-        //  [HttpPost]
         [Route("zayav/{id}")]
        
         public IActionResult Zayav(int id)
         {
             ViewBag.User = db.Zayavlen.Where(p => p.Id == id).ToList();
             return View("ZayavEdit", db.Zayavlen.Find(id));
-            /*
-            db.Entry(users).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("User");*/
+         
         }
 
         public IActionResult ZayavSaveEdit(int id_user, Zayavlen zayav)
