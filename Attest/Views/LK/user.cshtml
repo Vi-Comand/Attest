@@ -8,8 +8,8 @@
     <title>Lk-user</title>
 </head>
 <body>
-    <form method="post" asp-controller="User" asp-action="Add">
-        <button type="submit" style="margin:5px;" asp-area="" asp-controller="User" asp-action="Add"> Подать заявление</button>
+    <form method="post" asp-controller="User" asp-action="Creat">
+        <button type="submit" class="button" style="margin:5px;" asp-area="" asp-controller="User" asp-action="Creat"> Подать заявление</button>
         <table>
 
             @foreach (var row in ViewBag.LK)
