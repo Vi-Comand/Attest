@@ -16,7 +16,7 @@ namespace Attest.Controllers
         {
             var Email = HttpContext.User.Identity.Name;
             Users user = db.Users.Where(p => p.Email == Email).First();
-            ViewBag.LK = db.Zayavlen.Where(p => p.id_user == user.Id).ToList();
+            ViewBag.LK = db.Zayavlen.Where(p => p.id_user == user.Id).OrderByDescending(p => p.data_podachi).ToList();
 
             return View("user");
             /* ViewBag.LK = db.Zayavlen.Where(p=>p.mo==1).ToList();

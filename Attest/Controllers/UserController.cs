@@ -32,18 +32,22 @@ namespace Attest.Controllers
 
         public async Task<IActionResult> Update(int id_user, int id, Users users)
         {
+            ViewBag.User = db.Zayavlen.Where(p => p.Id == id).ToList();
+            ViewBag.Obr = db.Obrazovan.Where(p => p.id_zayavl == id).ToList();
+            ViewBag.File = db.File.Where(p => p.id_zayavl == id).ToList();
+
             StaffPortfolioServiceClient client = new StaffPortfolioServiceClient();
 
             string snils = db.Users.Find(id_user).Snils.ToString();
             //02332960826     15234126527  12962899413
             var nameUser = client.GetStaffInfoBySnilsAsync(snils).Result.staffPortfolio;
-
+            users= db.Users.Find(id_user);
 
 
             users.FIO = nameUser.PersonData.FirstName + " " + nameUser.PersonData.MiddleName + " " + nameUser.PersonData.LastName;
 
             // users.FIO = nameUser.OrganizationData.Municipality;
-            db.Entry(users).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+         
             db.SaveChanges();
             // List<Obrazovan> obr = db.Obrazovan.Where(p => p.id_zayavl == id);
 
@@ -247,7 +251,7 @@ namespace Attest.Controllers
                db.SaveChanges();
                /*var a = client.GetStaffInfoBySnils(Snils: snils).OrganizationData.Email;
                var b = client.GetStaffInfoBySnils(Snils: snils).MainPosition.AttestDate;*/
-            return View("ZayavEdit");
+            return View("ZayavEdit", db.Zayavlen.Find(id));
         }
 
         public void SGO()
@@ -310,7 +314,7 @@ namespace Attest.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Creat(string dolgnost_imeyu, string dolgnost_att)
+        public IActionResult Creat(string dolgnost_imeyu, string dolgnost_att)
         {
 
 
@@ -329,9 +333,9 @@ namespace Attest.Controllers
 
 
 
-            await Update(user.Id, zayav.Id, user);
+            
 
-            return View();
+            return RedirectToAction("zayavEditFirst", "User",new{id=zayav.Id, id_user=user.Id});
         }
 
 
@@ -345,8 +349,23 @@ namespace Attest.Controllers
         }
 
 
+        
+        [Route("zayavEditFirst/{id}/{id_user}")]
+        public IActionResult ZayavEditFirst(int id,int id_user,Users user)
+        {
+         
+
+            Update(id_user, id, user);
 
 
+            return RedirectToAction("Lk","lk", new{id=id_user});
+           
+
+
+
+
+
+        }
 
 
         //[HttpGet]
@@ -359,6 +378,7 @@ namespace Attest.Controllers
 
         //  [HttpPost]
         [Route("zayav/{id}")]
+       
         public IActionResult Zayav(int id)
         {
             ViewBag.User = db.Zayavlen.Where(p => p.Id == id).ToList();
