@@ -26,5 +26,8 @@ namespace Attest.Models
 
         [Compare("Sogl", ErrorMessage = "Не подтверждено согласие на обработку персональных знаний")]
         public string Sogl { get; set; }
+
+        [Compare("mo_s", ErrorMessage = "Не выбран регион")]
+        public string mo_s { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace Attest.Controllers
 {
     public class UserController : Controller
     {
- 
+
 
         private DataContext db = new DataContext();
 
@@ -31,9 +31,6 @@ namespace Attest.Controllers
 
         public async Task<IActionResult> Update(int id_user, int id, Users users)
         {
-            ViewBag.User = db.Zayavlen.Where(p => p.Id == id).ToList();
-            ViewBag.Obr = db.Obrazovan.Where(p => p.id_zayavl == id).ToList();
-            ViewBag.File = db.File.Where(p => p.id_zayavl == id).ToList();
 
             StaffPortfolioServiceClient client = new StaffPortfolioServiceClient();
 
@@ -59,9 +56,9 @@ namespace Attest.Controllers
             zayav.dolgnost_imeyu = nameUser.MainPosition.Position;
             zayav.kategor = nameUser.MainPosition.Category;
             zayav.kategor_rabot = nameUser.MainPosition.WorkerCategory;
-            //zayav.mo
-           
-            zayav.oo = nameUser.OrganizationData.ShortName;
+            zayav.oo = nameUser.OrganizationData.Municipality;
+
+            //zayav.oo = nameUser.OrganizationData.ShortName;
             //zayav.uch_stepen
             // db.Set<Zayavlen>().Attach(zayav);
             //  db.Zayavlen.Update(zayav).;
@@ -144,7 +141,13 @@ namespace Attest.Controllers
             }
 
 
+            var nauc = db.Naucn_deyat.Where(w => w.id_zayavl == id);
 
+            foreach (Nauch_deyat nauchn in nauc)
+            {
+                db.Naucn_deyat.Remove(nauchn);
+            }
+            db.SaveChanges();
 
             for (int i = 0; i < nameUser.StaffMethodicalActivityData.Length; i++)
             {
@@ -205,7 +208,7 @@ namespace Attest.Controllers
                 {
                     stream.Write(nameUser.StaffPortfolioFilesData[i].File, 0, nameUser.StaffPortfolioFilesData[i].File.Length);
                 }
-                
+
                 using (FileStream s = System.IO.File.Create(path))
                 {
                     await s.WriteAsync(nameUser.StaffPortfolioFilesData[i].File);
@@ -251,10 +254,15 @@ namespace Attest.Controllers
                db.SaveChanges();
                /*var a = client.GetStaffInfoBySnils(Snils: snils).OrganizationData.Email;
                var b = client.GetStaffInfoBySnils(Snils: snils).MainPosition.AttestDate;*/
+
+            ViewBag.User = db.Zayavlen.Where(p => p.Id == id).ToList();
+            ViewBag.Obr = db.Obrazovan.Where(p => p.id_zayavl == id).ToList();
+            ViewBag.File = db.File.Where(p => p.id_zayavl == id).ToList();
+            ViewBag.Nauch = db.Naucn_deyat.Where(p => p.id_zayavl == id).ToList();
             return View("ZayavEdit", db.Zayavlen.Find(id));
         }
 
-     
+
 
 
         public IActionResult view(int id_user, Users users)
@@ -273,7 +281,6 @@ namespace Attest.Controllers
         }
 
 
-        [HttpGet]
         [Route("edit/{id}")]
         public IActionResult Edit(int id)
         {
@@ -308,8 +315,8 @@ namespace Attest.Controllers
             Users user = db.Users.Where(p => p.Email == Email).First();
             Zayavlen zayav = new Zayavlen();
             zayav.id_user = user.Id;
-        
-            zayav.data_obnovl=DateTime.Now;
+
+            zayav.data_obnovl = DateTime.Now;
             zayav.data_podachi = DateTime.Now;
             zayav.status = "Заявление на расмотрении";
 
@@ -338,7 +345,7 @@ namespace Attest.Controllers
 
 
         [Route("zayavEditFirst/{id}/{id_user}")]
-        public async Task<IActionResult> ZayavEditFirst(int id,int id_user,Users user)
+        public async Task<IActionResult> ZayavEditFirst(int id, int id_user, Users user)
         {
 
 
@@ -361,14 +368,14 @@ namespace Attest.Controllers
         {
             ViewBag.User = db.Zayavlen.Where(p => p.Id == id).ToList();
             return View("ZayavEdit", db.Zayavlen.Find(id));
-         
+
         }
 
         public IActionResult ZayavSaveEdit(int id_user, Zayavlen zayav)
         {
 
-            db.Entry(zayav).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            db.SaveChanges();
+            /*db.Entry(zayav).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.SaveChanges();*/
             return RedirectToAction("Lk", "Lk");
         }
     }

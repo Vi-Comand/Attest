@@ -30,8 +30,24 @@
             <br />
         </div>
         <div>
+            <label asp-for="Snils">Снилс</label>
+            <input asp-for="Snils" />
+            <span asp-validation-for="Snils" />
+            <br />
+        </div>
+        <div>
+            <select id="dolg" asp-for="mo_s" required>
+
+                <option value="" selected="selected">Выберите регион</option>
+                <option value="1">Краснодарский край</option>
+                <option value="2">Краснодар</option>
+                <option value="3">Сочи</option>
+
+            </select>
+        </div>
+        <div>
             <label asp-for="Sogl">Согласие на обработку персональных данных</label>
-            <input id="sogl" type="checkbox" />
+            <input id="sogl" type="checkbox" class="a" required />
             <span asp-validation-for="Sogl" />
             <br />
         </div>

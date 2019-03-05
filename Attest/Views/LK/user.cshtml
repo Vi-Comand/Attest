@@ -9,11 +9,21 @@
 </head>
 <body>
     <form method="post" asp-controller="User" asp-action="Creat">
-        <button type="submit" class="button" style="margin:5px;" asp-area="" asp-controller="User" asp-action="Creat"> Подать заявление</button>
+        <button type="submit" style="margin:5px;" asp-area="" asp-controller="User" asp-action="Creat"> Подать заявление</button>
         <table>
+            <tr>
+                <th>№ заявления</th>
+                <th>Дата подачи</th>
+                <th>Должность</th>
+                <th>Дата обновления</th>
+                <th>Статус</th>
+                <th>Итоговый балл</th>
+                <th colspan="2">Кнопки управления</th>
 
+            </tr>
             @foreach (var row in ViewBag.LK)
             {
+
                 <tr>
                     <td>@row.Id</td>
                     <td><a asp-controller="User" asp-action="edit" asp-route-id="@row.Id">@row.data_podachi</a> </td>
@@ -24,7 +34,7 @@
                     <td>@row.ball</td>
 
 
-                    <td> <a asp-controller="User" asp-action="edit" asp-route-id="@row.Id">Edit</a> | <a asp-controller="User" asp-action="Delete" asp-route-id="@row.Id" onclick="return confirm('Ты Серьезно ?')">Delete</a></td>
+                    <td> <a asp-controller="User" asp-action="edit" asp-route-id="@row.Id">Изменить</a> | <a asp-controller="User" asp-action="Delete" asp-route-id="@row.Id" onclick="return confirm('Ты Серьезно ?')">Удалить</a></td>
                 </tr>
             }
         </table>
