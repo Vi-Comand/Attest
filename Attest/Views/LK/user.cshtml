@@ -9,9 +9,9 @@
 </head>
 <body>
     <form method="post" asp-controller="User" asp-action="Add">
-        <button type="submit" class="button" style="margin:5px;" asp-area="" asp-controller="User" asp-action="Add"> Подать заявление</button>
+        <button type="submit" style="margin:5px;" asp-area="" asp-controller="User" asp-action="Add"> Подать заявление</button>
         <table>
-            
+
             @foreach (var row in ViewBag.LK)
             {
                 <tr>

@@ -23,5 +23,8 @@ namespace Attest.Models
 
         [Compare("Snils", ErrorMessage = "Не указан снилс")]
         public string Snils { get; set; }
+
+        [Compare("Sogl", ErrorMessage = "Не подтверждено согласие на обработку персональных знаний")]
+        public string Sogl { get; set; }
     }
 }

@@ -1965,7 +1965,7 @@ textarea {
     -webkit-appearance: none;
     -ms-appearance: none;
     appearance: none;
-    background: #cdffe5;
+    /*background: #cdffe5;*/
     border-radius: 10px;
     border: none;
     border: solid 2px #8dcca9;

@@ -41,13 +41,13 @@ namespace Attest.Controllers
             string snils = db.Users.Find(id_user).Snils.ToString();
             //02332960826     15234126527  12962899413
             var nameUser = client.GetStaffInfoBySnilsAsync(snils).Result.staffPortfolio;
-            users= db.Users.Find(id_user);
+            users = db.Users.Find(id_user);
 
 
             users.FIO = nameUser.PersonData.FirstName + " " + nameUser.PersonData.MiddleName + " " + nameUser.PersonData.LastName;
 
             // users.FIO = nameUser.OrganizationData.Municipality;
-         
+
             db.SaveChanges();
             // List<Obrazovan> obr = db.Obrazovan.Where(p => p.id_zayavl == id);
 
@@ -294,6 +294,7 @@ namespace Attest.Controllers
         {
             ViewBag.Obr = db.Obrazovan.Where(p => p.id_zayavl == id).ToList();
             ViewBag.File = db.File.Where(p => p.id_zayavl == id).ToList();
+            ViewBag.Nauch = db.Naucn_deyat.Where(p => p.id_zayavl == id).ToList();
             return View("ZayavEdit", db.Zayavlen.Find(id));
         }
 
@@ -333,9 +334,9 @@ namespace Attest.Controllers
 
 
 
-            
 
-            return RedirectToAction("zayavEditFirst", "User",new{id=zayav.Id, id_user=user.Id});
+
+            return RedirectToAction("zayavEditFirst", "User", new { id = zayav.Id, id_user = user.Id });
         }
 
 
@@ -349,17 +350,17 @@ namespace Attest.Controllers
         }
 
 
-        
+
         [Route("zayavEditFirst/{id}/{id_user}")]
-        public IActionResult ZayavEditFirst(int id,int id_user,Users user)
+        public IActionResult ZayavEditFirst(int id, int id_user, Users user)
         {
-         
+
 
             Update(id_user, id, user);
 
 
-            return RedirectToAction("Lk","lk", new{id=id_user});
-           
+            return RedirectToAction("Lk", "lk", new { id = id_user });
+
 
 
 
@@ -378,7 +379,7 @@ namespace Attest.Controllers
 
         //  [HttpPost]
         [Route("zayav/{id}")]
-       
+
         public IActionResult Zayav(int id)
         {
             ViewBag.User = db.Zayavlen.Where(p => p.Id == id).ToList();

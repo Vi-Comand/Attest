@@ -30,6 +30,12 @@
             <br />
         </div>
         <div>
+            <label asp-for="Sogl">Согласие на обработку персональных данных</label>
+            <input id="sogl" type="checkbox" />
+            <span asp-validation-for="Sogl" />
+            <br />
+        </div>
+        <div>
             <input type="submit" value="Регистрация" />
         </div>
     </div>
