@@ -16,7 +16,10 @@
     <link rel="stylesheet" href="~/assets/css/Footer-Dark.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
     <!-- <link rel="stylesheet" href="~/assets/css/font-awesome.min.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="~/assets/bootstrap/js/bootstrap.js"></script>
 
     <title>@ViewData["Title"] - Аттестация</title>
 </head>
@@ -26,21 +29,28 @@
         <div class="container">
             <table style=" border: solid 0px #dbdbdb; margin: 0;">
                 <tr style=" border: solid 0px #dbdbdb; margin: 0;">
-                    <td><span class="navbar-expand-sm"><img class="rounded-circle" src="~/assets/img/logo60.png" width="60" style="margin-right:40px; margin-left:10px"></span><a class="navbar-brand logo" href="#">Аттестация педагогических работников ОО Краснодарского края</a></td>
+                    <td style=" border: solid 0px"><span class="navbar-expand-sm"><img class="rounded-circle" asp-controller="Home" asp-action="Index" src="~/assets/img/logo60.png" width="60" style="margin-right:40px; margin-left:10px"></span><a class="navbar-brand logo" asp-controller="Home" asp-action="Index">Аттестация педагогических работников ОО Краснодарского края</a></td>
                 </tr>
                 <tr style=" border: solid 0px #dbdbdb; margin: 0;">
-                    <td>
+                    <td style=" border: solid 0px">
                         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="sr-only sr-only-focusable"><img class="rounded-circle" src="~/assets/img/logo60.png" width="60"></span><span class="navbar-toggler-icon"></span></button>
 
                         <div class="collapse navbar-collapse text-left " id="navbarNav">
 
                             <form method="post" class="navbar" style="margin:initial; display:contents">
-                                <ul class="nav navbar-nav ml  align-items-xl-center">
+                                <button type="submit" class="button_nav" style="margin:5px;" asp-controller="Home" asp-action="Index">Главная</button>
+                                <br />
+                                <button type="submit" class="button_nav" style="margin:5px;" asp-controller="lk" asp-action="lk">Личный кабинет</button>
+                                <br />
+                                <button type="submit" class="button_nav" style="margin:5px;" asp-controller="Home" asp-action="Info">Информация</button>
+                                <br />
 
-                                    <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="index">Главная</a></li>
-                                    <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Lk" asp-action="lk">Личный кабинет</a></li>
-                                    <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="info">Информация</a></li>
-                                </ul>
+                                @*<ul class="nav navbar-nav ml  align-items-xl-center">
+
+                                        <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="index">Главная</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Lk" asp-action="lk">Личный кабинет</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="info">Информация</a></li>
+                                    </ul>*@
 
                                 @if (User.Identity.IsAuthenticated == false)
                                 {
@@ -71,7 +81,7 @@
         <hr />
     </div>
     <div class="d-print-none">
-        <footer>
+        <footer style="padding: 2em 0;">
             <div class="container">
                 <div class="row">
                     @*<div class="card border-success mb-4 mx-auto" style="max-width: 300px; padding:0;">
@@ -128,9 +138,6 @@
         </footer>
     </div>
 
-    <script src="~/assets/js/jquery.min.js"></script>
-    <script src="~/assets/bootstrap/js/bootstrap.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
 
     @RenderSection("Scripts", required: false)
 

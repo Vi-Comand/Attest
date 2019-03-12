@@ -7,34 +7,29 @@
     <div>
         <div>
             <label asp-for="Email">Введите Email</label>
-            <input type="text" asp-for="Email" />
+            <input type="text" asp-for="Email" required />
             <span asp-validation-for="Email" />
             <br />
         </div>
         <div>
             <label asp-for="Password">Введите пароль</label>
-            <input asp-for="Password" />
+            <input asp-for="Password" required />
             <span asp-validation-for="Password" />
             <br />
         </div>
         <div>
             <label asp-for="ConfirmPassword">Повторите пароль</label>
-            <input asp-for="ConfirmPassword" />
+            <input asp-for="ConfirmPassword" required />
             <span asp-validation-for="ConfirmPassword" />
             <br />
         </div>
         <div>
             <label asp-for="Snils">Снилс</label>
-            <input asp-for="Snils" />
+            <input asp-for="Snils" required />
             <span asp-validation-for="Snils" />
             <br />
         </div>
-        <div>
-            <label asp-for="Snils">Снилс</label>
-            <input asp-for="Snils" />
-            <span asp-validation-for="Snils" />
-            <br />
-        </div>
+
         <div>
             <select id="dolg" asp-for="mo_s" required>
 
@@ -45,12 +40,17 @@
 
             </select>
         </div>
+        <br />
         <div>
-            <label asp-for="Sogl">Согласие на обработку персональных данных</label>
-            <input id="sogl" type="checkbox" class="a" required />
+            <input type="checkbox" asp-for="Sogl" required /><label for="Sogl">Согласие на обработку персональных данных</label>
+            @*<label asp-for="Sogl" class="checkboxFour">
+                    Согласие на обработку персональных данных
+                    <input id="sogl" type="checkbox" class="checkboxFour" required />
+                </label>*@
             <span asp-validation-for="Sogl" />
             <br />
         </div>
+
         <div>
             <input type="submit" value="Регистрация" />
         </div>

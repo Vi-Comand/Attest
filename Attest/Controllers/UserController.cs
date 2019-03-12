@@ -56,9 +56,9 @@ namespace Attest.Controllers
             zayav.dolgnost_imeyu = nameUser.MainPosition.Position;
             zayav.kategor = nameUser.MainPosition.Category;
             zayav.kategor_rabot = nameUser.MainPosition.WorkerCategory;
-            zayav.oo = nameUser.OrganizationData.Municipality;
+            //  zayav.oo = nameUser.OrganizationData.Municipality;
 
-            //zayav.oo = nameUser.OrganizationData.ShortName;
+            zayav.oo = nameUser.OrganizationData.ShortName;
             //zayav.uch_stepen
             // db.Set<Zayavlen>().Attach(zayav);
             //  db.Zayavlen.Update(zayav).;
@@ -318,7 +318,7 @@ namespace Attest.Controllers
 
             zayav.data_obnovl = DateTime.Now;
             zayav.data_podachi = DateTime.Now;
-            zayav.status = "Заявление на расмотрении";
+            zayav.status = "Заявление на рассмотрении";
 
             db.Entry(zayav).State = Microsoft.EntityFrameworkCore.EntityState.Added;
             db.SaveChanges();
