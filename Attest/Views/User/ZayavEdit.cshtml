@@ -1,6 +1,25 @@
 ﻿
 @model Attest.Models.Zayavlen
-
+@*<script>
+        angular.module('typeaheadApp', ['ui.bootstrap']).controller('TypeaheadCtrl', ['$scope', '$http', function ($scope, $http) {
+            $scope.getLocation = function (val) {
+                return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {
+                    params: {
+                        address: val,
+                        sensor: false,
+                        language: 'ru',
+                        components: 'country:ru|administrative_area:Moscow'
+                    }
+                }).then(function (res) {
+                    var addresses = [];
+                    angular.forEach(res.data.results, function (item) {
+                        addresses.push(item.formatted_address);
+                    });
+                    return addresses;
+                });
+            };
+        }]);
+    </script>*@
 
 <!DOCTYPE html>
 
@@ -17,7 +36,7 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse0">
-                            Редактируемые данные
+                            Данные для аттестации
                         </a>
                     </h4>
                 </div>
@@ -55,6 +74,8 @@
                                         <option value="КОНЦЕРТМЕЙСТЕР образовательной организации культуры и искусства">КОНЦЕРТМЕЙСТЕР образовательной организации культуры и искусства</option>
                                         <option value="ИНСТРУКТОР-МЕТОДИСТ (включая старшего)">ИНСТРУКТОР-МЕТОДИСТ (включая старшего)</option>
                                     </select>
+
+
                                 </td>
                             </tr>
 
@@ -113,43 +134,122 @@
                             <tr>
                                 <td>ФИО</td>
                                 <td>
-                                    <input type="text" asp-for="mo" disabled />
+                                    <input type="text" asp-for="mo" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>МО</td>
                                 <td>
-                                    <input type="text" asp-for="mo" disabled />
+                                    <select id="napr" asp-for="mo" required>
+                                        <option value="" selected="selected">Выберите МО</option>
+                                        <option value="Абинский ">Абинский</option>
+                                        <option value="Анапский ">Анапский</option>
+                                        <option value="Апшеронский ">Апшеронский</option>
+                                        <option value="Белоглинский ">Белоглинский</option>
+                                        <option value="Белореченский ">Белореченский</option>
+                                        <option value="Брюховецкий ">Брюховецкий</option>
+                                        <option value="Выселковский ">Выселковский</option>
+                                        <option value="Гулькевичский ">Гулькевичский</option>
+                                        <option value="Динской ">Динской</option>
+                                        <option value="Ейский ">Ейский</option>
+                                        <option value="Кавказский ">Кавказский</option>
+                                        <option value="Калининский ">Калининский</option>
+                                        <option value="Каневской ">Каневской</option>
+                                        <option value="Кореновский ">Кореновский</option>
+                                        <option value="Красноармейский ">Красноармейский</option>
+                                        <option value="Крыловский ">Крыловский</option>
+                                        <option value="Крымский ">Крымский</option>
+                                        <option value="Курганинский ">Курганинский</option>
+                                        <option value="Кущевский ">Кущевский</option>
+                                        <option value="Лабинский ">Лабинский</option>
+                                        <option value="Ленинградский ">Ленинградский</option>
+                                        <option value="Мостовский ">Мостовский</option>
+                                        <option value="Новокубанский ">Новокубанский</option>
+                                        <option value="Новопокровский ">Новопокровский</option>
+                                        <option value="Отрадненский ">Отрадненский</option>
+                                        <option value="Павловский ">Павловский</option>
+                                        <option value="Приморско-Ахтарский ">Приморско-Ахтарский</option>
+                                        <option value="Северский ">Северский</option>
+                                        <option value="Славянский ">Славянский</option>
+                                        <option value="Староминский ">Староминский</option>
+                                        <option value="Тбилисский ">Тбилисский</option>
+                                        <option value="Темрюкский ">Темрюкский</option>
+                                        <option value="Тимашевский ">Тимашевский</option>
+                                        <option value="Тихорецкий ">Тихорецкий</option>
+                                        <option value="Туапсинский ">Туапсинский</option>
+                                        <option value="Успенский ">Успенский</option>
+                                        <option value="Усть-Лабинский ">Усть-Лабинский</option>
+                                        <option value="Щербиновский ">Щербиновский</option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td>ОО</td>
                                 <td>
-                                    <input type="text" asp-for="oo" disabled />
+                                    <input type="text" asp-for="oo" required />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Должность</td>
                                 <td>
-                                    <input type="text" asp-for="dolgnost_imeyu" disabled />
+                                    <select id="dolg" asp-for="dolgnost_imeyu" required>
+
+                                        <option value="" selected="selected">Выберите текущую должность</option>
+                                        <option value="ВОСПИТАТЕЛЬ">ВОСПИТАТЕЛЬ</option>
+                                        <option value="СТАРШИЙ ВОСПИТАТЕЛЬ">СТАРШИЙ ВОСПИТАТЕЛЬ</option>
+                                        <option value="МУЗЫКАЛЬНЫЙ РУКОВОДИТЕЛЬ">МУЗЫКАЛЬНЫЙ РУКОВОДИТЕЛЬ</option>
+                                        <option value="ИНСТРУКТОР ПО ТРУДУ">ИНСТРУКТОР ПО ТРУДУ</option>
+                                        <option value="КОНЦЕРТМЕЙСТЕР">КОНЦЕРТМЕЙСТЕР</option>
+                                        <option value="МАСТЕР ПРОИЗВОДСТВЕННОГО ОБУЧЕНИЯ">МАСТЕР ПРОИЗВОДСТВЕННОГО ОБУЧЕНИЯ</option>
+                                        <option value="МЕТОДИСТ">МЕТОДИСТ</option>
+                                        <option value="ПЕДАГОГ-БИБЛИОТЕКАРЬ">ПЕДАГОГ-БИБЛИОТЕКАРЬ</option>
+                                        <option value="ПЕДАГОГ ДОПОЛНИТЕЛЬНОГО ОБРАЗОВАНИЯ">ПЕДАГОГ ДОПОЛНИТЕЛЬНОГО ОБРАЗОВАНИЯ</option>
+                                        <option value="ПЕДАГОГ-ОРГАНИЗАТОР">ПЕДАГОГ-ОРГАНИЗАТОР</option>
+                                        <option value="ПЕДАГОГ-ПСИХОЛОГ">ПЕДАГОГ-ПСИХОЛОГ</option>
+                                        <option value="ПРЕПОДАВАТЕЛЬ">ПРЕПОДАВАТЕЛЬ</option>
+                                        <option value="ПРЕПОДАВАТЕЛЬ-ОРГАНИЗАТОР ОБЖ">ПРЕПОДАВАТЕЛЬ-ОРГАНИЗАТОР ОБЖ</option>
+                                        <option value="РУКОВОДИТЕЛЬ ФИЗИЧЕСКОГО ВОСПИТАНИЯ">РУКОВОДИТЕЛЬ ФИЗИЧЕСКОГО ВОСПИТАНИЯ</option>
+                                        <option value="СОЦИАЛЬНЫЙ ПЕДАГОГ">СОЦИАЛЬНЫЙ ПЕДАГОГ</option>
+                                        <option value="СТАРШИЙ ВОЖАТЫЙ">СТАРШИЙ ВОЖАТЫЙ</option>
+                                        <option value="ТРЕНЕР-ПРЕПОДАВАТЕЛЬ">ТРЕНЕР-ПРЕПОДАВАТЕЛЬ</option>
+                                        <option value="УЧИТЕЛЬ">УЧИТЕЛЬ</option>
+                                        <option value="УЧИТЕЛЬ-ЛОГОПЕД (УЧИТЕЛЬ-ДЕФЕКТОЛОГ)">УЧИТЕЛЬ-ЛОГОПЕД (УЧИТЕЛЬ-ДЕФЕКТОЛОГ)</option>
+                                        <option value="ИНСТРУКТОР ПО ФИЗИЧЕСКОЙ КУЛЬТУРЕ">ИНСТРУКТОР ПО ФИЗИЧЕСКОЙ КУЛЬТУРЕ</option>
+                                        <option value="ПРЕПОДАВАТЕЛЬ образовательной организации культуры и искусства">ПРЕПОДАВАТЕЛЬ образовательной организации культуры и искусства</option>
+                                        <option value="КОНЦЕРТМЕЙСТЕР образовательной организации культуры и искусства">КОНЦЕРТМЕЙСТЕР образовательной организации культуры и искусства</option>
+                                        <option value="ИНСТРУКТОР-МЕТОДИСТ (включая старшего)">ИНСТРУКТОР-МЕТОДИСТ (включая старшего)</option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Категория</td>
                                 <td>
-                                    <input type="text" asp-for="kategor" disabled />
+                                    <input type="text" asp-for="kategor" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Дата последней аттестации</td>
                                 <td>
-                                    <input type="text" asp-for="data_last_att" disabled />
+
+
+                                    <input type="date" asp-for="data_last_att" id="date" name="date" placeholder="Дата" required>
+                                    <script>
+
+                                        $(function () {
+                                            $('#date').daterangepicker({
+                                                singleDatePicker: true,
+                                                locale: {
+                                                    format: 'DD.MM.YYYY'
+                                                }
+                                            });
+                                        });
+                                    </script>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Категория работника</td>
                                 <td>
-                                    <input type="text" asp-for="kategor_rabot" disabled />
+                                    <input type="text" asp-for="kategor_rabot" />
                                 </td>
                             </tr>
                             <tr>
@@ -200,61 +300,63 @@
                                     <tr>
                                         <td>ОО</td>
                                         <td>
-                                            <input type="text" value="@row.oo" disabled />
+                                            <input type="text" value="@row.oo" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Период обучения</td>
                                         <td>
-                                            <input type="text" value="@row.period" disabled />
+                                            <input type="text" value="@row.period" />
+
+
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Муниципалитет</td>
                                         <td>
-                                            <input type="text" value="@row.mo" disabled />
+                                            <input type="text" value="@row.mo" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Специальность</td>
                                         <td>
-                                            <input type="text" value="@row.special" disabled />
+                                            <input type="text" value="@row.special" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Квалификация</td>
                                         <td>
-                                            <input type="text" value="@row.kvalif" disabled />
+                                            <input type="text" value="@row.kvalif" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Тип документа</td>
                                         <td>
-                                            <input type="text" value="@row.nazv_doc" disabled />
+                                            <input type="text" value="@row.nazv_doc" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Серия</td>
                                         <td>
-                                            <input type="text" value="@row.ser_doc" disabled />
+                                            <input type="text" value="@row.ser_doc" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Номер документа</td>
                                         <td>
-                                            <input type="text" value="@row.nom_doc" disabled />
+                                            <input type="text" value="@row.nom_doc" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Дата выдачи</td>
                                         <td>
-                                            <input type="text" value="@row.data_doc" disabled />
+                                            <input type="text" value="@row.data_doc" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Регистрационный номер</td>
                                         <td>
-                                            <input type="text" value="@row.reg_nom" disabled />
+                                            <input type="text" value="@row.reg_nom" />
                                         </td>
                                     </tr>
 
@@ -280,67 +382,82 @@
                                     <tr>
                                         <td>Организация</td>
                                         <td>
-                                            <input type="text" value="@row.oo" disabled />
+                                            <input type="text" value="@row.oo" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Период обучения</td>
                                         <td>
-                                            <input type="text" value="@row.period" disabled />
+
+                                            <input type="text" name="daterange" value="@row.period" />
+
+
+                                            <script>
+                                                $('input[name="dates"]').daterangepicker();
+
+                                                $(function () {
+                                                    $('input[name="daterange"]').daterangepicker({
+                                                        opens: 'left',
+                                                        locale: {
+                                                            format: 'DD.MM.YYYY'
+                                                        }
+                                                    });
+                                                });
+                                            </script>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Место прохождения</td>
                                         <td>
-                                            <input type="text" value="@row.mo" disabled />
+                                            <input type="text" value="@row.mo" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Кол-во часов</td>
                                         <td>
-                                            <input type="text" value="@row.kol_chas" disabled />
+                                            <input type="text" value="@row.kol_chas" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Тема курсов</td>
                                         <td>
-                                            <input type="text" value="@row.special" disabled />
+                                            <input type="text" value="@row.special" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Форма участия/проведения</td>
                                         <td>
-                                            <input type="text" value="@row.kvalif" disabled />
+                                            <input type="text" value="@row.kvalif" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Название документа</td>
                                         <td>
-                                            <input type="text" value="@row.nazv_doc" disabled />
+                                            <input type="text" value="@row.nazv_doc" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Серия</td>
                                         <td>
-                                            <input type="text" value="@row.ser_doc" disabled />
+                                            <input type="text" value="@row.ser_doc" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Номер документа</td>
                                         <td>
-                                            <input type="text" value="@row.nom_doc" disabled />
+                                            <input type="text" value="@row.nom_doc" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Дата выдачи</td>
                                         <td>
-                                            <input type="text" value="@row.data_doc" disabled />
+                                            <input type="text" value="@row.data_doc" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Регистрационный номер</td>
                                         <td>
-                                            <input type="text" value="@row.reg_nom" disabled />
+                                            <input type="text" value="@row.reg_nom" />
                                         </td>
                                     </tr>
                                 </table>
@@ -364,74 +481,74 @@
                                     <tr>
                                         <td>Организация</td>
                                         <td>
-                                            <input type="text" value="@row.oo" disabled />
+                                            <input type="text" value="@row.oo" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Период обучения</td>
                                         <td>
-                                            <input type="text" value="@row.period" disabled />
+                                            <input type="text" value="@row.period" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Место прохождения</td>
                                         <td>
-                                            <input type="text" value="@row.mo" disabled />
+                                            <input type="text" value="@row.mo" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Кол-во часов</td>
                                         <td>
-                                            <input type="text" value="@row.kol_chas" disabled />
+                                            <input type="text" value="@row.kol_chas" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Вид обучения</td>
                                         <td>
-                                            <input type="text" value="@row.vid_obuch" disabled />
+                                            <input type="text" value="@row.vid_obuch" />
                                         </td>
                                     </tr>
                                     <tr>
                                     <tr>
                                         <td>Специальность</td>
                                         <td>
-                                            <input type="text" value="@row.special" disabled />
+                                            <input type="text" value="@row.special" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Квалификация</td>
                                         <td>
-                                            <input type="text" value="@row.kvalif" disabled />
+                                            <input type="text" value="@row.kvalif" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Название документа</td>
                                         <td>
-                                            <input type="text" value="@row.nazv_doc" disabled />
+                                            <input type="text" value="@row.nazv_doc" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Серия</td>
                                         <td>
-                                            <input type="text" value="@row.ser_doc" disabled />
+                                            <input type="text" value="@row.ser_doc" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Номер документа</td>
                                         <td>
-                                            <input type="text" value="@row.nom_doc" disabled />
+                                            <input type="text" value="@row.nom_doc" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Дата выдачи</td>
                                         <td>
-                                            <input type="text" value="@row.data_doc" disabled />
+                                            <input type="text" value="@row.data_doc" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Регистрационный номер</td>
                                         <td>
-                                            <input type="text" value="@row.reg_nom" disabled />
+                                            <input type="text" value="@row.reg_nom" />
                                         </td>
                                     </tr>
                                 </table>
@@ -465,13 +582,13 @@
                                 <tr>
                                     <td>Имя файла</td>
                                     <td>
-                                        <input type="text" value="@row.name_f" disabled />
+                                        <input type="text" value="@row.name_f" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Тип файла</td>
                                     <td>
-                                        <input type="text" value="@row.kategor_f" disabled />
+                                        <input type="text" value="@row.kategor_f" />
                                     </td>
                                 </tr>
                             }
@@ -496,38 +613,38 @@
                                 <tr>
                                     <td>Период</td>
                                     <td>
-                                        <input type="text" value="@row.period" disabled />
+                                        <input type="text" value="@row.period" />
 
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Название работы</td>
                                     <td>
-                                        <input type="text" value="@row.nazv" disabled />
+                                        <input type="text" value="@row.nazv" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Название продукта</td>
                                     <td>
-                                        <input type="text" value="@row.nazv_p" disabled />
+                                        <input type="text" value="@row.nazv_p" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Уровень</td>
                                     <td>
-                                        <input type="text" value="@row.urov" disabled />
+                                        <input type="text" value="@row.urov" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Статус участия</td>
                                     <td>
-                                        <input type="text" value="@row.status" disabled />
+                                        <input type="text" value="@row.status" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Реализовано</td>
                                     <td>
-                                        <input type="text" value="@row.realiz" disabled />
+                                        <input type="text" value="@row.realiz" />
                                     </td>
                                 </tr>
                                 <tr>

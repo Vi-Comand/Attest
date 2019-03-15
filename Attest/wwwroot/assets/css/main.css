@@ -1563,11 +1563,11 @@ body {
     body.is-loading *, body.is-loading *:before, body.is-loading *:after {
         -moz-animation: none !important;
         -webkit-animation: none !important;
-        -ms-animation: none !important;
+        /*-ms-animation: none !important;*/
         animation: none !important;
         -moz-transition: none !important;
         -webkit-transition: none !important;
-        -ms-transition: none !important;
+        /*-ms-transition: none !important;*/
         transition: none !important;
     }
 
@@ -1619,7 +1619,7 @@ body, input, select, textarea {
 .a {
     color: #0fffa7;
     /* font-weight: 600; */
-    text-shadow: 1px 1px 1px #114e09, 0 0 1em #ece9e99e;
+    text-shadow: 1px 1px 1px #114e09, 0 0 1em #ece9e9;
     text-decoration: underline;
 }
 
@@ -1637,7 +1637,7 @@ a {
 b {
     color: #0fffa7;
     font-weight: 600;
-    text-shadow: 2px 1px 1px #114e09, 0 0 1em #ece9e99e;
+    text-shadow: 2px 1px 1px #114e09, 0 0 1em #ece9e9;
 }
 
 strong {
@@ -1871,15 +1871,15 @@ header h6 + p {
     display: -ms-flexbox;
     -ms-flex-wrap: wrap;
     -ms-flex-pack: justify;
-    -moz-justify-content: space-between;
+    /*-moz-justify-content: space-between;*/
     -webkit-justify-content: space-between;
-    -ms-justify-content: space-between;
+    /*-ms-justify-content: space-between;*/
     justify-content: space-between;
     display: -moz-flex;
     display: -webkit-flex;
     display: -ms-flex;
     display: flex;
-    -moz-flex-wrap: wrap;
+    /*-moz-flex-wrap: wrap;*/
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
@@ -1956,6 +1956,7 @@ label {
 }
 
 input[type="text"],
+input[type="date"],
 input[type="password"],
 input[type="email"],
 input[type="tel"],
@@ -1978,6 +1979,7 @@ textarea {
 }
 
     input[type="text"]:invalid,
+    input[type="date"]:invalid,
     input[type="password"]:invalid,
     input[type="email"]:invalid,
     input[type="tel"]:invalid,
@@ -1987,6 +1989,7 @@ textarea {
     }
 
     input[type="text"]:focus,
+    input[type="date"]:focus,
     input[type="password"]:focus,
     input[type="email"]:focus,
     input[type="tel"]:focus,
@@ -2030,6 +2033,7 @@ textarea {
     }
 
 input[type="text"],
+/*input[type="date"],*/
 input[type="password"],
 input[type="email"],
 select {
