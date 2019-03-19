@@ -27,6 +27,7 @@ namespace Attest.Controllers
         public IActionResult Login()
         {
             return View();
+
         }
 
         [HttpPost]
