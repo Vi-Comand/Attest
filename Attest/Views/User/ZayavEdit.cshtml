@@ -557,7 +557,7 @@
                     </div>
                 }
             }
-
+         
 
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -569,26 +569,32 @@
                 </div>
                 <div id="collapse5" class="panel-collapse collapse in">
                     <div class="panel-body">
+                        <!-- Button trigger modal -->
+                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                            Посмотреть демо
+                        </button>
+
+                    
                         <table>
                             @foreach (var row in ViewBag.File)
                             {
                                 <tr>
                                     <td>Название</td>
                                     <td>
-                                        @Html.ActionLink("Скачать", "file", "user", new { name_f = row.name_f, id = row.id_zayavl })
+                                        @Html.ActionLink("Скачать", "file", "user", new {name_f = row.name_f, id = row.id_zayavl})
 
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Имя файла</td>
                                     <td>
-                                        <input type="text" value="@row.name_f" />
+                                        <input type="text" value="@row.name_f"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Тип файла</td>
                                     <td>
-                                        <input type="text" value="@row.kategor_f" />
+                                        <input type="text" value="@row.kategor_f"/>
                                     </td>
                                 </tr>
                             }
@@ -673,7 +679,36 @@
                 </td>
             </tr>
         </table>
-    </form>
+</form>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Название модали</h4>
+            </div>
+            <div class="modal-body">
+                                
+                <form asp-action="AddFile" asp-controller="User" method="post" enctype="multipart/form-data">
+                   
+                    <input type="hidden" asp-for="Id" />
+                    
+                    <input type="file" name="uploadedFile" /><br>
+                    <input type="submit"  value="Загрузить" />
+                </form>
+                                        
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary">Сохранить изменения</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
