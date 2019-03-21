@@ -317,6 +317,33 @@ namespace Attest.Controllers
             return View();
         }
 
+        public async Task<IActionResult> AddFile(IFormFile uploadedFile, int id)
+        {
+            if (uploadedFile != null)
+            {
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/wwwroot/Files/" +id);
+                // путь к папке Files
+                string path = Directory.GetCurrentDirectory() + "/wwwroot/Files/" + id + "/" + uploadedFile.FileName;
+                // сохраняем файл в папку Files в каталоге wwwroot
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
+
+
+                FileModel file = new FileModel();
+                file.id_zayavl = id;
+                file.name_f = uploadedFile.FileName;
+                db.Entry(file).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+
+                db.SaveChanges();
+
+
+              
+            }
+
+            return View();
+        }
         public IActionResult Creat()
         {
 
