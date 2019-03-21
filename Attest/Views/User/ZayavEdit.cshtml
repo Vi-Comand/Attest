@@ -1,25 +1,5 @@
 ﻿
-@model Attest.Models.Zayavlen
-@*<script>
-        angular.module('typeaheadApp', ['ui.bootstrap']).controller('TypeaheadCtrl', ['$scope', '$http', function ($scope, $http) {
-            $scope.getLocation = function (val) {
-                return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {
-                    params: {
-                        address: val,
-                        sensor: false,
-                        language: 'ru',
-                        components: 'country:ru|administrative_area:Moscow'
-                    }
-                }).then(function (res) {
-                    var addresses = [];
-                    angular.forEach(res.data.results, function (item) {
-                        addresses.push(item.formatted_address);
-                    });
-                    return addresses;
-                });
-            };
-        }]);
-    </script>*@
+@model Attest.Models.CompositeModel
 
 <!DOCTYPE html>
 
@@ -32,8 +12,8 @@
     <form method="post" asp-controller="User" asp-action="ZayavSaveEdit">
         <div class="panel-group" id="accordion">
 
-            <div class="panel panel-default" data-toggle="collapse" data-parent="#accordion" href="#collapse0">
-                <div class="panel-heading">
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse0">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse0">
                             Данные для аттестации
@@ -47,7 +27,7 @@
                                 <td>Должность, по которой прошу провести аттестацию</td>
                                 <td>
 
-                                    <select id="dolg" asp-for="dolgnost_att" required>
+                                    <select id="dolg" asp-for="Zayavlen.dolgnost_att" required>
 
                                         <option value="" selected="selected">Выберите должность</option>
                                         <option value="ВОСПИТАТЕЛЬ">ВОСПИТАТЕЛЬ</option>
@@ -82,7 +62,7 @@
                             <tr>
                                 <td>Направление</td>
                                 <td>
-                                    <select id="napr" asp-for="uch_stepen" required>
+                                    <select id="napr" asp-for="Zayavlen.uch_stepen" required>
                                         <option value="" selected="selected">Выберите напрвление</option>
                                         <option value="Русский язык и литература">Русский язык и литература</option>
                                         <option value="Математика">Математика</option>
@@ -114,8 +94,8 @@
             </div>
 
 
-            <div class="panel panel-default" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                <div class="panel-heading">
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                             Общая информация
@@ -128,7 +108,7 @@
                             <tr>
                                 <td>№ заявления</td>
                                 <td>
-                                    <input type="text" asp-for="Id" disabled />
+                                    <input type="text" asp-for="Zayavlen.Id" disabled />
                                 </td>
                             </tr>
                             @*<tr>
@@ -140,7 +120,7 @@
                             <tr>
                                 <td>МО</td>
                                 <td>
-                                    <select id="napr" asp-for="mo" required>
+                                    <select id="napr" asp-for="Zayavlen.mo" required>
                                         <option value="" selected="selected">Выберите МО</option>
                                         <option value="Абинский ">Абинский</option>
                                         <option value="Анапский ">Анапский</option>
@@ -186,13 +166,13 @@
                             <tr>
                                 <td>ОО</td>
                                 <td>
-                                    <input type="text" asp-for="oo" required />
+                                    <input type="text" asp-for="Zayavlen.oo" required />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Должность</td>
                                 <td>
-                                    <select id="dolg" asp-for="dolgnost_imeyu" required>
+                                    <select id="dolg" asp-for="Zayavlen.dolgnost_imeyu" required>
 
                                         <option value="" selected="selected">Выберите текущую должность</option>
                                         <option value="ВОСПИТАТЕЛЬ">ВОСПИТАТЕЛЬ</option>
@@ -225,7 +205,7 @@
                                 <td>Категория</td>
                                 <td>
 
-                                    <select id="kategor" asp-for="kategor" required>
+                                    <select id="kategor" asp-for="Zayavlen.kategor" required>
 
                                         <option value="" selected="selected">Выберите категорию</option>
                                         <option value="Первая">Первая</option>
@@ -239,7 +219,7 @@
                                 <td>
 
 
-                                    <input type="text" asp-for="data_last_att" id="date" name="date" placeholder="Дата" required>
+                                    <input type="text" asp-for="Zayavlen.data_last_att" id="date" name="date" placeholder="Дата" required>
                                     <script>
 
                                         $(function () {
@@ -257,31 +237,31 @@
                             <tr>
                                 <td>Категория работника</td>
                                 <td>
-                                    <input type="text" asp-for="kategor_rabot" />
+                                    <input type="text" asp-for="Zayavlen.kategor_rabot" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Дата подачи заявления</td>
                                 <td>
-                                    <input type="text" asp-for="data_podachi" disabled />
+                                    <input type="text" asp-for="Zayavlen.data_podachi" disabled />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Дата обновления заявления</td>
                                 <td>
-                                    <input type="text" asp-for="data_obnovl" disabled />
+                                    <input type="text" asp-for="Zayavlen.data_obnovl" disabled />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Статус</td>
                                 <td>
-                                    <input type="text" asp-for="status" disabled />
+                                    <input type="text" asp-for="Zayavlen.status" disabled />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Итоговый балл</td>
                                 <td>
-                                    <input type="text" asp-for="ball" disabled />
+                                    <input type="text" asp-for="Zayavlen.ball" disabled />
                                 </td>
                             </tr>
                         </table>
@@ -299,8 +279,8 @@
             {
                 @if (row.tip_obr == 1)
                 {
-                    <div class="panel panel-default" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                        <div class="panel-heading">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                                     Образование
@@ -393,8 +373,8 @@
 
                 @if (row.tip_obr == 2)
                 {
-                    <div class="panel panel-default" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                        <div class="panel-heading">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                                     Курсы повышения квалификации
@@ -517,8 +497,8 @@
                 }
                 @if (row.tip_obr == 3)
                 {
-                    <div class="panel panel-default" data-toggle="collapse" data-parent="#accordion" href="#collapse4">
-                        <div class="panel-heading">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse4">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
                                     Второе высшеге образование и профессиональная переподготовка
@@ -621,8 +601,8 @@
             }
 
 
-            <div class="panel panel-default" data-toggle="collapse" data-parent="#accordion" href="#collapse5">
-                <div class="panel-heading">
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse5">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
                             Файлы
@@ -682,8 +662,8 @@
                 </div>
             </div>
 
-            <div class="panel panel-default" data-toggle="collapse" data-parent="#accordion" href="#collapse6">
-                <div class="panel-heading">
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse6">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
                             Научно-методическая деятельность
@@ -750,9 +730,9 @@
 
                 <td>
 
-                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="Zayavlen.Id" />
 
-                    <input type="hidden" asp-for="id_user" />
+                    <input type="hidden" asp-for="Zayavlen.id_user" />
                     <input type="submit" asp-controller="User" asp-action="Update" value="Обновить" data-toggle="tooltip" data-placement="top" title="Будут подгруженны данные из АИС Сетевой город. Ваши данные будут заменены" />
                     <input type="submit" value="Сохранить" />
                 </td>
