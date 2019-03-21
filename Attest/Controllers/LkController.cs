@@ -14,6 +14,8 @@ namespace Attest.Controllers
         [Authorize]
         public IActionResult Lk()
         {
+
+
             var Email = HttpContext.User.Identity.Name;
             Users user = db.Users.Where(p => p.Email == Email).First();
             ViewBag.LK = db.Zayavlen.Where(p => p.id_user == user.Id).OrderByDescending(p => p.data_podachi).ToList();

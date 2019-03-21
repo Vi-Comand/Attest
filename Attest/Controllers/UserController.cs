@@ -29,6 +29,10 @@ namespace Attest.Controllers
             return View();
         }
 
+
+
+
+
         public async Task<IActionResult> Update(int id_user, int id, Users users)
         {
 
@@ -284,10 +288,16 @@ namespace Attest.Controllers
         [Route("edit/{id}")]
         public IActionResult Edit(int id)
         {
+            var compositeModel = new CompositeModel();
+            compositeModel.Zayavlen = new Zayavlen();
+            compositeModel.FileModel = new FileModel();
+            compositeModel.Obrazovan = new Obrazovan();
             ViewBag.Obr = db.Obrazovan.Where(p => p.id_zayavl == id).ToList();
             ViewBag.File = db.File.Where(p => p.id_zayavl == id).ToList();
             ViewBag.Nauch = db.Naucn_deyat.Where(p => p.id_zayavl == id).ToList();
-            return View("ZayavEdit", db.Zayavlen.Find(id));
+            compositeModel.Zayavlen = db.Zayavlen.Find(id);
+            ViewBag.compositeModel = compositeModel;
+            return View("ZayavEdit", compositeModel);
         }
 
         public IActionResult file(int id, string name_f)
@@ -376,6 +386,14 @@ namespace Attest.Controllers
 
             /*db.Entry(zayav).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             db.SaveChanges();*/
+            return RedirectToAction("Lk", "Lk");
+        }
+
+        public IActionResult Save_Obr(int id_user, Zayavlen zayav)
+        {
+
+            db.Entry(zayav).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.SaveChanges();
             return RedirectToAction("Lk", "Lk");
         }
     }
