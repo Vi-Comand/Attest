@@ -27,6 +27,7 @@ namespace Attest.Controllers
         public IActionResult Login()
         {
             return View();
+
         }
 
         [HttpPost]
@@ -53,8 +54,7 @@ namespace Attest.Controllers
                     numBytesRequested: 256 / 8));
 
 
-                Users user =
-                    await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email && u.pass == hashed);
+                Users user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email && u.pass == hashed);
                 if (user != null)
                 {
                     await Authenticate(model.Email); // аутентификация
@@ -84,7 +84,8 @@ namespace Attest.Controllers
                 if (user == null)
                 {
                     string password = model.Password;
-
+                    string snils = model.Snils;
+                    int Mo = Convert.ToInt16(model.mo_s);
                     // generate a 128-bit salt using a secure PRNG
                     string a = "Соль";
 
@@ -104,11 +105,11 @@ namespace Attest.Controllers
                         numBytesRequested: 256 / 8));
 
                     // добавляем пользователя в бд
-                    db.Users.Add(new Users { Email = model.Email, pass = hashed });
+                    db.Users.Add(new Users { Email = model.Email, pass = hashed, Snils= snils, mo=Mo, role="1" });
                     await db.SaveChangesAsync();
 
                     await Authenticate(model.Email); // аутентификация
-                    user =
+                    
                     await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
                     return RedirectToAction("Lk", "Lk", new { id = user.Id });
                 }

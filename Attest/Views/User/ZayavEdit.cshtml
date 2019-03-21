@@ -26,13 +26,13 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Изменить пользователя</title>
+    <title>Заявление</title>
 </head>
 <body>
     <form method="post" asp-controller="User" asp-action="ZayavSaveEdit">
         <div class="panel-group" id="accordion">
 
-            <div class="panel panel-default">
+            <div class="panel panel-default" data-toggle="collapse" data-parent="#accordion" href="#collapse0">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse0">
@@ -114,7 +114,7 @@
             </div>
 
 
-            <div class="panel panel-default">
+            <div class="panel panel-default" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
@@ -131,12 +131,12 @@
                                     <input type="text" asp-for="Id" disabled />
                                 </td>
                             </tr>
-                            <tr>
-                                <td>ФИО</td>
-                                <td>
-                                    <input type="text" asp-for="mo" />
-                                </td>
-                            </tr>
+                            @*<tr>
+                                    <td>ФИО</td>
+                                    <td>
+                                        <input type="text" asp-for="fio" />
+                                    </td>
+                                </tr>*@
                             <tr>
                                 <td>МО</td>
                                 <td>
@@ -224,7 +224,14 @@
                             <tr>
                                 <td>Категория</td>
                                 <td>
-                                    <input type="text" asp-for="kategor" />
+
+                                    <select id="kategor" asp-for="kategor" required>
+
+                                        <option value="" selected="selected">Выберите категорию</option>
+                                        <option value="Первая">Первая</option>
+                                        <option value="Высшая">Высшая</option>
+                                    </select>
+
                                 </td>
                             </tr>
                             <tr>
@@ -232,14 +239,15 @@
                                 <td>
 
 
-                                    <input type="date" asp-for="data_last_att" id="date" name="date" placeholder="Дата" required>
+                                    <input type="text" asp-for="data_last_att" id="date" name="date" placeholder="Дата" required>
                                     <script>
 
                                         $(function () {
                                             $('#date').daterangepicker({
                                                 singleDatePicker: true,
                                                 locale: {
-                                                    format: 'DD.MM.YYYY'
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
                                                 }
                                             });
                                         });
@@ -280,12 +288,18 @@
                     </div>
                 </div>
             </div>
+            <!-- Button trigger modal -->
+            <button class="btn-lg" data-toggle="modal" data-target="#obr">
+                Добавить образование
+            </button>
+
+
 
             @foreach (var row in ViewBag.Obr)
             {
                 @if (row.tip_obr == 1)
                 {
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
@@ -350,7 +364,18 @@
                                     <tr>
                                         <td>Дата выдачи</td>
                                         <td>
-                                            <input type="text" value="@row.data_doc" />
+                                            <input type="text" id="d_v_o" value="@row.data_doc" />
+                                            <script>
+                                                $(function () {
+                                                    $('#d_v_o').daterangepicker({
+                                                        singleDatePicker: true,
+                                                        locale: {
+                                                            format: 'DD.MM.YYYY',
+                                                            "firstDay": 1
+                                                        }
+                                                    });
+                                                });
+                                            </script>
                                         </td>
                                     </tr>
                                     <tr>
@@ -368,7 +393,7 @@
 
                 @if (row.tip_obr == 2)
                 {
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
@@ -393,13 +418,16 @@
 
 
                                             <script>
-                                                $('input[name="dates"]').daterangepicker();
 
                                                 $(function () {
                                                     $('input[name="daterange"]').daterangepicker({
                                                         opens: 'left',
                                                         locale: {
-                                                            format: 'DD.MM.YYYY'
+                                                            "format": "DD.MM.YYYY",
+                                                            "autoApply": true,
+                                                            "applyLabel": "Выбрать",
+                                                            "cancelLabel": "Отменить",
+                                                            "firstDay": 1
                                                         }
                                                     });
                                                 });
@@ -427,7 +455,17 @@
                                     <tr>
                                         <td>Форма участия/проведения</td>
                                         <td>
-                                            <input type="text" value="@row.kvalif" />
+
+                                            <select id="kvalif_@row.Id">
+                                                <option value="">Выберите форму проведения</option>
+                                                <option label="Очная" value="FullTime">Очная</option>
+                                                <option label="Дистанционная" value="Distance">Дистанционная</option>
+                                                <option label="Очно-дистанционная" value="FullTimeDistance">Очно-дистанционная</option>
+                                                <option label="Заочная" value="Extramural">Заочная</option>
+                                            </select>
+                                            <script>
+                                                $("#kvalif_@row.Id").val("@row.kvalif").change()
+                                            </script>
                                         </td>
                                     </tr>
                                     <tr>
@@ -451,7 +489,19 @@
                                     <tr>
                                         <td>Дата выдачи</td>
                                         <td>
-                                            <input type="text" value="@row.data_doc" />
+                                            <input type="text" id="d_v_k" value="@row.data_doc" />
+                                            <script>
+
+                                                $(function () {
+                                                    $('#d_v_k').daterangepicker({
+                                                        singleDatePicker: true,
+                                                        locale: {
+                                                            format: 'DD.MM.YYYY',
+                                                            "firstDay": 1
+                                                        }
+                                                    });
+                                                });
+                                            </script>
                                         </td>
                                     </tr>
                                     <tr>
@@ -467,7 +517,7 @@
                 }
                 @if (row.tip_obr == 3)
                 {
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" data-toggle="collapse" data-parent="#accordion" href="#collapse4">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
@@ -542,7 +592,19 @@
                                     <tr>
                                         <td>Дата выдачи</td>
                                         <td>
-                                            <input type="text" value="@row.data_doc" />
+                                            <input type="text" id="d_v_v" value="@row.data_doc" />
+                                            <script>
+
+                                                $(function () {
+                                                    $('#d_v_v').daterangepicker({
+                                                        singleDatePicker: true,
+                                                        locale: {
+                                                            format: 'DD.MM.YYYY',
+                                                            "firstDay": 1
+                                                        }
+                                                    });
+                                                });
+                                            </script>
                                         </td>
                                     </tr>
                                     <tr>
@@ -559,7 +621,7 @@
             }
          
 
-            <div class="panel panel-default">
+            <div class="panel panel-default" data-toggle="collapse" data-parent="#accordion" href="#collapse5">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
@@ -576,6 +638,9 @@
 
                     
                         <table>
+
+
+
                             @foreach (var row in ViewBag.File)
                             {
                                 <tr>
@@ -594,7 +659,21 @@
                                 <tr>
                                     <td>Тип файла</td>
                                     <td>
-                                        <input type="text" value="@row.kategor_f"/>
+                                        <select id="file-category_@row.Id">
+                                            <option value="">Выберите категорию файла</option>
+                                            <option label="Заявление о проведении аттестации" value="AttestApplication">Заявление о проведении аттестации</option>
+                                            <option label="Копия аттестационного листа предыдущей аттестации" value="PrevAttestCopy">Копия аттестационного листа предыдущей аттестации</option>
+                                            <option label="Раздел I" value="Section1">Раздел I</option>
+                                            <option label="Раздел II" value="Section2">Раздел II</option>
+                                            <option label="Раздел III" value="Section3">Раздел III</option>
+                                            <option label="Раздел IV" value="Section4">Раздел IV</option>
+                                            <option label="Раздел V" value="Section5">Раздел V</option>
+                                            <option label="Согласие на обработку персональных данных" value="PersonalInfoAgreement">Согласие на обработку персональных данных</option>
+                                        </select>
+
+                                        <script>
+                                            $("#file-category_@row.Id").val("@row.kategor_f").change()
+                                        </script>
                                     </td>
                                 </tr>
                             }
@@ -603,7 +682,7 @@
                 </div>
             </div>
 
-            <div class="panel panel-default">
+            <div class="panel panel-default" data-toggle="collapse" data-parent="#accordion" href="#collapse6">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
@@ -674,12 +753,111 @@
                     <input type="hidden" asp-for="Id" />
 
                     <input type="hidden" asp-for="id_user" />
-                    <input type="submit" asp-controller="User" asp-action="Update" value="Обновить" />
+                    <input type="submit" asp-controller="User" asp-action="Update" value="Обновить" data-toggle="tooltip" data-placement="top" title="Будут подгруженны данные из АИС Сетевой город. Ваши данные будут заменены" />
                     <input type="submit" value="Сохранить" />
                 </td>
             </tr>
         </table>
 </form>
+
+
+
+    <!-- Modal Obr -->
+    <div class="modal fade bs-example-modal-lg" id="obr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Образование</h4>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td>ОО</td>
+                            <td>
+                                <input type="text" value="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Период обучения</td>
+                            <td>
+                                <input type="text" value="" />
+
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Муниципалитет</td>
+                            <td>
+                                <input type="text" value="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Специальность</td>
+                            <td>
+                                <input type="text" value="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Квалификация</td>
+                            <td>
+                                <input type="text" value="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Тип документа</td>
+                            <td>
+                                <input type="text" value="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Серия</td>
+                            <td>
+                                <input type="text" value="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Номер документа</td>
+                            <td>
+                                <input type="text" value="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Дата выдачи</td>
+                            <td>
+                                <input type="text" id="d_v_o" value="" />
+                                <script>
+                                    $(function () {
+                                        $('#d_v_o').daterangepicker({
+                                            singleDatePicker: true,
+                                            locale: {
+                                                format: 'DD.MM.YYYY',
+                                                "firstDay": 1
+                                            }
+                                        });
+                                    });
+                                </script>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Регистрационный номер</td>
+                            <td>
+                                <input type="text" value="" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class=""  asp-controller="User" asp-action="Save_Obr">Сохранить изменения</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
 
 <!-- Modal -->
