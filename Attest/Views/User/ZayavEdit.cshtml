@@ -300,7 +300,7 @@
                                     <tr>
                                         <td>Период обучения</td>
                                         <td>
-                                            <input type="text" value="@row.period" />
+                                            <input type="text" value="@row.period" pattern="[0-9]{4} - [0-9]{4}" />
 
 
                                         </td>
@@ -326,7 +326,28 @@
                                     <tr>
                                         <td>Тип документа</td>
                                         <td>
-                                            <input type="text" value="@row.nazv_doc" />
+                                            <select id="nazv_doc_@row.Id">
+                                                <option label="Справка с места учебы" value="TrainingCertificate">Справка с места учебы</option>
+                                                <option label="Свидетельство об освоении предпрофессиональной программы в области искусств" value="PreprofessionalArtsMasteringCertificate">Свидетельство об освоении предпрофессиональной программы в области искусств</option>
+                                                <option label="Другой документ об образовании" value="AnotherEducationDocument" selected="selected">Другой документ об образовании</option>
+                                                <option label="Другой документ об обучении" value="AnotherTrainingDocument">Другой документ об обучении</option>
+                                                <option label="Аттестат о среднем общем образовании" value="SecondaryGeneralEducationCertificate">Аттестат о среднем общем образовании</option>
+                                                <option label="Аттестат об основном общем образовании" value="SecondaryBasicEducationCertificate">Аттестат об основном общем образовании</option>
+                                                <option label="Диплом о среднем профессиональном образовании" value="SecondaryProfEducationDiploma">Диплом о среднем профессиональном образовании</option>
+                                                <option label="Диплом бакалавра" value="BachelorDegree">Диплом бакалавра</option>
+                                                <option label="Диплом специалиста" value="SpecialistDiploma">Диплом специалиста</option>
+                                                <option label="Диплом магистра" value="MasterDegree">Диплом магистра</option>
+                                                <option label="Диплом об окончании аспирантуры (адъюнктуры)" value="PostgraduateDiploma">Диплом об окончании аспирантуры (адъюнктуры)</option>
+                                                <option label="Диплом об окончании ординатуры" value="ResidencyCompletionDiploma">Диплом об окончании ординатуры</option>
+                                                <option label="Диплом об окончании ассистентуры-стажировки" value="InternshipAssistantCompletionDiploma">Диплом об окончании ассистентуры-стажировки</option>
+                                                <option label="Удостоверение о повышении квалификации" value="ProfessionalDevelopmentCertificate">Удостоверение о повышении квалификации</option>
+                                                <option label="Диплом о профессиональной переподготовке" value="ProfessionalRetrainingDiploma">Диплом о профессиональной переподготовке</option>
+                                                <option label="Свидетельство о профессии рабочего, должности служащего" value="WorkerCertificate">Свидетельство о профессии рабочего, должности служащего</option>
+                                                <option label="Свидетельство об обучении для лиц с ограниченными возможностями здоровья (с различными формами умственной отсталости)" value="PersonsWithDisabilitiesEducationCertificate">Свидетельство об обучении для лиц с ограниченными возможностями здоровья (с различными формами умственной отсталости)</option>
+                                            </select>
+                                            <script>
+                                                $("#nazv_doc_@row.Id").val("@row.nazv_doc").change()
+                                            </script>
                                         </td>
                                     </tr>
                                     <tr>
@@ -423,7 +444,7 @@
                                     <tr>
                                         <td>Кол-во часов</td>
                                         <td>
-                                            <input type="text" value="@row.kol_chas" />
+                                            <input type="text" value="@row.kol_chas" pattern="^[ 0-9]+$" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -517,7 +538,7 @@
                                     <tr>
                                         <td>Период обучения</td>
                                         <td>
-                                            <input type="text" value="@row.period" />
+                                            <input type="text" value="@row.period" pattern="[0-9]{4} - [0-9]{4}" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -529,7 +550,7 @@
                                     <tr>
                                         <td>Кол-во часов</td>
                                         <td>
-                                            <input type="text" value="@row.kol_chas" />
+                                            <input type="text" value="@row.kol_chas" pattern="^[ 0-9]+$" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -617,47 +638,58 @@
                         </button>
 
 
-                        <table>
-
-
-
+                        <ul class="nav nav-tabs">
                             @foreach (var row in ViewBag.File)
                             {
-                                <tr>
-                                    <td>Название</td>
-                                    <td>
-                                        @Html.ActionLink("Скачать", "file", "user", new { name_f = row.name_f, id = row.id_zayavl })
+                                <li><a href="#file_@row.Id" data-toggle="tab">Файл @row.name_f</a></li>
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Имя файла</td>
-                                    <td>
-                                        <input type="text" value="@row.name_f" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Тип файла</td>
-                                    <td>
-                                        <select id="file-category_@row.Id">
-                                            <option value="">Выберите категорию файла</option>
-                                            <option label="Заявление о проведении аттестации" value="AttestApplication">Заявление о проведении аттестации</option>
-                                            <option label="Копия аттестационного листа предыдущей аттестации" value="PrevAttestCopy">Копия аттестационного листа предыдущей аттестации</option>
-                                            <option label="Раздел I" value="Section1">Раздел I</option>
-                                            <option label="Раздел II" value="Section2">Раздел II</option>
-                                            <option label="Раздел III" value="Section3">Раздел III</option>
-                                            <option label="Раздел IV" value="Section4">Раздел IV</option>
-                                            <option label="Раздел V" value="Section5">Раздел V</option>
-                                            <option label="Согласие на обработку персональных данных" value="PersonalInfoAgreement">Согласие на обработку персональных данных</option>
-                                        </select>
 
-                                        <script>
-                                            $("#file-category_@row.Id").val("@row.kategor_f").change()
-                                        </script>
-                                    </td>
-                                </tr>
                             }
-                        </table>
+                        </ul>
+                        <div class="tab-content">
+                            @foreach (var row in ViewBag.File)
+                            {
+                                <div class="tab-pane fade " id="file_@row.Id">
+                                    <table>
+                                        <tr>
+                                            <td>Название</td>
+                                            <td>
+                                                @Html.ActionLink("Скачать", "file", "user", new { name_f = row.name_f, id = row.id_zayavl })
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Имя файла</td>
+                                            <td>
+                                                <input type="text" value="@row.name_f" disabled />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Тип файла</td>
+                                            <td>
+                                                <select id="file-category_@row.Id">
+                                                    <option value="">Выберите категорию файла</option>
+                                                    <option label="Заявление о проведении аттестации" value="AttestApplication">Заявление о проведении аттестации</option>
+                                                    <option label="Копия аттестационного листа предыдущей аттестации" value="PrevAttestCopy">Копия аттестационного листа предыдущей аттестации</option>
+                                                    <option label="Раздел I" value="Section1">Раздел I</option>
+                                                    <option label="Раздел II" value="Section2">Раздел II</option>
+                                                    <option label="Раздел III" value="Section3">Раздел III</option>
+                                                    <option label="Раздел IV" value="Section4">Раздел IV</option>
+                                                    <option label="Раздел V" value="Section5">Раздел V</option>
+                                                    <option label="Согласие на обработку персональных данных" value="PersonalInfoAgreement">Согласие на обработку персональных данных</option>
+                                                </select>
+
+                                                <script>
+                                            $("#file-category_@row.Id").val("@row.kategor_f").change()
+                                                </script>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            }
+                        </div>
+
+
                     </div>
                 </div>
             </div>
@@ -678,7 +710,7 @@
                                 <tr>
                                     <td>Период</td>
                                     <td>
-                                        <input type="text" value="@row.period" />
+                                        <input type="text" value="@row.period" pattern="[0-9]{4} - [0-9]{4}" />
 
                                     </td>
                                 </tr>
@@ -830,7 +862,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                    <button type="button" class=""  asp-controller="User" asp-action="Save_Obr">Сохранить изменения</button>
+                    <button type="button" class="" asp-controller="User" asp-action="Save_Obr">Сохранить изменения</button>
                 </div>
             </div>
         </div>
@@ -840,40 +872,40 @@
 
 
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Название модали</h4>
-            </div>
-            <div class="modal-body">
-                                
-                <form asp-action="AddFile" asp-controller="User" method="post" enctype="multipart/form-data">
-                   
-                    <input type="hidden" asp-for="Id" />
-                    
-                    <select id="file-category_AddFile" >
-                        <option value="" >Выберите категорию файла</option>
-                        <option label="Заявление о проведении аттестации" value="AttestApplication">Заявление о проведении аттестации</option>
-                        <option label="Копия аттестационного листа предыдущей аттестации" value="PrevAttestCopy">Копия аттестационного листа предыдущей аттестации</option>
-                        <option label="Раздел I" value="Section1">Раздел I</option>
-                        <option label="Раздел II" value="Section2">Раздел II</option>
-                        <option label="Раздел III" value="Section3">Раздел III</option>
-                        <option label="Раздел IV" value="Section4">Раздел IV</option>
-                        <option label="Раздел V" value="Section5">Раздел V</option>
-                        <option label="Согласие на обработку персональных данных" value="PersonalInfoAgreement">Согласие на обработку персональных данных</option>
-                    </select>
-                    
-                    
-                    
-                    
-                    
-                    <input type="file" name="uploadedFile" /><br>
-                    <input type="submit"  value="Загрузить" />
-                </form>
-                                        
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Название модали</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form asp-action="AddFile" asp-controller="User" method="post" enctype="multipart/form-data">
+
+                        <input type="hidden" asp-for="Zayavlen.Id" />
+
+                        <select id="file-category_AddFile">
+                            <option value="">Выберите категорию файла</option>
+                            <option label="Заявление о проведении аттестации" value="AttestApplication">Заявление о проведении аттестации</option>
+                            <option label="Копия аттестационного листа предыдущей аттестации" value="PrevAttestCopy">Копия аттестационного листа предыдущей аттестации</option>
+                            <option label="Раздел I" value="Section1">Раздел I</option>
+                            <option label="Раздел II" value="Section2">Раздел II</option>
+                            <option label="Раздел III" value="Section3">Раздел III</option>
+                            <option label="Раздел IV" value="Section4">Раздел IV</option>
+                            <option label="Раздел V" value="Section5">Раздел V</option>
+                            <option label="Согласие на обработку персональных данных" value="PersonalInfoAgreement">Согласие на обработку персональных данных</option>
+                        </select>
+
+
+
+
+
+                        <input type="file" name="uploadedFile" /><br>
+                        <input type="submit" value="Загрузить" />
+                    </form>
+
 
                 </div>
                 <div class="modal-footer">
