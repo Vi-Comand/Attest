@@ -317,8 +317,14 @@ namespace Attest.Controllers
             return View();
         }
 
-        public async Task<IActionResult> AddFile(IFormFile uploadedFile, int id)
+
+        
+        public async Task<IActionResult> AddFile(IFormFile uploadedFile,  CompositeModel compositeModel  )
         {
+           FileModel file = await db.File.Where(p => p.kategor_f == compositeModel.FileModel.kategor_f);
+            db.File.Remove(file);
+            db.SaveChanges();
+            int id = compositeModel.Zayavlen.Id;
             if (uploadedFile != null)
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/wwwroot/Files/" +id);
@@ -331,9 +337,11 @@ namespace Attest.Controllers
                 }
 
 
-                FileModel file = new FileModel();
+              //  FileModel file = new FileModel();
+                file=new FileModel();
                 file.id_zayavl = id;
                 file.name_f = uploadedFile.FileName;
+                file.kategor_f = compositeModel.FileModel.kategor_f;
                 db.Entry(file).State = Microsoft.EntityFrameworkCore.EntityState.Added;
 
                 db.SaveChanges();
@@ -374,7 +382,7 @@ namespace Attest.Controllers
         [Route("edit/{id}")]
         public IActionResult Edit(int id, Users users)
         {
-            db.Entry(users).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.Entry(users).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("User");
         }

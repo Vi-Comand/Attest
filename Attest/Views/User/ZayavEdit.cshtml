@@ -852,10 +852,10 @@
                                 
                 <form asp-action="AddFile" asp-controller="User" method="post" enctype="multipart/form-data">
                    
-                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="Zayavlen.Id" />
                     
-                    <select id="file-category_AddFile" >
-                        <option value="" >Выберите категорию файла</option>
+                    <select id="file-category_AddFile" asp-for="FileModel.kategor_f">
+                       
                         <option label="Заявление о проведении аттестации" value="AttestApplication">Заявление о проведении аттестации</option>
                         <option label="Копия аттестационного листа предыдущей аттестации" value="PrevAttestCopy">Копия аттестационного листа предыдущей аттестации</option>
                         <option label="Раздел I" value="Section1">Раздел I</option>
