@@ -14,7 +14,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse0">
-                    <h4 class="panel-title">
+                    <h4 class="panel-title" style="position: relative; padding:10px">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse0">
                             Данные для аттестации
                         </a>
@@ -96,7 +96,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                    <h4 class="panel-title">
+                    <h4 class="panel-title" style="position: relative; padding:10px">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                             Общая информация
                         </a>
@@ -268,374 +268,435 @@
                     </div>
                 </div>
             </div>
-            <!-- Button trigger modal -->
-            <button class="btn-lg" data-toggle="modal" data-target="#obr">
-                Добавить образование
-            </button>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                    <h4 class="panel-title" style="position: relative; padding:10px">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                            Образование
+                        </a>
+
+                        <button style="position: absolute; right: 0.3em; top:0em; margin:0; font:28pt;" data-toggle="modal" data-target="#obr"><strong>+</strong></button>
+                    </h4>
+
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul class="nav nav-tabs">
+                            @foreach (var row in ViewBag.Obr)
+                            {
+                                @if (row.tip_obr == 1)
+                                {
+                                    <li><a href="#Obr_@row.Id" data-toggle="tab">Образование №@row.Id</a></li>
+
+                                }
+                            }
+                        </ul>
+                        <div class="tab-content">
+                            @foreach (var row in ViewBag.Obr)
+                            {
+                                @if (row.tip_obr == 1)
+                                {
+                                    <div class="tab-pane fade " id="Obr_@row.Id">
 
 
 
-            @foreach (var row in ViewBag.Obr)
-            {
-                @if (row.tip_obr == 1)
-                {
-                    <div class="panel panel-default">
-                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                    Образование
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse">
-                            <div class="panel-body">
 
-                                <table>
-                                    <tr>
-                                        <td>ОО</td>
-                                        <td>
-                                            <input type="text" value="@row.oo" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Период обучения</td>
-                                        <td>
-                                            <input type="text" value="@row.period" pattern="[0-9]{4} - [0-9]{4}" />
+                                        <table>
+                                            <tr>
+                                                <td>ОО</td>
+                                                <td>
+                                                    <input type="text" value="@row.oo" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Период обучения</td>
+                                                <td>
+                                                    <input type="text" value="@row.period" pattern="[0-9]{4} - [0-9]{4}" />
 
 
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Муниципалитет</td>
-                                        <td>
-                                            <input type="text" value="@row.mo" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Специальность</td>
-                                        <td>
-                                            <input type="text" value="@row.special" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Квалификация</td>
-                                        <td>
-                                            <input type="text" value="@row.kvalif" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Тип документа</td>
-                                        <td>
-                                            <select id="nazv_doc_@row.Id">
-                                                <option label="Справка с места учебы" value="TrainingCertificate">Справка с места учебы</option>
-                                                <option label="Свидетельство об освоении предпрофессиональной программы в области искусств" value="PreprofessionalArtsMasteringCertificate">Свидетельство об освоении предпрофессиональной программы в области искусств</option>
-                                                <option label="Другой документ об образовании" value="AnotherEducationDocument" selected="selected">Другой документ об образовании</option>
-                                                <option label="Другой документ об обучении" value="AnotherTrainingDocument">Другой документ об обучении</option>
-                                                <option label="Аттестат о среднем общем образовании" value="SecondaryGeneralEducationCertificate">Аттестат о среднем общем образовании</option>
-                                                <option label="Аттестат об основном общем образовании" value="SecondaryBasicEducationCertificate">Аттестат об основном общем образовании</option>
-                                                <option label="Диплом о среднем профессиональном образовании" value="SecondaryProfEducationDiploma">Диплом о среднем профессиональном образовании</option>
-                                                <option label="Диплом бакалавра" value="BachelorDegree">Диплом бакалавра</option>
-                                                <option label="Диплом специалиста" value="SpecialistDiploma">Диплом специалиста</option>
-                                                <option label="Диплом магистра" value="MasterDegree">Диплом магистра</option>
-                                                <option label="Диплом об окончании аспирантуры (адъюнктуры)" value="PostgraduateDiploma">Диплом об окончании аспирантуры (адъюнктуры)</option>
-                                                <option label="Диплом об окончании ординатуры" value="ResidencyCompletionDiploma">Диплом об окончании ординатуры</option>
-                                                <option label="Диплом об окончании ассистентуры-стажировки" value="InternshipAssistantCompletionDiploma">Диплом об окончании ассистентуры-стажировки</option>
-                                                <option label="Удостоверение о повышении квалификации" value="ProfessionalDevelopmentCertificate">Удостоверение о повышении квалификации</option>
-                                                <option label="Диплом о профессиональной переподготовке" value="ProfessionalRetrainingDiploma">Диплом о профессиональной переподготовке</option>
-                                                <option label="Свидетельство о профессии рабочего, должности служащего" value="WorkerCertificate">Свидетельство о профессии рабочего, должности служащего</option>
-                                                <option label="Свидетельство об обучении для лиц с ограниченными возможностями здоровья (с различными формами умственной отсталости)" value="PersonsWithDisabilitiesEducationCertificate">Свидетельство об обучении для лиц с ограниченными возможностями здоровья (с различными формами умственной отсталости)</option>
-                                            </select>
-                                            <script>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Муниципалитет</td>
+                                                <td>
+                                                    <input type="text" value="@row.mo" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Специальность</td>
+                                                <td>
+                                                    <input type="text" value="@row.special" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Квалификация</td>
+                                                <td>
+                                                    <input type="text" value="@row.kvalif" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Тип документа</td>
+                                                <td>
+                                                    <select id="nazv_doc_@row.Id">
+                                                        <option label="Справка с места учебы" value="TrainingCertificate">Справка с места учебы</option>
+                                                        <option label="Свидетельство об освоении предпрофессиональной программы в области искусств" value="PreprofessionalArtsMasteringCertificate">Свидетельство об освоении предпрофессиональной программы в области искусств</option>
+                                                        <option label="Другой документ об образовании" value="AnotherEducationDocument" selected="selected">Другой документ об образовании</option>
+                                                        <option label="Другой документ об обучении" value="AnotherTrainingDocument">Другой документ об обучении</option>
+                                                        <option label="Аттестат о среднем общем образовании" value="SecondaryGeneralEducationCertificate">Аттестат о среднем общем образовании</option>
+                                                        <option label="Аттестат об основном общем образовании" value="SecondaryBasicEducationCertificate">Аттестат об основном общем образовании</option>
+                                                        <option label="Диплом о среднем профессиональном образовании" value="SecondaryProfEducationDiploma">Диплом о среднем профессиональном образовании</option>
+                                                        <option label="Диплом бакалавра" value="BachelorDegree">Диплом бакалавра</option>
+                                                        <option label="Диплом специалиста" value="SpecialistDiploma">Диплом специалиста</option>
+                                                        <option label="Диплом магистра" value="MasterDegree">Диплом магистра</option>
+                                                        <option label="Диплом об окончании аспирантуры (адъюнктуры)" value="PostgraduateDiploma">Диплом об окончании аспирантуры (адъюнктуры)</option>
+                                                        <option label="Диплом об окончании ординатуры" value="ResidencyCompletionDiploma">Диплом об окончании ординатуры</option>
+                                                        <option label="Диплом об окончании ассистентуры-стажировки" value="InternshipAssistantCompletionDiploma">Диплом об окончании ассистентуры-стажировки</option>
+                                                        <option label="Удостоверение о повышении квалификации" value="ProfessionalDevelopmentCertificate">Удостоверение о повышении квалификации</option>
+                                                        <option label="Диплом о профессиональной переподготовке" value="ProfessionalRetrainingDiploma">Диплом о профессиональной переподготовке</option>
+                                                        <option label="Свидетельство о профессии рабочего, должности служащего" value="WorkerCertificate">Свидетельство о профессии рабочего, должности служащего</option>
+                                                        <option label="Свидетельство об обучении для лиц с ограниченными возможностями здоровья (с различными формами умственной отсталости)" value="PersonsWithDisabilitiesEducationCertificate">Свидетельство об обучении для лиц с ограниченными возможностями здоровья (с различными формами умственной отсталости)</option>
+                                                    </select>
+                                                    <script>
                                                 $("#nazv_doc_@row.Id").val("@row.nazv_doc").change()
-                                            </script>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Серия</td>
-                                        <td>
-                                            <input type="text" value="@row.ser_doc" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Номер документа</td>
-                                        <td>
-                                            <input type="text" value="@row.nom_doc" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Дата выдачи</td>
-                                        <td>
-                                            <input type="text" id="d_v_o" value="@row.data_doc" />
-                                            <script>
-                                                $(function () {
-                                                    $('#d_v_o').daterangepicker({
-                                                        singleDatePicker: true,
-                                                        locale: {
-                                                            format: 'DD.MM.YYYY',
-                                                            "firstDay": 1
-                                                        }
-                                                    });
-                                                });
-                                            </script>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Регистрационный номер</td>
-                                        <td>
-                                            <input type="text" value="@row.reg_nom" />
-                                        </td>
-                                    </tr>
+                                                    </script>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Серия</td>
+                                                <td>
+                                                    <input type="text" value="@row.ser_doc" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Номер документа</td>
+                                                <td>
+                                                    <input type="text" value="@row.nom_doc" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Дата выдачи</td>
+                                                <td>
+                                                    <input type="text" id="d_v_o" value="@row.data_doc" />
+                                                    <script>
+                                                        $(function () {
+                                                            $('#d_v_o').daterangepicker({
+                                                                singleDatePicker: true,
+                                                                locale: {
+                                                                    format: 'DD.MM.YYYY',
+                                                                    "firstDay": 1
+                                                                }
+                                                            });
+                                                        });
+                                                    </script>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Регистрационный номер</td>
+                                                <td>
+                                                    <input type="text" value="@row.reg_nom" />
+                                                </td>
+                                            </tr>
 
-                                </table>
-                            </div>
+                                        </table>
+                                    </div>
+                                }
+                            }
+
+
+
+
                         </div>
                     </div>
-                }
-
-                @if (row.tip_obr == 2)
-                {
-                    <div class="panel panel-default">
-                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                    Курсы повышения квалификации
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <table>
-                                    <tr>
-                                        <td>Организация</td>
-                                        <td>
-                                            <input type="text" value="@row.oo" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Период обучения</td>
-                                        <td>
-
-                                            <input type="text" name="daterange" value="@row.period" />
+                </div>
+            </div>
 
 
-                                            <script>
 
-                                                $(function () {
-                                                    $('input[name="daterange"]').daterangepicker({
-                                                        opens: 'left',
-                                                        locale: {
-                                                            "format": "DD.MM.YYYY",
-                                                            "autoApply": true,
-                                                            "applyLabel": "Выбрать",
-                                                            "cancelLabel": "Отменить",
-                                                            "firstDay": 1
-                                                        }
-                                                    });
-                                                });
-                                            </script>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Место прохождения</td>
-                                        <td>
-                                            <input type="text" value="@row.mo" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Кол-во часов</td>
-                                        <td>
-                                            <input type="text" value="@row.kol_chas" pattern="^[ 0-9]+$" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Тема курсов</td>
-                                        <td>
-                                            <input type="text" value="@row.special" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Форма участия/проведения</td>
-                                        <td>
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                    <h4 style="position: relative; padding:10px" class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                            Курсы повышения квалификации
+                        </a>
+                        <button style="position: absolute; right: 0.3em; top:0em; margin:0; font:28pt;" data-toggle="modal" data-target="#kurs"><strong>+</strong></button>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul class="nav nav-tabs">
+                            @foreach (var row in ViewBag.Obr)
+                            {
+                                @if (row.tip_obr == 2)
+                                {
+                                    <li><a href="#Kurs_@row.Id" data-toggle="tab">Курсы №@row.Id</a></li>
 
-                                            <select id="kvalif_@row.Id">
-                                                <option value="">Выберите форму проведения</option>
-                                                <option label="Очная" value="FullTime">Очная</option>
-                                                <option label="Дистанционная" value="Distance">Дистанционная</option>
-                                                <option label="Очно-дистанционная" value="FullTimeDistance">Очно-дистанционная</option>
-                                                <option label="Заочная" value="Extramural">Заочная</option>
-                                            </select>
-                                            <script>
+                                }
+                            }
+                        </ul>
+                        <div class="tab-content">
+                            @foreach (var row in ViewBag.Obr)
+                            {
+                                @if (row.tip_obr == 2)
+                                {
+                                    <div class="tab-pane fade " id="Kurs_@row.Id">
+
+                                        <table>
+                                            <tr>
+                                                <td>Организация</td>
+                                                <td>
+                                                    <input type="text" value="@row.oo" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Период обучения</td>
+                                                <td>
+
+                                                    <input type="text" name="daterange" value="@row.period" />
+
+
+                                                    <script>
+
+                                                        $(function () {
+                                                            $('input[name="daterange"]').daterangepicker({
+                                                                opens: 'left',
+                                                                locale: {
+                                                                    "format": "DD.MM.YYYY",
+                                                                    "autoApply": true,
+                                                                    "applyLabel": "Выбрать",
+                                                                    "cancelLabel": "Отменить",
+                                                                    "firstDay": 1
+                                                                }
+                                                            });
+                                                        });
+                                                    </script>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Место прохождения</td>
+                                                <td>
+                                                    <input type="text" value="@row.mo" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Кол-во часов</td>
+                                                <td>
+                                                    <input type="text" value="@row.kol_chas" pattern="^[ 0-9]+$" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Тема курсов</td>
+                                                <td>
+                                                    <input type="text" value="@row.special" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Форма участия/проведения</td>
+                                                <td>
+
+                                                    <select id="kvalif_@row.Id">
+                                                        <option value="">Выберите форму проведения</option>
+                                                        <option label="Очная" value="FullTime">Очная</option>
+                                                        <option label="Дистанционная" value="Distance">Дистанционная</option>
+                                                        <option label="Очно-дистанционная" value="FullTimeDistance">Очно-дистанционная</option>
+                                                        <option label="Заочная" value="Extramural">Заочная</option>
+                                                    </select>
+                                                    <script>
                                                 $("#kvalif_@row.Id").val("@row.kvalif").change()
-                                            </script>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Название документа</td>
-                                        <td>
-                                            <input type="text" value="@row.nazv_doc" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Серия</td>
-                                        <td>
-                                            <input type="text" value="@row.ser_doc" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Номер документа</td>
-                                        <td>
-                                            <input type="text" value="@row.nom_doc" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Дата выдачи</td>
-                                        <td>
-                                            <input type="text" id="d_v_k" value="@row.data_doc" />
-                                            <script>
+                                                    </script>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Название документа</td>
+                                                <td>
+                                                    <input type="text" value="@row.nazv_doc" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Серия</td>
+                                                <td>
+                                                    <input type="text" value="@row.ser_doc" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Номер документа</td>
+                                                <td>
+                                                    <input type="text" value="@row.nom_doc" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Дата выдачи</td>
+                                                <td>
+                                                    <input type="text" id="d_v_k" value="@row.data_doc" />
+                                                    <script>
 
-                                                $(function () {
-                                                    $('#d_v_k').daterangepicker({
-                                                        singleDatePicker: true,
-                                                        locale: {
-                                                            format: 'DD.MM.YYYY',
-                                                            "firstDay": 1
-                                                        }
-                                                    });
-                                                });
-                                            </script>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Регистрационный номер</td>
-                                        <td>
-                                            <input type="text" value="@row.reg_nom" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                                                        $(function () {
+                                                            $('#d_v_k').daterangepicker({
+                                                                singleDatePicker: true,
+                                                                locale: {
+                                                                    format: 'DD.MM.YYYY',
+                                                                    "firstDay": 1
+                                                                }
+                                                            });
+                                                        });
+                                                    </script>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Регистрационный номер</td>
+                                                <td>
+                                                    <input type="text" value="@row.reg_nom" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                }
+                            }
                         </div>
                     </div>
-                }
-                @if (row.tip_obr == 3)
-                {
-                    <div class="panel panel-default">
-                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse4">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
-                                    Второе высшеге образование и профессиональная переподготовка
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse4" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <table>
-                                    <tr>
-                                        <td>Организация</td>
-                                        <td>
-                                            <input type="text" value="@row.oo" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Период обучения</td>
-                                        <td>
-                                            <input type="text" value="@row.period" pattern="[0-9]{4} - [0-9]{4}" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Место прохождения</td>
-                                        <td>
-                                            <input type="text" value="@row.mo" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Кол-во часов</td>
-                                        <td>
-                                            <input type="text" value="@row.kol_chas" pattern="^[ 0-9]+$" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Вид обучения</td>
-                                        <td>
-                                            <input type="text" value="@row.vid_obuch" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    <tr>
-                                        <td>Специальность</td>
-                                        <td>
-                                            <input type="text" value="@row.special" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Квалификация</td>
-                                        <td>
-                                            <input type="text" value="@row.kvalif" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Название документа</td>
-                                        <td>
-                                            <input type="text" value="@row.nazv_doc" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Серия</td>
-                                        <td>
-                                            <input type="text" value="@row.ser_doc" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Номер документа</td>
-                                        <td>
-                                            <input type="text" value="@row.nom_doc" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Дата выдачи</td>
-                                        <td>
-                                            <input type="text" id="d_v_v" value="@row.data_doc" />
-                                            <script>
 
-                                                $(function () {
-                                                    $('#d_v_v').daterangepicker({
-                                                        singleDatePicker: true,
-                                                        locale: {
-                                                            format: 'DD.MM.YYYY',
-                                                            "firstDay": 1
-                                                        }
-                                                    });
-                                                });
-                                            </script>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Регистрационный номер</td>
-                                        <td>
-                                            <input type="text" value="@row.reg_nom" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                    <h4 class="panel-title" style="position: relative; padding:10px">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                            Второе высшее образование и профессиональная переподготовка
+                        </a>
+                        <button style="position: absolute; right: 0.3em; top:0em; margin:0; font:28pt;" data-toggle="modal" data-target="#Vtor"><strong>+</strong></button>
+                    </h4>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul class="nav nav-tabs">
+                            @foreach (var row in ViewBag.Obr)
+                            {
+                                @if (row.tip_obr == 3)
+                                {
+                                    <li><a href="#Vtor_@row.Id" data-toggle="tab">Второе высшее №@row.Id</a></li>
+
+                                }
+                            }
+                        </ul>
+                        <div class="tab-content">
+                            @foreach (var row in ViewBag.Obr)
+                            {
+                                @if (row.tip_obr == 3)
+                                {
+                                    <div class="tab-pane fade " id="Vtor_@row.Id">
+
+                                        <table>
+                                            <tr>
+                                                <td>Организация</td>
+                                                <td>
+                                                    <input type="text" value="@row.oo" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Период обучения</td>
+                                                <td>
+                                                    <input type="text" value="@row.period" pattern="[0-9]{4} - [0-9]{4}" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Место прохождения</td>
+                                                <td>
+                                                    <input type="text" value="@row.mo" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Кол-во часов</td>
+                                                <td>
+                                                    <input type="text" value="@row.kol_chas" pattern="^[ 0-9]+$" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Вид обучения</td>
+                                                <td>
+                                                    <input type="text" value="@row.vid_obuch" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                            <tr>
+                                                <td>Специальность</td>
+                                                <td>
+                                                    <input type="text" value="@row.special" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Квалификация</td>
+                                                <td>
+                                                    <input type="text" value="@row.kvalif" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Название документа</td>
+                                                <td>
+                                                    <input type="text" value="@row.nazv_doc" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Серия</td>
+                                                <td>
+                                                    <input type="text" value="@row.ser_doc" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Номер документа</td>
+                                                <td>
+                                                    <input type="text" value="@row.nom_doc" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Дата выдачи</td>
+                                                <td>
+                                                    <input type="text" id="d_v_v" value="@row.data_doc" />
+                                                    <script>
+
+                                                        $(function () {
+                                                            $('#d_v_v').daterangepicker({
+                                                                singleDatePicker: true,
+                                                                locale: {
+                                                                    format: 'DD.MM.YYYY',
+                                                                    "firstDay": 1
+                                                                }
+                                                            });
+                                                        });
+                                                    </script>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Регистрационный номер</td>
+                                                <td>
+                                                    <input type="text" value="@row.reg_nom" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                }
+                            }
                         </div>
                     </div>
-                }
-            }
+                </div>
+            </div>
+
 
 
             <div class="panel panel-default">
                 <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse5">
-                    <h4 class="panel-title">
+                    <h4 class="panel-title" style="position: relative; padding:10px">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
                             Файлы
                         </a>
+                        <button style="position: absolute; right: 0.3em; top:0em; margin:0; font:28pt;" data-toggle="modal" data-target="#File"><strong>+</strong></button>
                     </h4>
                 </div>
                 <div id="collapse5" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <!-- Button trigger modal -->
-                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                            Посмотреть демо
-                        </button>
+
 
 
                         <ul class="nav nav-tabs">
@@ -696,10 +757,11 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse6">
-                    <h4 class="panel-title">
+                    <h4 class="panel-title" style="position: relative; padding:10px">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
                             Научно-методическая деятельность
                         </a>
+                        <button style="position: absolute; right: 0.3em; top:0em; margin:0; font:28pt;" data-toggle="modal" data-target="#Nauhc"><strong>+</strong></button>
                     </h4>
                 </div>
                 <div id="collapse6" class="panel-collapse collapse in">
@@ -757,19 +819,14 @@
             </div>
         </div>
 
-        <table>
-            <tr>
+        <div>
 
-                <td>
+            <input type="hidden" asp-for="Zayavlen.Id" />
 
-                    <input type="hidden" asp-for="Zayavlen.Id" />
-
-                    <input type="hidden" asp-for="Zayavlen.id_user" />
-                    <input type="submit" asp-controller="User" asp-action="Update" value="Обновить" data-toggle="tooltip" data-placement="top" title="Будут подгруженны данные из АИС Сетевой город. Ваши данные будут заменены" />
-                    <input type="submit" value="Сохранить" />
-                </td>
-            </tr>
-        </table>
+            <input type="hidden" asp-for="Zayavlen.id_user" />
+            <input type="submit" asp-controller="User" asp-action="Update" value="Обновить" data-toggle="tooltip" data-placement="top" title="Будут подгруженны данные из АИС Сетевой город. Ваши данные будут заменены" />
+            <input type="submit" value="Сохранить" />
+        </div>
     </form>
 
 
@@ -873,7 +930,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="File" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
