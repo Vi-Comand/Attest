@@ -292,6 +292,9 @@ namespace Attest.Controllers
             compositeModel.Zayavlen = new Zayavlen();
             compositeModel.FileModel = new FileModel();
             compositeModel.Obrazovan = new Obrazovan();
+            compositeModel.Nauch_Deyat = new Nauch_deyat();
+            compositeModel.Users = new Users();
+            compositeModel.ProfRazvModel = new ProfRazvModel();
             ViewBag.Obr = db.Obrazovan.Where(p => p.id_zayavl == id).ToList();
             ViewBag.File = db.File.Where(p => p.id_zayavl == id).ToList();
             ViewBag.Nauch = db.Naucn_deyat.Where(p => p.id_zayavl == id).ToList();
