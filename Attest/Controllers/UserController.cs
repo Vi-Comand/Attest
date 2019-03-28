@@ -286,18 +286,19 @@ namespace Attest.Controllers
 
 
         [Route("edit/{id}")]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int id,DataContext db)
         {
-            var compositeModel = new CompositeModel();
+            var compositeModel = new CompositeModel(db);
             compositeModel.Zayavlen = new Zayavlen();
             compositeModel.FileModel = new FileModel();
-            compositeModel.Obrazovan = new Obrazovan();
+           compositeModel.Obrazovan = new Obrazovan();
             compositeModel.Nauch_Deyat = new Nauch_deyat();
             compositeModel.Users = new Users();
-            compositeModel.ProfRazvModel = new ProfRazvModel();
-            ViewBag.Obr = db.Obrazovan.Where(p => p.id_zayavl == id).ToList();
-            ViewBag.File = db.File.Where(p => p.id_zayavl == id).ToList();
-            ViewBag.Nauch = db.Naucn_deyat.Where(p => p.id_zayavl == id).ToList();
+            //compositeModel.ProfRazvModel = new ProfRazvModel();
+           
+            compositeModel.listFile = db.File.Where(p => p.id_zayavl == id).ToList();
+            compositeModel.listObrazovan= db.Obrazovan.Where(p => p.id_zayavl == id).ToList();
+            compositeModel.listNauch_deyat= db.Naucn_deyat.Where(p => p.id_zayavl == id).ToList();
             compositeModel.Zayavlen = db.Zayavlen.Find(id);
             ViewBag.compositeModel = compositeModel;
             return View("ZayavEdit", compositeModel);
@@ -324,7 +325,7 @@ namespace Attest.Controllers
         
         public async Task<IActionResult> AddFile(IFormFile uploadedFile,  CompositeModel compositeModel  )
         {
-           FileModel file = await db.File.Where(p => p.kategor_f == compositeModel.FileModel.kategor_f);
+          /*FileModel file = await db.File.Where(p => p.kategor_f == compositeModel.FileModel.kategor_f);
             db.File.Remove(file);
             db.SaveChanges();
             int id = compositeModel.Zayavlen.Id;
@@ -352,7 +353,7 @@ namespace Attest.Controllers
 
               
             }
-
+            */
             return View();
         }
         public IActionResult Creat()
@@ -419,11 +420,30 @@ namespace Attest.Controllers
 
         }
 
-        public IActionResult ZayavSaveEdit(int id_user, Zayavlen zayav)
+        public IActionResult ZayavSaveEdit(int id_user, CompositeModel compositeModel)
         {
 
-            /*db.Entry(zayav).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            db.SaveChanges();*/
+            db.Entry(compositeModel.Zayavlen).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+            foreach (var row in compositeModel.listFile)
+            {
+                db.Entry(row).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            }
+            foreach (var row in compositeModel.listObrazovan)
+            {
+                db.Entry(row).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            }
+            foreach (var row in compositeModel.listNauch_deyat)
+            {
+                db.Entry(row).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            }
+
+
+            /*db.Entry(compositeModel.Nauch_Deyat).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+           db.Entry(compositeModel.Obrazovan).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+           db.Entry(compositeModel.ProfRazvModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;*/
+
+            db.SaveChanges();
             return RedirectToAction("Lk", "Lk");
         }
 
