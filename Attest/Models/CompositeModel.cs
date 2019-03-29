@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Attest.Models
 
 {
-    public class CompositeModel:PageModel
+    public class CompositeModel : PageModel
     {
         private readonly DataContext _context;
         public List<FileModel> listFile { get; set; }
@@ -19,18 +18,19 @@ namespace Attest.Models
         public List<Nauch_deyat> listNauch_deyat { get; set; }
         public Nauch_deyat Nauch_Deyat { get; set; }
         public Users Users { get; set; }
-        //public ProfRazvModel ProfRazvModel { get; set; }
+        public ProfRazv ProfRazv { get; set; }
+        public List<ProfRazv> listProfRazv { get; set; }
 
         public CompositeModel()
         {
-            
+
         }
         public CompositeModel(DataContext db)
         {
             _context = db;
         }
 
-     
+
 
         //public CompositeModel(DataContext db)
         //{
