@@ -174,6 +174,34 @@ namespace Attest.Controllers
             }
 
 
+            var prof = db.ProfRazv.Where(w => w.id_zayav == id);
+
+            foreach (ProfRazv proff in prof)
+            {
+                db.ProfRazv.Remove(proff);
+            }
+            db.SaveChanges();
+
+            for (int i = 0; i < nameUser.StaffMethodicalActivityData.Length; i++)
+            {
+                ProfRazv profr = new ProfRazv();
+                profr.id_zayav = id;
+
+                profr.uch_stepen = nameUser.AcademicAwardsData[i].AcademicDegree;
+                profr.uch_zvanie = nameUser.AcademicAwardsData[i].AcademicTitle;
+                profr.kod_nauc_spec = nameUser.AcademicAwardsData[i].Speciality;
+                profr.nazv_doc = nameUser.AcademicAwardsData[i].AwardDocument.DocType.ToString();
+                profr.org_d = nameUser.AcademicAwardsData[i].AwardDocument.Organization.ToString();
+                profr.ser_d = nameUser.AcademicAwardsData[i].AwardDocument.Series.ToString();
+                profr.non_d = nameUser.AcademicAwardsData[i].AwardDocument.Number.ToString();
+                profr.data_vid_d = nameUser.AcademicAwardsData[i].AwardDocument.AwardDate;
+
+                db.Entry(profr).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                db.SaveChanges();
+
+
+            }
+
             var fl = db.File.Where(w => w.id_zayavl == id);
 
             foreach (FileModel file in fl)
