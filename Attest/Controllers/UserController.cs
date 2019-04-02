@@ -350,14 +350,25 @@ namespace Attest.Controllers
             return View();
         }
 
+       
 
-
-        public async Task<IActionResult> AddFile(IFormFile uploadedFile, CompositeModel compositeModel)
+        public async Task<IActionResult> AddFile(IFormFile uploadedFile, CompositeModel compositeModel,FileModel fileUpload)
         {
-            /*FileModel file = await db.File.Where(p => p.kategor_f == compositeModel.FileModel.kategor_f);
-              db.File.Remove(file);
-              db.SaveChanges();
-              int id = compositeModel.Zayavlen.Id;
+            int id = compositeModel.Zayavlen.Id;
+            FileModel file =  db.File.Where(p =>
+                p.kategor_f == compositeModel.FileModel.kategor_f && p.id_zayavl == id).FirstOrDefault();
+            if (file != null)
+            {
+              
+                string path = Directory.GetCurrentDirectory() + "/wwwroot/Files/" + id+ "/" + file.name_f;
+            
+
+            System.IO.File.Delete(path);
+            db.File.Remove(file);
+            db.SaveChanges();
+            }
+
+          
               if (uploadedFile != null)
               {
                   Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/wwwroot/Files/" +id);
@@ -371,7 +382,7 @@ namespace Attest.Controllers
 
 
                 //  FileModel file = new FileModel();
-                  file=new FileModel();
+               file=new FileModel();
                   file.id_zayavl = id;
                   file.name_f = uploadedFile.FileName;
                   file.kategor_f = compositeModel.FileModel.kategor_f;
@@ -382,7 +393,7 @@ namespace Attest.Controllers
 
 
               }
-              */
+              
             return View();
         }
         public IActionResult Creat()
