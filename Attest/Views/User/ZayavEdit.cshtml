@@ -1493,12 +1493,13 @@
 
 
     <!-- Modal file-->
-    <div class="modal fade" id="File" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade bs-example-modal-lg" id="File" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Файлы</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Название модали</h4>
+
                 </div>
                 <div class="modal-body">
 
@@ -1506,7 +1507,7 @@
 
                         <input type="hidden" asp-for="Zayavlen.Id" />
 
-                        <select id="file-category_AddFile">
+                        <select id="file-category_AddFile" required>
                             <option value="">Выберите категорию файла</option>
                             <option label="Заявление о проведении аттестации" value="AttestApplication">Заявление о проведении аттестации</option>
                             <option label="Копия аттестационного листа предыдущей аттестации" value="PrevAttestCopy">Копия аттестационного листа предыдущей аттестации</option>
@@ -1518,19 +1519,46 @@
                             <option label="Согласие на обработку персональных данных" value="PersonalInfoAgreement">Согласие на обработку персональных данных</option>
                         </select>
 
+                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+                        <div class="file">
+                            <div class="form-group">
+                                <input type="file" name="uploadedFile" id="uploadedFile" class="input-file" required>
+                                <label for="uploadedFile" class="btn btn-tertiary js-labelFile">
+                                    <i class="icon fa fa-check"></i>
+                                    <span class="js-fileName">Загрузить файл</span>
+                                </label>
+                            </div>
+                        </div>
+                        <script>
+                            (function () {
+
+                                'use strict';
+
+                                $('.input-file').each(function () {
+                                    var $input = $(this),
+                                        $label = $input.next('.js-labelFile'),
+                                        labelVal = $label.html();
+
+                                    $input.on('change', function (element) {
+                                        var fileName = '';
+                                        if (element.target.value) fileName = element.target.value.split('\\').pop();
+                                        fileName ? $label.addClass('has-file').find('.js-fileName').html(fileName) : $label.removeClass('has-file').html(labelVal);
+                                    });
+                                });
+
+                            })();
+                        </script>
 
 
-
-
-                        <input type="file" name="uploadedFile" /><br>
-                        <input type="submit" value="Загрузить" />
+                        <input type="submit" value="Сохранить" />
                     </form>
 
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                    <button type="button" class="btn btn-primary">Сохранить изменения</button>
+                    <button type="button" class="">Сохранить изменения</button>
                 </div>
             </div>
         </div>
