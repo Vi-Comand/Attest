@@ -30,6 +30,7 @@
                 </div>
                 <div id="collapse0" class="collapse in show">
                     <div class="panel-body">
+
                         <table>
                             <tr>
                                 <td>Должность, по которой прошу провести аттестацию</td>
@@ -67,7 +68,7 @@
                                 </td>
                             </tr>
 
-                            <tr>
+                            <tr id="naprtr">
                                 <td>Направление</td>
                                 <td>
                                     <select id="napr" asp-for="Zayavlen.uch_stepen" required>
@@ -100,7 +101,27 @@
                     </div>
                 </div>
             </div>
+            <script>
+                var select = document.getElementById("dolg");
+                var val = select.value;
+                if (val == "УЧИТЕЛЬ") {
+                    $('#naprtr').show(); // показать
+                }
+                else {
+                    $('#naprtr').hide(); // показать
+                }
+                $('#dolg').change(function () {
+                    var select = document.getElementById("dolg");
+                    var val = select.value;
+                    if (val == "УЧИТЕЛЬ") {
+                        $('#naprtr').show(); // показать
+                    }
+                    else {
+                        $('#naprtr').hide(); // показать
+                    }
+                })
 
+            </script>
 
             <div class="panel panel-default">
                 <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
@@ -1041,31 +1062,31 @@
                       alert("-go");
                   }*/
 
-                $(document).ready(function () {
+                /*   $(document).ready(function () {
 
-                    /*  $('input[type="tel"]').inputmask('+7 (999) 999 99 99', {
-                          clearMaskOnLostFocus: true,
-                      });*/
+                         $('input[type="tel"]').inputmask('+7 (999) 999 99 99', {
+                             clearMaskOnLostFocus: true,
+                         });*/
 
-                    /*  $('.js-form-validate').submit(function () {
-                          var form = $(this);
-                          var field = [];
-                          form.find('input[data-validate]').each(function () {
-                              field.push('input[data-validate]');
-                              var value = $(this).val(),
-                                  line = $(this).closest('.some-form__line');
-                              for (var i = 0; i < field.length; i++) {
-                                  if (!value) {
-                                      line.addClass('some-form__line-required');
-                                      setTimeout(function () {
-                                          line.removeClass('some-form__line-required')
-                                      }.bind(this), 2000);
-                                      event.preventDefault();
-                                  }
+                /*  $('.js-form-validate').submit(function () {
+                      var form = $(this);
+                      var field = [];
+                      form.find('input[data-validate]').each(function () {
+                          field.push('input[data-validate]');
+                          var value = $(this).val(),
+                              line = $(this).closest('.some-form__line');
+                          for (var i = 0; i < field.length; i++) {
+                              if (!value) {
+                                  line.addClass('some-form__line-required');
+                                  setTimeout(function () {
+                                      line.removeClass('some-form__line-required')
+                                  }.bind(this), 2000);
+                                  event.preventDefault();
                               }
-                          });
+                          }
                       });
-                  });*/
+                  });
+              });*/
 
             </script>
             <input type="submit" value="Сохранить" />
