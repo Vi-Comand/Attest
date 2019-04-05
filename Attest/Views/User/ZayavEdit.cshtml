@@ -1047,25 +1047,25 @@
                           clearMaskOnLostFocus: true,
                       });*/
 
-                    $('.js-form-validate').submit(function () {
-                        var form = $(this);
-                        var field = [];
-                        form.find('input[data-validate]').each(function () {
-                            field.push('input[data-validate]');
-                            var value = $(this).val(),
-                                line = $(this).closest('.some-form__line');
-                            for (var i = 0; i < field.length; i++) {
-                                if (!value) {
-                                    line.addClass('some-form__line-required');
-                                    setTimeout(function () {
-                                        line.removeClass('some-form__line-required')
-                                    }.bind(this), 2000);
-                                    event.preventDefault();
-                                }
-                            }
-                        });
-                    });
-                });
+                    /*  $('.js-form-validate').submit(function () {
+                          var form = $(this);
+                          var field = [];
+                          form.find('input[data-validate]').each(function () {
+                              field.push('input[data-validate]');
+                              var value = $(this).val(),
+                                  line = $(this).closest('.some-form__line');
+                              for (var i = 0; i < field.length; i++) {
+                                  if (!value) {
+                                      line.addClass('some-form__line-required');
+                                      setTimeout(function () {
+                                          line.removeClass('some-form__line-required')
+                                      }.bind(this), 2000);
+                                      event.preventDefault();
+                                  }
+                              }
+                          });
+                      });
+                  });*/
 
             </script>
             <input type="submit" value="Сохранить" />
@@ -1162,7 +1162,7 @@
                                 </td>
                             </tr>
                         </table>
-                        
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
@@ -1187,111 +1187,111 @@
                     <div class="modal-body">
                         <input type="hidden" asp-for="Zayavlen.Id" />
                         <table>
-                                <tr>
-                                    <td>Организация</td>
-                                    <td>
-                                        <input type="text" asp-for="Obrazovan.oo" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Периодобучения</td>
-                                    <td>
+                            <tr>
+                                <td>Организация</td>
+                                <td>
+                                    <input type="text" asp-for="Obrazovan.oo" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Периодобучения</td>
+                                <td>
 
-                                        <input type="text" name="mdaterange" asp-for="Obrazovan.period" />
+                                    <input type="text" name="mdaterange" asp-for="Obrazovan.period" />
 
 
-                                        <script>
+                                    <script>
 
-                                            $(function () {
-                                                $('input[name="mdaterange"]').daterangepicker({
-                                                    opens: 'left',
-                                                    locale: {
-                                                        "format": "DD.MM.YYYY",
-                                                        "autoApply": true,
-                                                        "applyLabel": "Выбрать",
-                                                        "cancelLabel": "Отменить",
-                                                        "firstDay": 1
-                                                    }
-                                                });
+                                        $(function () {
+                                            $('input[name="mdaterange"]').daterangepicker({
+                                                opens: 'left',
+                                                locale: {
+                                                    "format": "DD.MM.YYYY",
+                                                    "autoApply": true,
+                                                    "applyLabel": "Выбрать",
+                                                    "cancelLabel": "Отменить",
+                                                    "firstDay": 1
+                                                }
                                             });
-                                        </script>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Место прохождения</td>
-                                    <td>
-                                        <input type="text" asp-for="Obrazovan.mo" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Кол-во часов</td>
-                                    <td>
-                                        <input type="text" asp-for="Obrazovan.kol_chas" pattern="^[ 0-9]+$" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Тема курсов</td>
-                                    <td>
-                                        <input type="text" asp-for="Obrazovan.special" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Форма участия/проведения</td>
-                                    <td>
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Место прохождения</td>
+                                <td>
+                                    <input type="text" asp-for="Obrazovan.mo" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Кол-во часов</td>
+                                <td>
+                                    <input type="text" asp-for="Obrazovan.kol_chas" pattern="^[ 0-9]+$" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Тема курсов</td>
+                                <td>
+                                    <input type="text" asp-for="Obrazovan.special" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Форма участия/проведения</td>
+                                <td>
 
-                                        <select asp-for="Obrazovan.kvalif">
-                                            <option value="">Выберите форму проведения</option>
-                                            <option label="Очная" value="FullTime">Очная</option>
-                                            <option label="Дистанционная" value="Distance">Дистанционная</option>
-                                            <option label="Очно-дистанционная" value="FullTimeDistance">Очно-дистанционная</option>
-                                            <option label="Заочная" value="Extramural">Заочная</option>
-                                        </select>
+                                    <select asp-for="Obrazovan.kvalif">
+                                        <option value="">Выберите форму проведения</option>
+                                        <option label="Очная" value="FullTime">Очная</option>
+                                        <option label="Дистанционная" value="Distance">Дистанционная</option>
+                                        <option label="Очно-дистанционная" value="FullTimeDistance">Очно-дистанционная</option>
+                                        <option label="Заочная" value="Extramural">Заочная</option>
+                                    </select>
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Название документа</td>
-                                    <td>
-                                        <input type="text" asp-for="Obrazovan.nazv_doc" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Серия</td>
-                                    <td>
-                                        <input type="text" asp-for="Obrazovan.ser_doc" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Номер документа</td>
-                                    <td>
-                                        <input type="text" asp-for="Obrazovan.nom_doc" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Дата выдачи</td>
-                                    <td>
-                                        <input type="text" id="md_v_k" asp-for="Obrazovan.data_doc" />
-                                        <script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Название документа</td>
+                                <td>
+                                    <input type="text" asp-for="Obrazovan.nazv_doc" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Серия</td>
+                                <td>
+                                    <input type="text" asp-for="Obrazovan.ser_doc" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Номер документа</td>
+                                <td>
+                                    <input type="text" asp-for="Obrazovan.nom_doc" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дата выдачи</td>
+                                <td>
+                                    <input type="text" id="md_v_k" asp-for="Obrazovan.data_doc" />
+                                    <script>
 
-                                            $(function () {
-                                                $('#md_v_k').daterangepicker({
-                                                    singleDatePicker: true,
-                                                    locale: {
-                                                        format: 'DD.MM.YYYY',
-                                                        "firstDay": 1
-                                                    }
-                                                });
+                                        $(function () {
+                                            $('#md_v_k').daterangepicker({
+                                                singleDatePicker: true,
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
                                             });
-                                        </script>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Регистрационный номер</td>
-                                    <td>
-                                        <input type="text" asp-for="Obrazovan.reg_nom" />
-                                    </td>
-                                </tr>
-                            </table>
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Регистрационный номер</td>
+                                <td>
+                                    <input type="text" asp-for="Obrazovan.reg_nom" />
+                                </td>
+                            </tr>
+                        </table>
 
                     </div>
                     <div class="modal-footer">
@@ -1431,50 +1431,50 @@
                     <div class="modal-body">
                         <input type="hidden" asp-for="Zayavlen.Id" />
                         <table>
-                                <tr>
-                                    <td>Период</td>
-                                    <td>
-                                        <input type="text" asp-for="Nauch_Deyat.period" pattern="[0-9]{4} - [0-9]{4}" />
+                            <tr>
+                                <td>Период</td>
+                                <td>
+                                    <input type="text" asp-for="Nauch_Deyat.period" pattern="[0-9]{4} - [0-9]{4}" />
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Название работы</td>
-                                    <td>
-                                        <input type="text" asp-for="Nauch_Deyat.nazv" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Название продукта</td>
-                                    <td>
-                                        <input type="text" asp-for="Nauch_Deyat.nazv_p" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Уровень</td>
-                                    <td>
-                                        <input type="text" asp-for="Nauch_Deyat.urov" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Статус участия</td>
-                                    <td>
-                                        <input type="text" asp-for="Nauch_Deyat.status" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Реализовано</td>
-                                    <td>
-                                        <input type="text" asp-for="Nauch_Deyat.realiz" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Электронный адрес публикации</td>
-                                    <td>
-                                        <input type="text" asp-for="Nauch_Deyat.el_adr" />
-                                    </td>
-                                </tr>
-                            </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Название работы</td>
+                                <td>
+                                    <input type="text" asp-for="Nauch_Deyat.nazv" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Название продукта</td>
+                                <td>
+                                    <input type="text" asp-for="Nauch_Deyat.nazv_p" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Уровень</td>
+                                <td>
+                                    <input type="text" asp-for="Nauch_Deyat.urov" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Статус участия</td>
+                                <td>
+                                    <input type="text" asp-for="Nauch_Deyat.status" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Реализовано</td>
+                                <td>
+                                    <input type="text" asp-for="Nauch_Deyat.realiz" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Электронный адрес публикации</td>
+                                <td>
+                                    <input type="text" asp-for="Nauch_Deyat.el_adr" />
+                                </td>
+                            </tr>
+                        </table>
 
                     </div>
                     <div class="modal-footer">
@@ -1500,75 +1500,75 @@
                     <div class="modal-body">
                         <input type="hidden" asp-for="Zayavlen.Id" />
                         <table>
-                                <tr>
-                                    <td>Ученая степень</td>
-                                    <td>
-                                        <input type="text" asp-for="ProfRazv.uch_stepen" />
+                            <tr>
+                                <td>Ученая степень</td>
+                                <td>
+                                    <input type="text" asp-for="ProfRazv.uch_stepen" />
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ученое звание</td>
-                                    <td>
-                                        <input type="text" asp-for="ProfRazv.uch_zvanie" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Код научной специальности</td>
-                                    <td>
-                                        <input type="text" asp-for="ProfRazv.kod_nauc_spec" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Название документа</td>
-                                    <td>
-                                        <select asp-for="ProfRazv.nazv_doc">
-                                            <option value="?" selected="selected"></option>
-                                            <option label="Удостоверение сданных экзаменов" value="ExamCertificate">Удостоверение сданных экзаменов</option>
-                                            <option label="Справка об обучении в аспирантуре" value="PostgraduateCertificate">Справка об обучении в аспирантуре</option>
-                                            <option label="Диплом" value="Diploma">Диплом</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Организация</td>
-                                    <td>
-                                        <input type="text" asp-for="ProfRazv.org_d" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Серия</td>
-                                    <td>
-                                        <input type="text" asp-for="ProfRazv.ser_d" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Номер документа</td>
-                                    <td>
-                                        <input type="text" asp-for="ProfRazv.non_d" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Дата выдачи</td>
-                                    <td>
-                                        <input type="text" id="md_v_rw_" asp-for="ProfRazv.data_vid_d" />
-                                        <script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ученое звание</td>
+                                <td>
+                                    <input type="text" asp-for="ProfRazv.uch_zvanie" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Код научной специальности</td>
+                                <td>
+                                    <input type="text" asp-for="ProfRazv.kod_nauc_spec" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Название документа</td>
+                                <td>
+                                    <select asp-for="ProfRazv.nazv_doc">
+                                        <option value="?" selected="selected"></option>
+                                        <option label="Удостоверение сданных экзаменов" value="ExamCertificate">Удостоверение сданных экзаменов</option>
+                                        <option label="Справка об обучении в аспирантуре" value="PostgraduateCertificate">Справка об обучении в аспирантуре</option>
+                                        <option label="Диплом" value="Diploma">Диплом</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Организация</td>
+                                <td>
+                                    <input type="text" asp-for="ProfRazv.org_d" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Серия</td>
+                                <td>
+                                    <input type="text" asp-for="ProfRazv.ser_d" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Номер документа</td>
+                                <td>
+                                    <input type="text" asp-for="ProfRazv.non_d" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дата выдачи</td>
+                                <td>
+                                    <input type="text" id="md_v_rw_" asp-for="ProfRazv.data_vid_d" />
+                                    <script>
 
-                                            $(function () {
-                                                /**/
-                                                $('#md_v_rw_').daterangepicker({
+                                        $(function () {
+                                            /**/
+                                            $('#md_v_rw_').daterangepicker({
 
-                                                    singleDatePicker: true,
-                                                    locale: {
-                                                        format: 'DD.MM.YYYY',
-                                                        "firstDay": 1
-                                                    }
-                                                });
+                                                singleDatePicker: true,
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
                                             });
-                                        </script>
-                                    </td>
-                                </tr>
-                            </table>
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                        </table>
 
                     </div>
                     <div class="modal-footer">
@@ -1595,8 +1595,8 @@
                     <form asp-action="AddFile" asp-controller="User" method="post" enctype="multipart/form-data">
 
                         <input type="hidden" asp-for="Zayavlen.Id" />
-                        <input type="text" asp-for="FileModel.name_f"  id="find" />
-                        <select  asp-for="FileModel.kategor_f"id="file-category_AddFile" required>
+                        <input type="text" asp-for="FileModel.name_f" id="find" />
+                        <select asp-for="FileModel.kategor_f" id="file-category_AddFile" required>
                             <option value="">Выберите категорию файла</option>
                             <option label="Заявление о проведении аттестации" value="AttestApplication">Заявление о проведении аттестации</option>
                             <option label="Копия аттестационного листа предыдущей аттестации" value="PrevAttestCopy">Копия аттестационного листа предыдущей аттестации</option>
@@ -1612,10 +1612,10 @@
 
                         <div class="file">
                             <div class="form-group">
-                                <input type="file"   name="uploadedFile" id="uploadedFile" class="input-file" required>
-                                <label for="uploadedFile"    class="btn btn-tertiary js-labelFile">
+                                <input type="file" name="uploadedFile" id="uploadedFile" class="input-file" required>
+                                <label for="uploadedFile" class="btn btn-tertiary js-labelFile">
                                     <i class="icon fa fa-check"></i>
-                                    <span  class="js-fileName">Загрузить файл</span>
+                                    <span class="js-fileName">Загрузить файл</span>
                                 </label>
                             </div>
                         </div>
@@ -1643,7 +1643,7 @@
                             })();
                         </script>
 
-                        
+
                         <input type="submit" value="Загрузить" />
                     </form>
 
