@@ -24,7 +24,7 @@
     <script src="~/assets/js/moment.min.js" charset="utf-8"></script>
     <script src="~/assets/js/daterangepicker.js" charset="utf-8"></script>
     <script src="~/assets/bootstrap/js/bootstrap.js"></script>
-
+    @* <script src="~/assets/js/jquery-1.9.1.min.js" charset="utf-8"></script>*@
     <title>@ViewData["Title"] - Аттестация</title>
 </head>
 <body>
@@ -51,24 +51,24 @@
 
                                 @*<ul class="nav navbar-nav ml  align-items-xl-center">
 
-                                    <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="index">Главная</a></li>
-                                    <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Lk" asp-action="lk">Личный кабинет</a></li>
-                                    <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="info">Информация</a></li>
-                                </ul>*@
+                                        <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="index">Главная</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Lk" asp-action="lk">Личный кабинет</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="info">Информация</a></li>
+                                    </ul>*@
 
                                 @if (User.Identity.IsAuthenticated == false)
                                 {
-                                <button type="submit" class="button" style="margin-left:auto;" asp-controller="Account" asp-action="login">Войти</button>
-                                <br />
-                                <button type="submit" class="button" style="margin:5px;" asp-area="" asp-controller="Account" asp-action="Register"> Зарегистрироваться</button>
+                                    <button type="submit" class="button" style="margin-left:auto;" asp-controller="Account" asp-action="login">Войти</button>
+                                    <br />
+                                    <button type="submit" class="button" style="margin:5px;" asp-area="" asp-controller="Account" asp-action="Register"> Зарегистрироваться</button>
                                 }
                                 else
                                 {
 
 
-                                <button type="submit" class="button" style="margin-left:auto;" asp-controller="User" asp-action="view">Моя учетная запись</button>
-                                <br />
-                                <button type="submit" class="button" style="margin:5px; " asp-controller="Account" asp-action="Logout"> Выйти</button>
+                                    <button type="submit" class="button" style="margin-left:auto;" asp-controller="User" asp-action="view">Моя учетная запись</button>
+                                    <br />
+                                    <button type="submit" class="button" style="margin:5px; " asp-controller="Account" asp-action="Logout"> Выйти</button>
 
                                 }
                             </form>
@@ -89,28 +89,28 @@
             <div class="container">
                 <div class="row">
                     @*<div class="card border-success mb-4 mx-auto" style="max-width: 300px; padding:0;">
-                        <!-- Шапка -->
-                        <div class="card-header bg-success text-white">
-                            Главная
-                        </div>
-                        <!-- Текстовый контент -->
-                        <div class="card-body">
+                            <!-- Шапка -->
+                            <div class="card-header bg-success text-white">
+                                Главная
+                            </div>
+                            <!-- Текстовый контент -->
+                            <div class="card-body">
 
+                                <ul>
+                                    <li><a href="#">Личный кабинет</a></li>
+                                    <li><a href="#">Ответственным МО</a></li>
+                                    <li><a href="#">Аттестационная комиссия</a></li>
+                                </ul>
+                            </div>
+                        </div><!-- Конец карточки -->*@
+                    @*<div class="col-sm-6 col-md-3 item" style="width: 196px;">
+                            <h3>Главная</h3>
                             <ul>
                                 <li><a href="#">Личный кабинет</a></li>
                                 <li><a href="#">Ответственным МО</a></li>
                                 <li><a href="#">Аттестационная комиссия</a></li>
                             </ul>
-                        </div>
-                    </div><!-- Конец карточки -->*@
-                    @*<div class="col-sm-6 col-md-3 item" style="width: 196px;">
-                        <h3>Главная</h3>
-                        <ul>
-                            <li><a href="#">Личный кабинет</a></li>
-                            <li><a href="#">Ответственным МО</a></li>
-                            <li><a href="#">Аттестационная комиссия</a></li>
-                        </ul>
-                    </div>*@
+                        </div>*@
                     <div class="col-sm-6 col-md-4 item" style="width: 331px;">
                         <h3>КОНТАКТЫ<br></h3>
                         <p style="font-size: 14px;">

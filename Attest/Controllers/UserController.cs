@@ -350,50 +350,50 @@ namespace Attest.Controllers
             return View();
         }
 
-       
 
-        public async Task<IActionResult> AddFile(IFormFile uploadedFile, CompositeModel compositeModel,FileModel fileUpload)
+
+        public async Task<IActionResult> AddFile(IFormFile uploadedFile, CompositeModel compositeModel, FileModel fileUpload)
         {
             int id = compositeModel.Zayavlen.Id;
-            FileModel file =  db.File.Where(p =>
-                p.kategor_f == compositeModel.FileModel.kategor_f && p.id_zayavl == id).FirstOrDefault();
+            FileModel file = db.File.Where(p =>
+               p.kategor_f == compositeModel.FileModel.kategor_f && p.id_zayavl == id).FirstOrDefault();
             if (file != null)
             {
-              
-                string path = Directory.GetCurrentDirectory() + "/wwwroot/Files/" + id+ "/" + file.name_f;
-            
 
-            System.IO.File.Delete(path);
-            db.File.Remove(file);
-            db.SaveChanges();
+                string path = Directory.GetCurrentDirectory() + "/wwwroot/Files/" + id + "/" + file.name_f;
+
+
+                System.IO.File.Delete(path);
+                db.File.Remove(file);
+                db.SaveChanges();
             }
 
-          
-              if (uploadedFile != null)
-              {
-                  Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/wwwroot/Files/" +id);
-                  // путь к папке Files
-                  string path = Directory.GetCurrentDirectory() + "/wwwroot/Files/" + id + "/" + uploadedFile.FileName;
-                  // сохраняем файл в папку Files в каталоге wwwroot
-                  using (var fileStream = new FileStream(path, FileMode.Create))
-                  {
-                      await uploadedFile.CopyToAsync(fileStream);
-                  }
+
+            if (uploadedFile != null)
+            {
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/wwwroot/Files/" + id);
+                // путь к папке Files
+                string path = Directory.GetCurrentDirectory() + "/wwwroot/Files/" + id + "/" + uploadedFile.FileName;
+                // сохраняем файл в папку Files в каталоге wwwroot
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
 
 
                 //  FileModel file = new FileModel();
-               file=new FileModel();
-                  file.id_zayavl = id;
-                  file.name_f = uploadedFile.FileName;
-                  file.kategor_f = compositeModel.FileModel.kategor_f;
-                  db.Entry(file).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                file = new FileModel();
+                file.id_zayavl = id;
+                file.name_f = uploadedFile.FileName;
+                file.kategor_f = compositeModel.FileModel.kategor_f;
+                db.Entry(file).State = Microsoft.EntityFrameworkCore.EntityState.Added;
 
-                  db.SaveChanges();
+                db.SaveChanges();
 
 
 
-              }
-              
+            }
+
             return View();
         }
         public IActionResult Creat()
@@ -464,23 +464,39 @@ namespace Attest.Controllers
         {
 
             db.Entry(compositeModel.Zayavlen).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            try
+            {
+                foreach (var row in compositeModel.listFile)
+                {
+                    db.Entry(row).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                }
+            }
+            catch { }
+            try
+            {
+                foreach (var row in compositeModel.listObrazovan)
+                {
+                    db.Entry(row).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                }
+            }
+            catch { }
+            try
+            {
+                foreach (var row in compositeModel.listNauch_deyat)
+                {
+                    db.Entry(row).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                }
+            }
+            catch { }
+            try
+            {
+                foreach (var row in compositeModel.listProfRazv)
+                {
+                    db.Entry(row).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                }
+            }
+            catch { }
 
-            foreach (var row in compositeModel.listFile)
-            {
-                db.Entry(row).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            }
-            foreach (var row in compositeModel.listObrazovan)
-            {
-                db.Entry(row).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            }
-            foreach (var row in compositeModel.listNauch_deyat)
-            {
-                db.Entry(row).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            }
-            foreach (var row in compositeModel.listProfRazv)
-            {
-                db.Entry(row).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            }
 
             /*db.Entry(compositeModel.Nauch_Deyat).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
            db.Entry(compositeModel.Obrazovan).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
