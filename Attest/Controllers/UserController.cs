@@ -352,7 +352,7 @@ namespace Attest.Controllers
 
        
 
-        public async Task<IActionResult> AddFile(IFormFile uploadedFile, CompositeModel compositeModel,FileModel fileUpload)
+        public async Task<IActionResult> AddFile(IFormFile uploadedFile, CompositeModel compositeModel)
         {
             int id = compositeModel.Zayavlen.Id;
             FileModel file =  db.File.Where(p =>
@@ -368,12 +368,30 @@ namespace Attest.Controllers
             db.SaveChanges();
             }
 
-          
-              if (uploadedFile != null)
+            file = null;
+            file = db.File.Where(p =>
+                p.name_f == compositeModel.FileModel.name_f && p.id_zayavl == id).FirstOrDefault();
+            if (file != null)
+            {
+                string name = compositeModel.FileModel.name_f;
+                int index = name.LastIndexOf(".");
+                string nameFile = name.Substring(0, index);
+                
+
+                string typeFile = name.Substring(index );
+                string date = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+
+
+                compositeModel.FileModel.name_f = nameFile + "_"+date+ typeFile;
+               
+                    
+            }
+
+            if (uploadedFile != null)
               {
                   Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/wwwroot/Files/" +id);
                   // путь к папке Files
-                  string path = Directory.GetCurrentDirectory() + "/wwwroot/Files/" + id + "/" + uploadedFile.FileName;
+                  string path = Directory.GetCurrentDirectory() + "/wwwroot/Files/" + id + "/" + compositeModel.FileModel.name_f;
                   // сохраняем файл в папку Files в каталоге wwwroot
                   using (var fileStream = new FileStream(path, FileMode.Create))
                   {
@@ -384,7 +402,7 @@ namespace Attest.Controllers
                 //  FileModel file = new FileModel();
                file=new FileModel();
                   file.id_zayavl = id;
-                  file.name_f = uploadedFile.FileName;
+                  file.name_f = compositeModel.FileModel.name_f;
                   file.kategor_f = compositeModel.FileModel.kategor_f;
                   db.Entry(file).State = Microsoft.EntityFrameworkCore.EntityState.Added;
 
@@ -489,12 +507,65 @@ namespace Attest.Controllers
             db.SaveChanges();
             return RedirectToAction("Lk", "Lk");
         }
-
-        public IActionResult Save_Obr(int id_user, Zayavlen zayav)
+        public IActionResult Save_Prof(CompositeModel compositeModel)
         {
+            ProfRazv prof = new ProfRazv();
+            prof = compositeModel.ProfRazv;
 
-            db.Entry(zayav).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            prof.id_zayav = compositeModel.Zayavlen.Id;
+            db.Entry(prof).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+
             db.SaveChanges();
+
+            return RedirectToAction("Lk", "Lk");
+        }
+        public IActionResult Save_VV(CompositeModel compositeModel)
+        {
+            Obrazovan obr = new Obrazovan();
+            obr = compositeModel.Obrazovan;
+            obr.tip_obr = 3;
+            obr.id_zayavl = compositeModel.Zayavlen.Id;
+            db.Entry(obr).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+
+            db.SaveChanges();
+
+            return RedirectToAction("Lk", "Lk");
+        }
+        public IActionResult Save_Kurs(CompositeModel compositeModel)
+        {
+            Obrazovan obr = new Obrazovan();
+            obr = compositeModel.Obrazovan;
+            obr.tip_obr = 2;
+            obr.id_zayavl = compositeModel.Zayavlen.Id;
+            db.Entry(obr).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+
+            db.SaveChanges();
+
+            return RedirectToAction("Lk", "Lk");
+        }
+        public IActionResult Save_Nauch(CompositeModel compositeModel)
+        {
+            Nauch_deyat nauch = new Nauch_deyat();
+            nauch = compositeModel.Nauch_Deyat;
+
+            nauch.id_zayavl = compositeModel.Zayavlen.Id;
+            db.Entry(nauch).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+
+            db.SaveChanges();
+
+            return RedirectToAction("Lk", "Lk");
+        }
+       
+        public IActionResult Save_Obr( CompositeModel compositeModel)
+        {
+            Obrazovan obr = new Obrazovan();
+            obr = compositeModel.Obrazovan;
+            obr.tip_obr = 1;
+            obr.id_zayavl = compositeModel.Zayavlen.Id;
+            db.Entry(obr).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+
+            db.SaveChanges();
+
             return RedirectToAction("Lk", "Lk");
         }
     }
