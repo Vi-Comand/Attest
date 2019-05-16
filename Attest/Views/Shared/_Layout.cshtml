@@ -5,9 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="~/assets/bootstrap/css/bootstrap.min.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
+
+    <link rel="stylesheet" href="~/assets/css/main.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
     <link rel="stylesheet" href="~/assets/fonts/ionicons.min.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
     <link rel="stylesheet" href="~/assets/css/Footer-Dark.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
+    <!-- <link rel="stylesheet" href="~/assets/css/font-awesome.min.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
 
 
@@ -16,13 +20,18 @@
 <body>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="padding-top: 11px;padding-right: 7px;padding-bottom: 10px;padding-left: 3px;">
         <div class="container">
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="sr-only sr-only-focusable"><img class="rounded-circle" src="~/assets/img/лого%20ИРО%20КК%20и%20текст.png" width="150"></span><span class="navbar-toggler-icon"></span></button>
+            <span class="navbar-expand-sm"><img class="rounded-circle" src="~/assets/img/лого%20ИРО%20КК%20и%20текст.png" width="150"></span>
             <div class="collapse navbar-collapse text-left " id="navbarNav">
-                <ul class="nav navbar-nav ml-auto text-left align-items-xl-center" style="width: 847px; padding-right: 20px;">
-                    <li class="nav-item" role="presentation"><a href="~/Home/Index" class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="Index"><img class="rounded-circle" src="~/assets/img/лого%20ИРО%20КК%20и%20текст.png" width="150">Главная</a></li>
+
+                <ul class="nav navbar-nav ml  align-items-xl-center" padding-right: 20px;">
+                    <li class="nav-item" role="img"></li>
+                    <li class="nav-item" role="presentation"><a href="~/Home/Index" class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="Index">Главная</a></li>
                     <li class="nav-item" role="presentation"><a href="~/Home/Lk" class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="Login">Личный кабинет</a></li>
-                </ul><button class="btn btn-success ml-auto " type="button">Войти</button><br />
-                <button class="btn btn-secondary mr-auto" type="button" asp-area="" asp-controller="Home" asp-action="Login"> Зарегистрироваться</button>
+                </ul><button type="button" style="margin-left:auto;" asp-area="" asp-controller="Home" asp-action="Login">Войти</button><br />
+                <button type="button" style="margin:5px;"> Зарегистрироваться</button>
+                <button type="button" class="sr-only" style="margin-left:auto; ">Моя учетная запись</button><br />
+                <button type="button" class="sr-only" style="margin:5px;"> Выйти</button>
             </div>
         </div>
     </nav>
@@ -32,42 +41,58 @@
         @RenderBody()
         <hr />
     </div>
-    <div class="footer-dark">
+    <div>
         <footer>
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-6 col-md-3 item" style="width: 196px;">
-                        <h3>Главная</h3>
-                        <ul>
-                            <li><a href="#">Личный кабинет</a></li>
-                            <li><a href="#">Ответственным МО</a></li>
-                            <li><a href="#">Аттестационная комиссия</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-6 col-md-3 item" style="width: 331px;">
+                    @*<div class="card border-success mb-4 mx-auto" style="max-width: 300px; padding:0;">
+                            <!-- Шапка -->
+                            <div class="card-header bg-success text-white">
+                                Главная
+                            </div>
+                            <!-- Текстовый контент -->
+                            <div class="card-body">
+
+                                <ul>
+                                    <li><a href="#">Личный кабинет</a></li>
+                                    <li><a href="#">Ответственным МО</a></li>
+                                    <li><a href="#">Аттестационная комиссия</a></li>
+                                </ul>
+                            </div>
+                        </div><!-- Конец карточки -->*@
+                    @*<div class="col-sm-6 col-md-3 item" style="width: 196px;">
+                            <h3>Главная</h3>
+                            <ul>
+                                <li><a href="#">Личный кабинет</a></li>
+                                <li><a href="#">Ответственным МО</a></li>
+                                <li><a href="#">Аттестационная комиссия</a></li>
+                            </ul>
+                        </div>*@
+                    <div class="col-sm-6 col-md-4 item" style="width: 331px;">
                         <h3>КОНТАКТЫ<br></h3>
-                        <p style="font-size: 12px;">
+                        <p style="font-size: 14px;">
                             Отдел&nbsp;сопровождения процедуры аттестации&nbsp;педагогических работников ГБОУ ИРО КК <br /> Телефон:&nbsp;<strong>8(861) 232-17-09 &nbsp;</strong> <br />
                             Электронная&nbsp;почта:&nbsp;<a href="mailto:oa@iro23.ru"><strong>oa@iro23.ru</strong></a><br />
                             Для справок педагогических работников организаций <strong>Министерства культуры <br /> </strong>Тел:&nbsp;<strong>8(861) 224-20-38, 224-88- 60 &nbsp;</strong><br />
                             Email:&nbsp;<a href="mailto:att_kumc@mail.ru"><strong>att_kumc@mail.ru</strong></a><br><br>
                         </p>
                     </div>
-                    <div class="col-sm-6 col-md-3 item" style="width: 196px;">
+                    <div class="col-sm-6 col-md-4 item" style="width: 196px;">
                         <h3>Техническая поддержка</h3>
-                        <p style="font-size: 12px;">
+                        <p style="font-size: 14px;">
                             Информационно-аналитический центр ГБОУ ИРО КК <br />
                             Телефоны: <br /> <strong>8(861) 232-39-71</strong><br><strong> 8(861) 260-27-54</strong><br><br>
                         </p>
                     </div>
-                    <div class="col-sm-6 col-md-3 item" style="width: 196px;">
+                    <div class="col-sm-6 col-md-4 item" style="width: 196px;">
                         <h3>Полезные ссылки</h3>
                         <ul>
-                            <li><a href="#">Сжатие PDF</a></li>
-                            <li><a href="#">Инструкция сжатия PDF</a></li>
-                            <li></li>
+                            <li><a href="https://www.pdf2go.com/ru/compress-pdf">Сжатие PDF</a></li>
+                            <li><a href="http://attest.iro23.ru/sites/default/files/PDF.pdf">Инструкция сжатия PDF</a></li>
+
                         </ul>
                     </div>
+
                 </div>
                 <p class="copyright">© Информационно-аналитический центр ГБОУ ИРО Краснодарского края 2019</p>
             </div>
