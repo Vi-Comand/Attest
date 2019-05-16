@@ -30,6 +30,7 @@ namespace Attest.Models
         }
 
         public DbSet<Users> Users { get; set; }
+        public DbSet<Mo> Mo { get; set; }
         public DbSet<FileModel> File { get; set; }
         //  public DbSet<FileModel> File1 { get; set; }
         public DbSet<Nauch_deyat> Naucn_deyat { get; set; }

@@ -71,7 +71,7 @@
                             <tr id="naprtr">
                                 <td>Направление</td>
                                 <td>
-                                    <select id="napr" asp-for="Zayavlen.uch_stepen" required>
+                                    <select id="napr" asp-for="Zayavlen.uch_stepen">
                                         <option value="">Выберите напрвление</option>
                                         <option value="Русский язык и литература">Русский язык и литература</option>
                                         <option value="Математика">Математика</option>
@@ -151,44 +151,51 @@
                                 <td>
                                     <select id="napr" class="req" asp-for="Zayavlen.mo" data-validate>
                                         <option value="">Выберите МО</option>
-                                        <option value="Абинский ">Абинский</option>
-                                        <option value="Анапский ">Анапский</option>
-                                        <option value="Апшеронский ">Апшеронский</option>
-                                        <option value="Белоглинский ">Белоглинский</option>
-                                        <option value="Белореченский ">Белореченский</option>
-                                        <option value="Брюховецкий ">Брюховецкий</option>
-                                        <option value="Выселковский ">Выселковский</option>
-                                        <option value="Гулькевичский ">Гулькевичский</option>
-                                        <option value="Динской ">Динской</option>
-                                        <option value="Ейский ">Ейский</option>
-                                        <option value="Кавказский ">Кавказский</option>
-                                        <option value="Калининский ">Калининский</option>
-                                        <option value="Каневской ">Каневской</option>
-                                        <option value="Кореновский ">Кореновский</option>
-                                        <option value="Красноармейский ">Красноармейский</option>
-                                        <option value="Крыловский ">Крыловский</option>
-                                        <option value="Крымский ">Крымский</option>
-                                        <option value="Курганинский ">Курганинский</option>
-                                        <option value="Кущевский ">Кущевский</option>
-                                        <option value="Лабинский ">Лабинский</option>
-                                        <option value="Ленинградский ">Ленинградский</option>
-                                        <option value="Мостовский ">Мостовский</option>
-                                        <option value="Новокубанский ">Новокубанский</option>
-                                        <option value="Новопокровский ">Новопокровский</option>
-                                        <option value="Отрадненский ">Отрадненский</option>
-                                        <option value="Павловский ">Павловский</option>
-                                        <option value="Приморско-Ахтарский ">Приморско-Ахтарский</option>
-                                        <option value="Северский ">Северский</option>
-                                        <option value="Славянский ">Славянский</option>
-                                        <option value="Староминский ">Староминский</option>
-                                        <option value="Тбилисский ">Тбилисский</option>
-                                        <option value="Темрюкский ">Темрюкский</option>
-                                        <option value="Тимашевский ">Тимашевский</option>
-                                        <option value="Тихорецкий ">Тихорецкий</option>
-                                        <option value="Туапсинский ">Туапсинский</option>
-                                        <option value="Успенский ">Успенский</option>
-                                        <option value="Усть-Лабинский ">Усть-Лабинский</option>
-                                        <option value="Щербиновский ">Щербиновский</option>
+                                        <option value='1'>Абинский</option>
+                                        <option value='2'>Анапский</option>
+                                        <option value='3'>Апшеронский</option>
+                                        <option value='4'>Армавир</option>
+                                        <option value='5'>Белоглинский</option>
+                                        <option value='6'>Белореченский</option>
+                                        <option value='7'>Брюховецкий</option>
+                                        <option value='8'>Выселковский</option>
+                                        <option value='9'>Геленджик</option>
+                                        <option value='10'>Горячий Ключ</option>
+                                        <option value='11'>Гулькевичский</option>
+                                        <option value='12'>Динской</option>
+                                        <option value='13'>Ейский</option>
+                                        <option value='14'>Кавказский</option>
+                                        <option value='15'>Калининский</option>
+                                        <option value='16'>Каневской</option>
+                                        <option value='17'>Кореновский</option>
+                                        <option value='18'>Красноармейский</option>
+                                        <option value='19'>Краснодар</option>
+                                        <option value='20'>Крыловский</option>
+                                        <option value='21'>Крымский</option>
+                                        <option value='22'>Курганинский</option>
+                                        <option value='23'>Кущевский</option>
+                                        <option value='24'>Лабинский</option>
+                                        <option value='25'>Ленинградский</option>
+                                        <option value='26'>Мостовский</option>
+                                        <option value='27'>Новокубанский</option>
+                                        <option value='28'>Новопокровский</option>
+                                        <option value='29'>Новороссийск</option>
+                                        <option value='30'>Отрадненский</option>
+                                        <option value='31'>Павловский</option>
+                                        <option value='32'>Приморско-Ахтарский</option>
+                                        <option value='33'>Северский</option>
+                                        <option value='34'>Славянский</option>
+                                        <option value='35'>Сочи</option>
+                                        <option value='36'>Староминский</option>
+                                        <option value='37'>Тбилисский</option>
+                                        <option value='38'>Темрюкский</option>
+                                        <option value='39'>Тимашевский</option>
+                                        <option value='40'>Тихорецкий</option>
+                                        <option value='41'>Туапсинский</option>
+                                        <option value='42'>Успенский</option>
+                                        <option value='43'>Усть-Лабинский</option>
+                                        <option value='44'>Щербиновский</option>
+
                                     </select>
                                     <span class="some-form__hint">Обязательно для заполнения</span>
                                 </td>
@@ -203,7 +210,7 @@
                             <tr>
                                 <td>Должность</td>
                                 <td>
-                                    <select id="dolg" asp-for="Zayavlen.dolgnost_imeyu" required>
+                                    <select id="dolg" asp-for="Zayavlen.dolgnost_imeyu">
 
                                         <option value="">Выберите текущую должность</option>
                                         <option value="ВОСПИТАТЕЛЬ">ВОСПИТАТЕЛЬ</option>
@@ -236,7 +243,7 @@
                                 <td>Категория</td>
                                 <td>
 
-                                    <select id="kategor" asp-for="Zayavlen.kategor" required>
+                                    <select id="kategor" asp-for="Zayavlen.kategor">
 
                                         <option value="">Выберите категорию</option>
                                         <option value="Первая">Первая</option>
@@ -250,7 +257,7 @@
                                 <td>
 
 
-                                    <input type="text" asp-for="Zayavlen.data_last_att" id="date" required>
+                                    <input type="text" asp-for="Zayavlen.data_last_att" id="date">
                                     <script>
 
                                         $(function () {
@@ -1045,8 +1052,11 @@
             </div>
             <input type="hidden" asp-for="Zayavlen.Id" />
 
-            <input type="hidden" asp-for="Zayavlen.id_user" />
-            <input type="submit" asp-controller="User" asp-action="Update" value="Обновить" data-toggle="tooltip" data-placement="top" title="Будут подгруженны данные из АИС Сетевой город. Ваши данные будут заменены" />
+            <input type="text" asp-for="Zayavlen.id_user" />
+
+
+            <input type="submit" asp-controller="User" asp-action="Update1" value="Обновить" data-toggle="tooltip" data-placement="top" title="Будут подгруженны данные из АИС Сетевой город. Ваши данные будут заменены" />
+
             <script>
                 /*  function Check() {
                       // alert("go");

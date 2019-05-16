@@ -29,11 +29,16 @@ namespace Attest.Controllers
             return View();
         }
 
+        public IActionResult Update1(CompositeModel composite)
+        {
+            return RedirectToAction("Update", "User", new { id = composite.Zayavlen.Id, id_user = composite.Zayavlen.id_user, pvt = 1 });
+        }
 
 
+        [Route("Update")]
+        [Route("Update/{id }/{id_user}/{pvt}")]
 
-
-        public async Task<IActionResult> Update(int id_user, int id, Users users)
+        public async Task<IActionResult> Update(int id_user, int id, Users users, int pvt)
         {
 
             StaffPortfolioServiceClient client = new StaffPortfolioServiceClient();
@@ -45,14 +50,16 @@ namespace Attest.Controllers
             {
 
                 users = db.Users.Find(id_user);
+                var mo = db.Mo.Where(p => p.name == nameUser.OrganizationData.Municipality).First();
                 if (nameUser.PersonData != null)
                 {
 
                     users.FIO = nameUser.PersonData.FirstName + " " + nameUser.PersonData.MiddleName + " " + nameUser.PersonData.LastName;
 
-                    // users.FIO = nameUser.OrganizationData.Municipality;
 
-           
+                    users.mo = mo.Id;
+
+
                 }
                 // List<Obrazovan> obr = db.Obrazovan.Where(p => p.id_zayavl == id);
                 db.SaveChanges();
@@ -64,7 +71,7 @@ namespace Attest.Controllers
                 {
                     zayav.data_last_att = nameUser.MainPosition.AttestDate != null ? Convert.ToDateTime(nameUser.MainPosition.AttestDate) : DateTime.MinValue;
 
-
+                    zayav.mo = mo.Id;
 
 
                     zayav.dolgnost_imeyu = nameUser.MainPosition.Position;
@@ -73,20 +80,20 @@ namespace Attest.Controllers
                     //  zayav.oo = nameUser.OrganizationData.Municipality;
 
                     zayav.oo = nameUser.OrganizationData.ShortName;
-                    //zayav.uch_stepen
+                    // zayav.uch_stepen = nameUser.M
                     // db.Set<Zayavlen>().Attach(zayav);
                     //  db.Zayavlen.Update(zayav).;
-                   
+
                 }
                 db.SaveChanges();
                 var obr = db.Obrazovan.Where(w => w.id_zayavl == id);
 
-                    foreach (Obrazovan obrz in obr)
-                    {
-                        db.Obrazovan.Remove(obrz);
-                    }
-                    db.SaveChanges();
-                
+                foreach (Obrazovan obrz in obr)
+                {
+                    db.Obrazovan.Remove(obrz);
+                }
+                db.SaveChanges();
+
                 // _context.Obrazovan.stRemoveRange(db.Obrazovan.Where(p => p.id_zayavl == id).ToList());
                 //_context.SaveChanges();
 
@@ -106,7 +113,7 @@ namespace Attest.Controllers
                     obraz.nazv_doc = nameUser.EducationData[i].CompletionDocument.DocType.Value.ToString();
                     obraz.ser_doc = nameUser.EducationData[i].CompletionDocument.Series;
                     obraz.nom_doc = nameUser.EducationData[i].CompletionDocument.Number;
-                  try
+                    try
                     {
                         obraz.data_doc = nameUser.EducationData[i].CompletionDocument.IssueDate != null ? Convert.ToDateTime(nameUser.EducationData[i].CompletionDocument.IssueDate) : DateTime.MinValue;
                     }
@@ -129,13 +136,13 @@ namespace Attest.Controllers
                     obraz.tip_obr = 2;
                     obraz.oo = nameUser.StaffTrainingsData[i].Organization;
                     obraz.mo = nameUser.StaffTrainingsData[i].Place;
-                  
+
                     try
                     {
-                        obraz.kol_chas = nameUser.StaffTrainingsData[i].Hours != null ? Convert.ToInt32(nameUser.StaffTrainingsData[i].Hours) : 0; 
+                        obraz.kol_chas = nameUser.StaffTrainingsData[i].Hours != null ? Convert.ToInt32(nameUser.StaffTrainingsData[i].Hours) : 0;
                     }
                     catch
-                    { obraz.kol_chas =  0; }
+                    { obraz.kol_chas = 0; }
 
 
 
@@ -145,9 +152,9 @@ namespace Attest.Controllers
                     obraz.nazv_doc = nameUser.StaffTrainingsData[i].CompletionDocument.DocName;
                     obraz.ser_doc = nameUser.StaffTrainingsData[i].CompletionDocument.Series;
                     obraz.nom_doc = nameUser.StaffTrainingsData[i].CompletionDocument.Number;
-                 
 
-                   
+
+
                     try
                     {
                         obraz.data_doc = nameUser.StaffTrainingsData[i].CompletionDocument.IssueDate != null ? Convert.ToDateTime(nameUser.StaffTrainingsData[i].CompletionDocument.IssueDate) : DateTime.MinValue;
@@ -170,7 +177,7 @@ namespace Attest.Controllers
                     obraz.tip_obr = 2;
                     obraz.oo = nameUser.StaffRetrainingsData[i].Organization;
                     obraz.mo = nameUser.StaffRetrainingsData[i].Place;
-                  try
+                    try
                     {
                         obraz.kol_chas = nameUser.StaffRetrainingsData[i].Hours != null ? Convert.ToInt32(nameUser.StaffRetrainingsData[i].Hours) : 0;
                     }
@@ -186,14 +193,14 @@ namespace Attest.Controllers
                     obraz.nazv_doc = nameUser.StaffRetrainingsData[i].CompletionDocument.DocName;
                     obraz.ser_doc = nameUser.StaffRetrainingsData[i].CompletionDocument.Series;
                     obraz.nom_doc = nameUser.StaffRetrainingsData[i].CompletionDocument.Number;
-                   
+
                     try
                     {
                         obraz.data_doc = nameUser.StaffRetrainingsData[i].CompletionDocument.IssueDate != null ? Convert.ToDateTime(nameUser.StaffRetrainingsData[i].CompletionDocument.IssueDate) : DateTime.MinValue;
                     }
                     catch
                     {
-                        obraz.data_doc =DateTime.MinValue;
+                        obraz.data_doc = DateTime.MinValue;
                     }
 
                     obraz.reg_nom = nameUser.StaffRetrainingsData[i].CompletionDocument.RegNumber;
@@ -351,8 +358,13 @@ namespace Attest.Controllers
                 ViewBag.File = db.File.Where(p => p.id_zayavl == id).ToList();
                 ViewBag.Nauch = db.Naucn_deyat.Where(p => p.id_zayavl == id).ToList();
             }
+            if (pvt == 0)
                 return View("ZayavEdit", db.Zayavlen.Find(id));
-            
+            else
+
+                return RedirectToAction("edit", "User", new { id });
+
+
         }
 
 
@@ -437,35 +449,35 @@ namespace Attest.Controllers
                 string name = compositeModel.FileModel.name_f;
                 int index = name.LastIndexOf(".");
                 string nameFile = name.Substring(0, index);
-                
 
-                string typeFile = name.Substring(index );
+
+                string typeFile = name.Substring(index);
                 string date = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
 
-                compositeModel.FileModel.name_f = nameFile + "_"+date+ typeFile;
-               
-                    
+                compositeModel.FileModel.name_f = nameFile + "_" + date + typeFile;
+
+
             }
 
             if (uploadedFile != null)
-              {
-                  Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/wwwroot/Files/" +id);
-                  // путь к папке Files
-                  string path = Directory.GetCurrentDirectory() + "/wwwroot/Files/" + id + "/" + compositeModel.FileModel.name_f;
-                  // сохраняем файл в папку Files в каталоге wwwroot
-                  using (var fileStream = new FileStream(path, FileMode.Create))
-                  {
-                      await uploadedFile.CopyToAsync(fileStream);
-                  }
+            {
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/wwwroot/Files/" + id);
+                // путь к папке Files
+                string path = Directory.GetCurrentDirectory() + "/wwwroot/Files/" + id + "/" + compositeModel.FileModel.name_f;
+                // сохраняем файл в папку Files в каталоге wwwroot
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
 
 
                 //  FileModel file = new FileModel();
-               file=new FileModel();
-                  file.id_zayavl = id;
-                  file.name_f = compositeModel.FileModel.name_f;
-                  file.kategor_f = compositeModel.FileModel.kategor_f;
-                  db.Entry(file).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                file = new FileModel();
+                file.id_zayavl = id;
+                file.name_f = compositeModel.FileModel.name_f;
+                file.kategor_f = compositeModel.FileModel.kategor_f;
+                db.Entry(file).State = Microsoft.EntityFrameworkCore.EntityState.Added;
 
                 db.SaveChanges();
 
@@ -517,7 +529,7 @@ namespace Attest.Controllers
         {
 
 
-            await Update(id_user, id, user);
+            await Update(id_user, id, user, 0);
 
 
             return RedirectToAction("Edit", "User", new { id });
@@ -632,8 +644,8 @@ namespace Attest.Controllers
 
             return RedirectToAction("Lk", "Lk");
         }
-       
-        public IActionResult Save_Obr( CompositeModel compositeModel)
+
+        public IActionResult Save_Obr(CompositeModel compositeModel)
         {
             Obrazovan obr = new Obrazovan();
             obr = compositeModel.Obrazovan;
