@@ -57,7 +57,7 @@ namespace Attest.Controllers
                     users.FIO = nameUser.PersonData.FirstName + " " + nameUser.PersonData.MiddleName + " " + nameUser.PersonData.LastName;
 
 
-                    users.mo = mo.Id;
+                    //  users.mo = mo.Id;
 
 
                 }
