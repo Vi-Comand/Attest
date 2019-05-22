@@ -150,7 +150,7 @@
                         <tr>
                             <td>МО</td>
                             <td>
-                                <select id="napr" class="req" asp-for="Zayavlen.mo" data-validate>
+                                <select id="napr" class="req" asp-for="Zayavlen.mo" required>
                                     <option value="">Выберите МО</option>
                                     <option value='1'>Абинский</option>
                                     <option value='2'>Анапский</option>
@@ -198,20 +198,20 @@
                                     <option value='44'>Щербиновский</option>
 
                                 </select>
-                                <span class="some-form__hint">Обязательно для заполнения</span>
+
                             </td>
                         </tr>
                         <tr>
                             <td>ОО</td>
                             <td>
-                                <input type="text" class="req" asp-for="Zayavlen.oo" data-validate required />
-                                <span class="some-form__hint">Обязательно для заполнения</span>
+                                <input type="text" class="req" asp-for="Zayavlen.oo" required />
+
                             </td>
                         </tr>
                         <tr>
                             <td>Должность</td>
                             <td>
-                                <select id="dolg" asp-for="Zayavlen.dolgnost_imeyu">
+                                <select id="dolg" asp-for="Zayavlen.dolgnost_imeyu" required>
 
                                     <option value="">Выберите текущую должность</option>
                                     <option value="ВОСПИТАТЕЛЬ">ВОСПИТАТЕЛЬ</option>
@@ -244,7 +244,7 @@
                             <td>Категория</td>
                             <td>
 
-                                <select id="kategor" asp-for="Zayavlen.kategor">
+                                <select id="kategor" asp-for="Zayavlen.kategor" required>
 
                                     <option value="">Выберите категорию</option>
                                     <option value="Первая">Первая</option>
@@ -254,11 +254,11 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Дата последней аттестации</td>
+                            <td>Дата последней аттестации </td>
                             <td>
 
 
-                                <input type="text" asp-for="Zayavlen.data_last_att" id="date">
+                                <input type="text" asp-for="Zayavlen.data_last_att" id="date" required>
                                 <script>
 
                                     $(function () {
@@ -350,7 +350,7 @@
                                         <tr>
                                             <td>Периодобучения</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].period" value="@Model.listObrazovan[i].period" pattern="[0-9]{4} - [0-9]{4}" />
+                                                <input type="text" asp-for="listObrazovan[i].period" value="@Model.listObrazovan[i].period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -485,7 +485,7 @@
                                         <tr>
                                             <td>Организация</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].oo" />
+                                                <input type="text" asp-for="listObrazovan[i].oo" required />
                                             </td>
                                         </tr>
                                         <tr>
@@ -633,13 +633,13 @@
                                         <tr>
                                             <td>Организация</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].oo" />
+                                                <input type="text" asp-for="listObrazovan[i].oo" required />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Периодобучения</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].period" pattern="[0-9]{4} - [0-9]{4}" />
+                                                <input type="text" asp-for="listObrazovan[i].period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -896,7 +896,7 @@
                                     <tr>
                                         <td>Период</td>
                                         <td>
-                                            <input type="text" asp-for="listNauch_deyat[i].period" pattern="[0-9]{4} - [0-9]{4}" />
+                                            <input type="text" asp-for="listNauch_deyat[i].period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
 
                                         </td>
                                     </tr>
@@ -1096,11 +1096,12 @@
                         var collId = $(this).closest('.collapse').attr('id');
                         //id taba
                         var tabId = $(this).closest('.tab-pane').attr('id');
+
+                        // переключаем таб
+                        $('.nav-tabs a[href="#' + tabId + '"]').tab('show');
                         // переключаем collapse
                         $('#' + collId).removeClass('in collapse');
                         $('#' + collId).addClass('collapsed');
-                        // переключаем таб
-                        $('.nav-tabs a[href="#' + tabId + '"]').tab('show');
 
                         // прерываем обработку остальных обязательных полей
                         return false;
@@ -1135,7 +1136,7 @@
                             <tr>
                                 <td>Периодобучения</td>
                                 <td>
-                                    <input type="text" value="" asp-for="Obrazovan.period" pattern="[0-9]{4} - [0-9]{4}" />
+                                    <input type="text" value="" asp-for="Obrazovan.period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
 
 
                                 </td>
@@ -1366,7 +1367,7 @@
                             <tr>
                                 <td>Периодобучения</td>
                                 <td>
-                                    <input type="text" asp-for="Obrazovan.period" pattern="[0-9]{4} - [0-9]{4}" />
+                                    <input type="text" asp-for="Obrazovan.period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
                                 </td>
                             </tr>
                             <tr>
@@ -1472,7 +1473,7 @@
                             <tr>
                                 <td>Период</td>
                                 <td>
-                                    <input type="text" asp-for="Nauch_Deyat.period" pattern="[0-9]{4} - [0-9]{4}" />
+                                    <input type="text" asp-for="Nauch_Deyat.period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
 
                                 </td>
                             </tr>
