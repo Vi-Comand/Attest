@@ -7,25 +7,25 @@
     <div>
         <div>
             <label asp-for="Email">Введите Email</label>
-            <input type="text" asp-for="Email" required />
+            <input type="text" asp-for="Email" required title="Введите email" />
             <span asp-validation-for="Email" />
             <br />
         </div>
         <div>
             <label asp-for="Password">Введите пароль</label>
-            <input asp-for="Password" required />
+            <input asp-for="Password" required pattern="[A-Za-zА-Яа-яЁё0-9]{3,}" title="Введите пароль не менее трех символов" />
             <span asp-validation-for="Password" />
             <br />
         </div>
         <div>
             <label asp-for="ConfirmPassword">Повторите пароль</label>
-            <input asp-for="ConfirmPassword" required />
+            <input asp-for="ConfirmPassword" required pattern="[A-Za-zА-Яа-яЁё0-9]{3,}" title="Введите пароль не менее трех символов" />
             <span asp-validation-for="ConfirmPassword" />
             <br />
         </div>
         <div>
             <label asp-for="Snils">Снилс</label>
-            <input asp-for="Snils" required />
+            <input asp-for="Snils" pattern="[0-9]{11}" title="Введит снилс 11 символов без пробелов и других знаков" />
             <span asp-validation-for="Snils" />
             <br />
         </div>
