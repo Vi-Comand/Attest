@@ -105,12 +105,13 @@ namespace Attest.Controllers
                         numBytesRequested: 256 / 8));
 
                     // добавляем пользователя в бд
-                    db.Users.Add(new Users { Email = model.Email, pass = hashed, Snils= snils, mo=Mo, role="1" });
+                    db.Users.Add(new Users { Email = model.Email, pass = hashed, Snils = snils, mo = Mo, role = "1" });
                     await db.SaveChangesAsync();
 
                     await Authenticate(model.Email); // аутентификация
-                    
+
                     await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+                    user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
                     return RedirectToAction("Lk", "Lk", new { id = user.Id });
                 }
                 else

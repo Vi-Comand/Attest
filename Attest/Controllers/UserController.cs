@@ -5,14 +5,14 @@ using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Scaffolding;
-using server1=ServiceReference1;
-using server2=ServiceReference2;
-using server3=ServiceReference3;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using server1 = ServiceReference1;
+using server2 = ServiceReference2;
+using server3 = ServiceReference3;
 
 
 namespace Attest.Controllers
@@ -53,9 +53,9 @@ namespace Attest.Controllers
 
 
 
-                //02332960826     15234126527  12962899413
+            //02332960826     15234126527  12962899413
             if (snils.Length == 11)
-                {
+            {
 
 
                 if (mo == 35)
@@ -65,7 +65,7 @@ namespace Attest.Controllers
                 else
                     serv3(id_user, id, users, snils);
             }
-           
+
             if (pvt == 0)
                 return View("ZayavEdit", db.Zayavlen.Find(id));
             else
@@ -88,17 +88,27 @@ namespace Attest.Controllers
 
                 if (nameUser != null)
                 {
-
+                    Attest.Models.Mo mo = null;
                     users = db.Users.Find(id_user);
-                    var mo = db.Mo.Where(p => p.name == nameUser.OrganizationData.Municipality).First();
+                    try
+                    {
+                        mo = db.Mo.Where(p => p.name == nameUser.OrganizationData.Municipality).First();
+                    }
+                    catch
+                    {
+                        mo = null;
+                    }
                     if (nameUser.PersonData != null)
                     {
 
                         users.FIO = nameUser.PersonData.FirstName + " " + nameUser.PersonData.MiddleName + " " + nameUser.PersonData.LastName;
 
-
-                        //  users.mo = mo.Id;
-
+                        try
+                        {
+                            users.mo = mo.Id;
+                        }
+                        catch
+                        { }
 
                     }
                     // List<Obrazovan> obr = db.Obrazovan.Where(p => p.id_zayavl == id);
@@ -110,9 +120,12 @@ namespace Attest.Controllers
                     if (nameUser.MainPosition != null)
                     {
                         zayav.data_last_att = nameUser.MainPosition.AttestDate != null ? Convert.ToDateTime(nameUser.MainPosition.AttestDate) : DateTime.MinValue;
-
-                        zayav.mo = mo.Id;
-
+                        try
+                        {
+                            zayav.mo = mo.Id;
+                        }
+                        catch
+                        { }
 
                         zayav.dolgnost_imeyu = nameUser.MainPosition.Position;
                         zayav.kategor = nameUser.MainPosition.Category;
@@ -125,6 +138,7 @@ namespace Attest.Controllers
                         //  db.Zayavlen.Update(zayav).;
 
                     }
+                    zayav.data_obnovl = DateTime.Now;
                     db.SaveChanges();
                     var obr = db.Obrazovan.Where(w => w.id_zayavl == id);
 
@@ -399,7 +413,10 @@ namespace Attest.Controllers
                     ViewBag.Nauch = db.Naucn_deyat.Where(p => p.id_zayavl == id).ToList();
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                var exx = ex.Message;
+            }
 
         }
 
@@ -414,14 +431,27 @@ namespace Attest.Controllers
 
                 if (nameUser != null)
                 {
-
+                    Attest.Models.Mo mo = null;
                     users = db.Users.Find(id_user);
-                    var mo = db.Mo.Where(p => p.name == nameUser.OrganizationData.Municipality).First();
+                    try
+                    {
+                        mo = db.Mo.Where(p => p.name == nameUser.OrganizationData.Municipality).First();
+                    }
+                    catch
+                    {
+                        mo = null;
+                    }
                     if (nameUser.PersonData != null)
                     {
 
                         users.FIO = nameUser.PersonData.FirstName + " " + nameUser.PersonData.MiddleName + " " + nameUser.PersonData.LastName;
 
+                        try
+                        {
+                            users.mo = mo.Id;
+                        }
+                        catch
+                        { }
 
                         //  users.mo = mo.Id;
 
@@ -437,7 +467,12 @@ namespace Attest.Controllers
                     {
                         zayav.data_last_att = nameUser.MainPosition.AttestDate != null ? Convert.ToDateTime(nameUser.MainPosition.AttestDate) : DateTime.MinValue;
 
-                        zayav.mo = mo.Id;
+                        try
+                        {
+                            zayav.mo = mo.Id;
+                        }
+                        catch
+                        { }
 
 
                         zayav.dolgnost_imeyu = nameUser.MainPosition.Position;
@@ -451,6 +486,7 @@ namespace Attest.Controllers
                         //  db.Zayavlen.Update(zayav).;
 
                     }
+                    zayav.data_obnovl = DateTime.Now;
                     db.SaveChanges();
                     var obr = db.Obrazovan.Where(w => w.id_zayavl == id);
 
@@ -729,7 +765,7 @@ namespace Attest.Controllers
 
         }
 
-        private async void serv1(int id_user,int id,Users users, string snils)
+        private async void serv1(int id_user, int id, Users users, string snils)
         {
             var client = new server1.StaffPortfolioServiceClient();
             try
@@ -740,16 +776,29 @@ namespace Attest.Controllers
 
                 if (nameUser != null)
                 {
-
+                    Attest.Models.Mo mo = null;
                     users = db.Users.Find(id_user);
-                    var mo = db.Mo.Where(p => p.name == nameUser.OrganizationData.Municipality).First();
+                    try
+                    {
+                        mo = db.Mo.Where(p => p.name == nameUser.OrganizationData.Municipality).First();
+                    }
+                    catch
+                    {
+                        mo = null;
+                    }
                     if (nameUser.PersonData != null)
                     {
 
                         users.FIO = nameUser.PersonData.FirstName + " " + nameUser.PersonData.MiddleName + " " + nameUser.PersonData.LastName;
 
+                        try
+                        {
+                            users.mo = mo.Id;
+                        }
+                        catch
+                        {
+                        }
 
-                        //  users.mo = mo.Id;
 
 
                     }
@@ -763,7 +812,12 @@ namespace Attest.Controllers
                     {
                         zayav.data_last_att = nameUser.MainPosition.AttestDate != null ? Convert.ToDateTime(nameUser.MainPosition.AttestDate) : DateTime.MinValue;
 
-                        zayav.mo = mo.Id;
+                        try
+                        {
+                            zayav.mo = mo.Id;
+                        }
+                        catch
+                        { }
 
 
                         zayav.dolgnost_imeyu = nameUser.MainPosition.Position;
@@ -777,6 +831,7 @@ namespace Attest.Controllers
                         //  db.Zayavlen.Update(zayav).;
 
                     }
+                    zayav.data_obnovl = DateTime.Now;
                     db.SaveChanges();
                     var obr = db.Obrazovan.Where(w => w.id_zayavl == id);
 
@@ -1170,8 +1225,8 @@ namespace Attest.Controllers
 
 
             }
-
-            return View();
+            return RedirectToAction(compositeModel.Zayavlen.Id.ToString(), "edit");
+            //return View();
         }
         public IActionResult Creat()
         {
@@ -1183,8 +1238,11 @@ namespace Attest.Controllers
             zayav.id_user = user.Id;
 
             zayav.data_obnovl = DateTime.Now;
-            zayav.data_podachi = DateTime.Now;
-            zayav.status = "Заявление на рассмотрении";
+            if (zayav.data_podachi == Convert.ToDateTime("01.01.0001 0:00:00"))
+            {
+                zayav.data_podachi = DateTime.Now;
+            }
+            zayav.status = "Заявление созданно, заполните обязательные поля";
 
             db.Entry(zayav).State = Microsoft.EntityFrameworkCore.EntityState.Added;
             db.SaveChanges();
@@ -1204,6 +1262,7 @@ namespace Attest.Controllers
         public IActionResult Edit(int id, Users users)
         {
             db.Entry(users).State = EntityState.Modified;
+
             db.SaveChanges();
             return RedirectToAction("User");
         }
@@ -1274,7 +1333,8 @@ namespace Attest.Controllers
             }
             catch { }
 
-
+            db.Zayavlen.Find(compositeModel.Zayavlen.Id).data_obnovl = DateTime.Now;
+            db.Zayavlen.Find(compositeModel.Zayavlen.Id).status = "Заявление на рассмотрении";
             /*db.Entry(compositeModel.Nauch_Deyat).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
            db.Entry(compositeModel.Obrazovan).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
            db.Entry(compositeModel.ProfRazvModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;*/
@@ -1292,7 +1352,7 @@ namespace Attest.Controllers
 
             db.SaveChanges();
 
-            return RedirectToAction("Lk", "Lk");
+            return RedirectToAction(compositeModel.Zayavlen.Id.ToString(), "edit");
         }
         public IActionResult Save_VV(CompositeModel compositeModel)
         {
@@ -1304,7 +1364,7 @@ namespace Attest.Controllers
 
             db.SaveChanges();
 
-            return RedirectToAction("Lk", "Lk");
+            return RedirectToAction(compositeModel.Zayavlen.Id.ToString(), "edit");
         }
         public IActionResult Save_Kurs(CompositeModel compositeModel)
         {
@@ -1316,7 +1376,7 @@ namespace Attest.Controllers
 
             db.SaveChanges();
 
-            return RedirectToAction("Lk", "Lk");
+            return RedirectToAction(compositeModel.Zayavlen.Id.ToString(), "edit");
         }
         public IActionResult Save_Nauch(CompositeModel compositeModel)
         {
@@ -1328,7 +1388,7 @@ namespace Attest.Controllers
 
             db.SaveChanges();
 
-            return RedirectToAction("Lk", "Lk");
+            return RedirectToAction(compositeModel.Zayavlen.Id.ToString(), "edit");
         }
 
         public IActionResult Save_Obr(CompositeModel compositeModel)
@@ -1341,7 +1401,51 @@ namespace Attest.Controllers
 
             db.SaveChanges();
 
-            return RedirectToAction("Lk", "Lk");
+            return RedirectToAction(compositeModel.Zayavlen.Id.ToString(), "edit");
+        }
+
+        public async Task<IActionResult> Del_Obr(CompositeModel compositeModel)
+        {
+            var product = db.Obrazovan.Find(compositeModel.Obrazovan.Id);
+            if (product != null)
+            {
+                db.Obrazovan.Remove(product);
+                await db.SaveChangesAsync();
+            }
+            return RedirectToAction(compositeModel.Zayavlen.Id.ToString(), "edit");
+        }
+
+        public async Task<IActionResult> Del_File(CompositeModel compositeModel)
+        {
+            var product = db.File.Find(compositeModel.FileModel.Id);
+            if (product != null)
+            {
+                db.File.Remove(product);
+                await db.SaveChangesAsync();
+            }
+            return RedirectToAction(compositeModel.Zayavlen.Id.ToString(), "edit");
+        }
+
+        public async Task<IActionResult> Del_Nauch(CompositeModel compositeModel)
+        {
+            var product = db.Naucn_deyat.Find(compositeModel.Nauch_Deyat.Id);
+            if (product != null)
+            {
+                db.Naucn_deyat.Remove(product);
+                await db.SaveChangesAsync();
+            }
+            return RedirectToAction(compositeModel.Zayavlen.Id.ToString(), "edit");
+        }
+
+        public async Task<IActionResult> Del_Prof(CompositeModel compositeModel)
+        {
+            var product = db.ProfRazv.Find(compositeModel.ProfRazv.Id);
+            if (product != null)
+            {
+                db.ProfRazv.Remove(product);
+                await db.SaveChangesAsync();
+            }
+            return RedirectToAction(compositeModel.Zayavlen.Id.ToString(), "edit");
         }
     }
 }

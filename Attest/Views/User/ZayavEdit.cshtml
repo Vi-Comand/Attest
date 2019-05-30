@@ -261,9 +261,17 @@
                                 <input type="text" asp-for="Zayavlen.data_last_att" id="date" required>
                                 <script>
 
+
                                     $(function () {
+
                                         $('#date').daterangepicker({
                                             singleDatePicker: true,
+                                            showDropdowns: true,
+                                            minYear: 1980,
+
+                                            "autoApply": true,
+                                            "applyLabel": "Выбрать",
+                                            "cancelLabel": "Отменить",
                                             locale: {
                                                 format: 'DD.MM.YYYY',
                                                 "firstDay": 1
@@ -316,7 +324,7 @@
                         Образование
                     </a>
 
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; font:28pt;" data-toggle="modal" data-target="#obr" form="0"><strong>+</strong></button>
+                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#obr" form="0"><strong>+</strong></button>
                 </h4>
 
             </div>
@@ -327,7 +335,11 @@
                         {
                             @if (row.tip_obr == 1)
                             {
-                                <li><a href="#Obr_@row.Id" data-toggle="tab">@row.oo</a></li>
+
+                                <li>
+                                    <a href="#Obr_@row.Id" style="float: left; " data-toggle="tab">@row.oo</a>
+                                    <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del" value="@row.Id" form="0"><strong>Х</strong></button>
+                                </li>
                             }
                         }
                     </ul>
@@ -348,7 +360,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Периодобучения</td>
+                                            <td>Период обучения</td>
                                             <td>
                                                 <input type="text" asp-for="listObrazovan[i].period" value="@Model.listObrazovan[i].period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
                                             </td>
@@ -415,15 +427,23 @@
                                             <td>
                                                 <input type="text" id="d_v_o_@i" asp-for="listObrazovan[i].data_doc" />
                                                 <script>
-                                                        $(function () {
-                                                            $('#d_v_o_@i').daterangepicker({
-                                                                singleDatePicker: true,
-                                                                locale: {
-                                                                    format: 'DD.MM.YYYY',
-                                                                    "firstDay": 1
-                                                                }
-                                                            });
+
+
+                                                    $(function () {
+                                                        $('#d_v_o_@i').daterangepicker({
+                                                            singleDatePicker: true,
+                                                            showDropdowns: true,
+                                                            minYear: 1970,
+
+                                                            "autoApply": true,
+                                                            "applyLabel": "Выбрать",
+                                                            "cancelLabel": "Отменить",
+                                                            locale: {
+                                                                format: 'DD.MM.YYYY',
+                                                                "firstDay": 1
+                                                            }
                                                         });
+                                                    });
                                                 </script>
                                             </td>
                                         </tr>
@@ -455,7 +475,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                         Курсы повышения квалификации
                     </a>
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; font:28pt;" data-toggle="modal" data-target="#kurs" form="0"><strong>+</strong></button>
+                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#kurs" form="0"><strong>+</strong></button>
                 </h4>
             </div>
             <div id="collapseThree" class="panel-collapse collapse">
@@ -465,8 +485,10 @@
                         {
                             @if (row.tip_obr == 2)
                             {
-                                <li><a href="#Kurs_@row.Id" data-toggle="tab">ОО @row.oo</a></li>
-
+                                <li>
+                                    <a href="#Kurs_@row.Id" style="float: left; " data-toggle="tab">@row.oo</a>
+                                    <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del" value="@row.Id" form="0"><strong>Х</strong></button>
+                                </li>
                             }
                         }
                     </ul>
@@ -492,23 +514,28 @@
                                             <td>Периодобучения</td>
                                             <td>
 
-                                                <input type="text" name="daterange_@i" asp-for="listObrazovan[i].period" />
+                                                <input type="text" id="daterange_@i" asp-for="listObrazovan[i].period" />
 
 
                                                 <script>
 
-                                                        $(function () {
-                                                            $('input[name="daterange_@i"]').daterangepicker({
-                                                                opens: 'left',
-                                                                locale: {
-                                                                    "format": "DD.MM.YYYY",
-                                                                    "autoApply": true,
-                                                                    "applyLabel": "Выбрать",
-                                                                    "cancelLabel": "Отменить",
-                                                                    "firstDay": 1
-                                                                }
-                                                            });
+                                                    $(function () {
+                                                        $('#daterange_@i').daterangepicker({
+                                                            "showDropdowns": true,
+                                                            "minYear": 1970,
+
+                                                            "locale": {
+                                                                "format": "DD.MM.YYYY",
+                                                                "separator": " - ",
+                                                                "applyLabel": "Выбрать",
+                                                                "cancelLabel": "Отменить",
+
+                                                                "firstDay": 1
+                                                            },
+
                                                         });
+                                                    });
+
                                                 </script>
                                             </td>
                                         </tr>
@@ -570,15 +597,21 @@
                                                 <input type="text" id="d_v_k_@i" asp-for="listObrazovan[i].data_doc" />
                                                 <script>
 
-                                                        $(function () {
-                                                            $('#d_v_k_@i').daterangepicker({
-                                                                singleDatePicker: true,
-                                                                locale: {
-                                                                    format: 'DD.MM.YYYY',
-                                                                    "firstDay": 1
-                                                                }
-                                                            });
+                                                    $(function () {
+                                                        $('#d_v_k_@i').daterangepicker({
+                                                            singleDatePicker: true,
+                                                            showDropdowns: true,
+                                                            minYear: 1970,
+
+                                                            "autoApply": true,
+                                                            "applyLabel": "Выбрать",
+                                                            "cancelLabel": "Отменить",
+                                                            locale: {
+                                                                format: 'DD.MM.YYYY',
+                                                                "firstDay": 1
+                                                            }
                                                         });
+                                                    });
                                                 </script>
                                             </td>
                                         </tr>
@@ -604,7 +637,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
                         Второе высшее образование и профессиональная переподготовка
                     </a>
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; font:28pt;" data-toggle="modal" data-target="#Vtor" form="0"><strong>+</strong></button>
+                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#Vtor" form="0"><strong>+</strong></button>
                 </h4>
             </div>
             <div id="collapse4" class="panel-collapse collapse">
@@ -614,8 +647,11 @@
                         {
                             @if (row.tip_obr == 3)
                             {
-                                <li><a href="#Vtor_@row.Id" data-toggle="tab">Второе высшее №@row.Id</a></li>
 
+                                <li>
+                                    <a href="#Vtor_@row.Id" style="float: left; " data-toggle="tab">@row.oo</a>
+                                    <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del" value="@row.Id" form="0"><strong>Х</strong></button>
+                                </li>
                             }
                         }
                     </ul>
@@ -697,15 +733,21 @@
                                                 <input type="text" id="d_v_vw_@i" asp-for="listObrazovan[i].data_doc" />
                                                 <script>
 
-                                                        $(function () {
-                                                            $('#d_v_vw_@i').daterangepicker({
-                                                                singleDatePicker: true,
-                                                                locale: {
-                                                                    format: 'DD.MM.YYYY',
-                                                                    "firstDay": 1
-                                                                }
-                                                            });
+                                                    $(function () {
+                                                        $('#d_v_vw_@i').daterangepicker({
+                                                            singleDatePicker: true,
+                                                            showDropdowns: true,
+                                                            minYear: 1970,
+
+                                                            "autoApply": true,
+                                                            "applyLabel": "Выбрать",
+                                                            "cancelLabel": "Отменить",
+                                                            locale: {
+                                                                format: 'DD.MM.YYYY',
+                                                                "firstDay": 1
+                                                            }
                                                         });
+                                                    });
                                                 </script>
                                             </td>
                                         </tr>
@@ -732,7 +774,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
                         Файлы
                     </a>
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; font:28pt;" data-toggle="modal" data-target="#File" form="0"><strong>+</strong></button>
+                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#File" form="0"><strong>+</strong></button>
                 </h4>
             </div>
             <div id="collapse5" class="panel-collapse collapse in">
@@ -766,7 +808,7 @@
 
                         <script>
 
-                                kateg.push('@row.kategor_f');
+                            kateg.push('@row.kategor_f');
 
                         </script>
 
@@ -783,7 +825,11 @@
                     <ul class="nav nav-tabs">
                         @foreach (var row in Model.listFile)
                         {
-                            <li><a href="#file_@row.Id" data-toggle="tab">Файл  @row.name_f</a></li>
+                            <li>
+                                <a href="#file_@row.Id" style="float: left; " data-toggle="tab">Файл  @row.name_f</a>
+                                <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del_file" value="@row.Id" form="0"><strong>Х</strong></button>
+                            </li>
+
 
 
                         }
@@ -830,7 +876,7 @@
                                                 //  alert(kateg.length);
 
                                                 for (var m = 0; m < kateg.length; m++) {
-                                                    $('select option[value="' + kateg[m] + '"]').hide()
+                                                    $('select option[value="' + kateg[m] + '"]').hide();
                                                     //   alert(kateg[m]);
                                                 }
 
@@ -851,7 +897,7 @@
                                         var select = document.getElementById("listFile_" + ss + "__kategor_f");
                                         var val = select.value;
                                         kateg1.push(val);
-                                        $('select option[value="' + kateg1[ss] + '"]').hide()
+                                        $('select option[value="' + kateg1[ss] + '"]').hide();
                                     }
                                 })
                             }
@@ -869,7 +915,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
                         Научно-методическая деятельность
                     </a>
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; font:28pt;" data-toggle="modal" data-target="#Nauch" form="0"><strong>+</strong></button>
+                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#Nauch" form="0"><strong>+</strong></button>
                 </h4>
             </div>
             <div id="collapse6" class="panel-collapse collapse in">
@@ -877,8 +923,11 @@
                     <ul class="nav nav-tabs">
                         @foreach (var row in Model.listNauch_deyat)
                         {
-                            <li><a href="#nauch_@row.Id" data-toggle="tab">Работа  @row.nazv</a></li>
 
+                            <li>
+                                <a href="#nauch_@row.Id" style="float: left; " data-toggle="tab">@row.nazv</a>
+                                <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del_Nauch" value="@row.Id" form="0"><strong>Х</strong></button>
+                            </li>
 
                         }
                     </ul>
@@ -903,7 +952,7 @@
                                     <tr>
                                         <td>Название работы</td>
                                         <td>
-                                            <input type="text" asp-for="listNauch_deyat[i].nazv" />
+                                            <input type="text" asp-for="listNauch_deyat[i].nazv" required />
                                         </td>
                                     </tr>
                                     <tr>
@@ -951,7 +1000,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">
                         Профессиональное научное развитие
                     </a>
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; font:28pt;" data-toggle="modal" data-target="#Prof" form="0"><strong>+</strong></button>
+                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#Prof" form="0"><strong>+</strong></button>
                 </h4>
             </div>
             <div id="collapse7" class="panel-collapse collapse in">
@@ -959,8 +1008,10 @@
                     <ul class="nav nav-tabs">
                         @foreach (var row in Model.listProfRazv)
                         {
-                            <li><a href="#prof_@row.Id" data-toggle="tab">Проф  @row.nazv_doc</a></li>
-
+                            <li>
+                                <a href="#prof_@row.Id" style="float: left; " data-toggle="tab">Звание  @row.uch_zvanie</a>
+                                <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del_Prof" value="@row.Id" form="0"><strong>Х</strong></button>
+                            </li>
 
                         }
                     </ul>
@@ -985,7 +1036,7 @@
                                     <tr>
                                         <td>Ученое звание</td>
                                         <td>
-                                            <input type="text" asp-for="listProfRazv[i].uch_zvanie" />
+                                            <input type="text" asp-for="listProfRazv[i].uch_zvanie" required />
                                         </td>
                                     </tr>
                                     <tr>
@@ -998,7 +1049,7 @@
                                         <td>Название документа</td>
                                         <td>
                                             <select asp-for="listProfRazv[i].nazv_doc">
-                                                <option value="?" selected="selected"></option>
+                                                <option value="?" label="Выберите документ" selected="selected"></option>
                                                 <option label="Удостоверение сданных экзаменов" value="ExamCertificate">Удостоверение сданных экзаменов</option>
                                                 <option label="Справка об обучении в аспирантуре" value="PostgraduateCertificate">Справка об обучении в аспирантуре</option>
                                                 <option label="Диплом" value="Diploma">Диплом</option>
@@ -1029,17 +1080,23 @@
                                             <input type="text" id="d_v_rw_@i" asp-for="listProfRazv[i].data_vid_d" />
                                             <script>
 
-                                                    $(function () {
-                                                        /**/
-                                                        $('#d_v_rw_@i').daterangepicker({
+                                                $(function () {
+                                                    /**/
+                                                    $('#d_v_rw_@i').daterangepicker({
 
-                                                            singleDatePicker: true,
-                                                            locale: {
-                                                                format: 'DD.MM.YYYY',
-                                                                "firstDay": 1
-                                                            }
-                                                        });
+                                                        singleDatePicker: true,
+                                                        showDropdowns: true,
+                                                        minYear: 1970,
+
+                                                        "autoApply": true,
+                                                        "applyLabel": "Выбрать",
+                                                        "cancelLabel": "Отменить",
+                                                        locale: {
+                                                            format: 'DD.MM.YYYY',
+                                                            "firstDay": 1
+                                                        }
                                                     });
+                                                });
                                             </script>
                                         </td>
                                     </tr>
@@ -1123,7 +1180,7 @@
 
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
-                <form asp-action="AddObr1" asp-controller="User" method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" asp-for="Zayavlen.Id" />
                         <table>
@@ -1182,9 +1239,14 @@
                                 <td>
                                     <input type="text" id="md_v_o" value="" asp-for="Obrazovan.data_doc" />
                                     <script>
+
                                         $(function () {
                                             $('#md_v_o').daterangepicker({
                                                 singleDatePicker: true,
+                                                showDropdowns: true,
+                                                minYear: 1970,
+
+                                                autoApply: true,
                                                 locale: {
                                                     format: 'DD.MM.YYYY',
                                                     "firstDay": 1
@@ -1222,7 +1284,7 @@
 
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
-                <form asp-action="AddKurs1" asp-controller="User" method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" asp-for="Zayavlen.Id" />
                         <table>
@@ -1236,17 +1298,20 @@
                                 <td>Периодобучения</td>
                                 <td>
 
-                                    <input type="text" name="mdaterange" asp-for="Obrazovan.period" />
+                                    <input type="text" id="mdaterange" asp-for="Obrazovan.period" />
 
 
                                     <script>
 
                                         $(function () {
-                                            $('input[name="mdaterange"]').daterangepicker({
+                                            $('#mdaterange').daterangepicker({
                                                 opens: 'left',
+                                                showDropdowns: true,
+                                                minYear: 1970,
+
+
                                                 locale: {
                                                     "format": "DD.MM.YYYY",
-                                                    "autoApply": true,
                                                     "applyLabel": "Выбрать",
                                                     "cancelLabel": "Отменить",
                                                     "firstDay": 1
@@ -1315,6 +1380,11 @@
                                         $(function () {
                                             $('#md_v_k').daterangepicker({
                                                 singleDatePicker: true,
+                                                showDropdowns: true,
+                                                minYear: 1970,
+
+                                                "autoApply": true,
+
                                                 locale: {
                                                     format: 'DD.MM.YYYY',
                                                     "firstDay": 1
@@ -1354,7 +1424,7 @@
 
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
-                <form asp-action="AddVtor1" asp-controller="User" method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" asp-for="Zayavlen.Id" />
                         <table>
@@ -1365,7 +1435,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Периодобучения</td>
+                                <td>Период обучения</td>
                                 <td>
                                     <input type="text" asp-for="Obrazovan.period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
                                 </td>
@@ -1428,6 +1498,11 @@
                                         $(function () {
                                             $('#md_v_vw_').daterangepicker({
                                                 singleDatePicker: true,
+                                                showDropdowns: true,
+                                                minYear: 1970,
+
+                                                "autoApply": true,
+
                                                 locale: {
                                                     format: 'DD.MM.YYYY',
                                                     "firstDay": 1
@@ -1466,7 +1541,7 @@
 
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
-                <form asp-action="AddVtor1" asp-controller="User" method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" asp-for="Zayavlen.Id" />
                         <table>
@@ -1535,7 +1610,7 @@
 
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
-                <form asp-action="AddVtor2" asp-controller="User" method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" asp-for="Zayavlen.Id" />
                         <table>
@@ -1598,6 +1673,11 @@
                                             $('#md_v_rw_').daterangepicker({
 
                                                 singleDatePicker: true,
+                                                showDropdowns: true,
+                                                minYear: 1970,
+
+                                                "autoApply": true,
+
                                                 locale: {
                                                     format: 'DD.MM.YYYY',
                                                     "firstDay": 1
@@ -1618,6 +1698,13 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
 
 
     <!-- Modal file-->
@@ -1695,6 +1782,149 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Modal del_obr -->
+    <div class="modal fade bs-example-modal-sm" id="Del" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Выдействительно хотите удалить запись?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <form asp-action="Del_Obr" asp-controller="User" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="Zayavlen.Id" />
+                        <input type="hidden" class="result" asp-for="Obrazovan.Id" />
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" style="background-color: #ffb4bb; box-shadow: inset 0 0 0 3px #ff0000" class="" asp-controller="User" asp-route-id="#obr_del" asp-action="Del_Obr">Удалить запись</button>
+                    </div>
+                </form>
+                <script>
+                    window.addEventListener("DOMContentLoaded", function () {
+                        var but = document.querySelectorAll(".button_del"),
+                            res = document.querySelector(".result");
+                        [].forEach.call(but, function (item) {
+                            item.addEventListener("click", function () {
+                                res.value = item.value
+                            })
+                        })
+                    });
+                </script>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del_file -->
+    <div class="modal fade bs-example-modal-sm" id="Del_file" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Выдействительно хотите удалить файл?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <form asp-action="Del_Obr" asp-controller="User" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="Zayavlen.Id" />
+                        <input type="text" class="result_file" asp-for="FileModel.Id" />
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" style="background-color: #ffb4bb; box-shadow: inset 0 0 0 3px #ff0000" class="" asp-controller="User" asp-action="Del_File">Удалить файл</button>
+                    </div>
+                </form>
+                <script>
+                    window.addEventListener("DOMContentLoaded", function () {
+                        var but = document.querySelectorAll(".button_del"),
+                            res = document.querySelector(".result_file");
+                        [].forEach.call(but, function (item) {
+                            item.addEventListener("click", function () {
+                                res.value = item.value;
+                            })
+                        })
+                    });
+                </script>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal del_nauch -->
+    <div class="modal fade bs-example-modal-sm" id="Del_Nauch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Выдействительно хотите удалить запись?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <form asp-action="Del_Obr" asp-controller="User" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="Zayavlen.Id" />
+                        <input type="text" class="result_nauch" asp-for="Nauch_Deyat.Id" />
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" style="background-color: #ffb4bb; box-shadow: inset 0 0 0 3px #ff0000" class="" asp-controller="User" asp-action="Del_Nauch">Удалить запись</button>
+                    </div>
+                </form>
+                <script>
+                    window.addEventListener("DOMContentLoaded", function () {
+                        var but = document.querySelectorAll(".button_del"),
+                            res = document.querySelector(".result_nauch");
+                        [].forEach.call(but, function (item) {
+                            item.addEventListener("click", function () {
+                                res.value = item.value
+                            })
+                        })
+                    });
+                </script>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal del_prof -->
+    <div class="modal fade bs-example-modal-sm" id="Del_Prof" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Выдействительно хотите удалить запись?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <form asp-action="Del_Obr" asp-controller="User" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="Zayavlen.Id" />
+                        <input type="text" class="result_prof" asp-for="ProfRazv.Id" />
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" style="background-color: #ffb4bb; box-shadow: inset 0 0 0 3px #ff0000" class="" asp-controller="User" asp-action="Del_Prof">Удалить запись</button>
+                    </div>
+                </form>
+                <script>
+                    window.addEventListener("DOMContentLoaded", function () {
+                        var but = document.querySelectorAll(".button_del"),
+                            res = document.querySelector(".result_prof");
+                        [].forEach.call(but, function (item) {
+                            item.addEventListener("click", function () {
+                                res.value = item.value
+                            })
+                        })
+                    });
+                </script>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
 
 </body>
 </html>
