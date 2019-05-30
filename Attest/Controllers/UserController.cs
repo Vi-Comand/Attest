@@ -77,6 +77,39 @@ namespace Attest.Controllers
 
 
 
+        //[HttpPost]
+        //[AllowAnonymous]
+        public IActionResult AddUser(UserModel model)
+        { string status = "";
+            if (model.tip == "1")
+                status = "Дубль";
+            if (model.tip == "2")
+                status = "Ошибочное заявление";
+            if (model.tip == "3")
+                status = "Заявление подлинное";
+            saveOtvIzm(model, status);
+            // Add user model
+            return Json(status);
+        }
+    
+
+   
+
+    [HttpPost]
+        public IActionResult Status([FromBody]Users Model)
+        {
+            int i = Model.Id;
+            return PartialView("_Ciutada");
+        }
+        /* [HttpPost("/User/Status/{process}")]
+         public IActionResult ToolProcess([FromBody] ToolModel model, string process)
+         {
+             var test = model.name;
+             var result = model;
+             // to do : Add your custom code here
+             return Ok(result);
+         }*/
+
         private async void serv3(int id_user, int id, Users users, string snils)
         {
             var client = new server3.StaffPortfolioServiceClient();
@@ -1447,5 +1480,27 @@ namespace Attest.Controllers
             }
             return RedirectToAction(compositeModel.Zayavlen.Id.ToString(), "edit");
         }
+        public void saveOtvIzm(UserModel model, string status)
+        {
+
+            var zayav = db.Zayavlen.Find(Convert.ToInt32(model.id));
+            // zayav.Id = id;
+            zayav.status = status;
+
+
+            db.SaveChanges();
+        }
     }
+}
+public class ToolModel
+{
+    public ToolModel() { }
+    public string text { get; set; }
+    public string type { get; set; }
+    public string name { get; set; }
+}
+public class UserModel
+{
+    public string id { get; set; }
+    public string tip { get; set; }
 }

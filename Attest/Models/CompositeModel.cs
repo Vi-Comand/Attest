@@ -15,9 +15,11 @@ namespace Attest.Models
         public List<Obrazovan> listObrazovan { get; set; }
         public Obrazovan Obrazovan { get; set; }
         public Zayavlen Zayavlen { get; set; }
+        public List<Zayavlen> ListZayavlen { get; set; }
         public List<Nauch_deyat> listNauch_deyat { get; set; }
         public Nauch_deyat Nauch_Deyat { get; set; }
         public Users Users { get; set; }
+        public List<Users> ListUsers { get; set; }
         public ProfRazv ProfRazv { get; set; }
         public List<ProfRazv> listProfRazv { get; set; }
 

@@ -38,6 +38,7 @@ namespace Attest.Models
         public DbSet<Obrazovan> Obrazovan { get; set; }
         public DbSet<ProfRazv> ProfRazv { get; set; }
         public CompositeModel Composite { get; set; }
+      
         public object Files { get; internal set; }
     }
 }
