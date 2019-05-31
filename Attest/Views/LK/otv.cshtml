@@ -8,11 +8,11 @@
     <title>Lk-user</title>
 </head>
 <body>
-    <form method="post" id="formid"asp-controller="User" asp-action="Add">
+    <form method="post" id="formid">
 
-        <table>
+        <table id="lk">
             <tr>
-                <th>№ заявления</th>
+                <th>№</th>
                 <th>ФИО</th>
                 <th>Дата подачи</th>
                 <th>Место работы</th>
@@ -29,55 +29,38 @@
             {
 
 
-            <tr>
+                <tr>
 
-                <td> <input type="text" asp-for="ListOtvetstven[i].Id" /></td>
-                <td> <input type="text" asp-for="ListOtvetstven[i].name" /></td>
-                <td> <input type="text" asp-for="ListOtvetstven[i].data_podachi" /></td>
-                <td> <input type="text" asp-for="ListOtvetstven[i].oo" /></td>
-                <td> <input type="text" asp-for="ListOtvetstven[i].dolgnost" /></td>
-                <td> <input type="text" asp-for="ListOtvetstven[i].kategor" /></td>
+                    <td> @Model.ListOtvetstven[i].Id</td>
+                    <td> @Model.ListOtvetstven[i].name</td>
+                    <td> @Model.ListOtvetstven[i].data_podachi</td>
+                    <td> @Model.ListOtvetstven[i].oo</td>
+                    <td> @Model.ListOtvetstven[i].dolgnost</td>
+                    <td> @Model.ListOtvetstven[i].kategor</td>
+                    <td>
+                        @if (Model.ListOtvetstven[i].file != "")
+                        {
+                            @Html.ActionLink("Скачать", "file", "user", new { name_f = Model.ListOtvetstven[i].file, id = Model.ListOtvetstven[i].Id })
+                        }
+                    </td>
 
-                <td>
-                    @if (Model.ListOtvetstven[i].file != "")
-                    {
-                        @Html.ActionLink("Скачать", "file", "user", new { name_f = Model.ListOtvetstven[i].file, id = Model.ListOtvetstven[i].Id })
-                    }
-                </td>
-
-                <td> <input type="text" asp-for="ListOtvetstven[i].status" id="status_@Model.ListOtvetstven[i].Id" /></td>
-                <td> <input type="button" value="Дубль" id="@Model.ListOtvetstven[i].Id" /><input type="button" value="Ошибочное"  id="@Model.ListOtvetstven[i].Id"/><input type="button" value="Подлинное"  id="@Model.ListOtvetstven[i].Id"/></td>
-            </tr>
+                    <td id="status_@Model.ListOtvetstven[i].Id">@Model.ListOtvetstven[i].status</td>
+                    <td>
+                        <input type="image" value="Дубль" id="@Model.ListOtvetstven[i].Id" src="~/assets/icon/icons8-dubl.png" style="vertical-align:middle" /><input type="image" src="~/assets/icon/icons8-oshib.png" value="Ошибочное" id="@Model.ListOtvetstven[i].Id" /><input type="image" src="~/assets/icon/icons8-podl.png" value="Подлинное" id="@Model.ListOtvetstven[i].Id" />
+                    </td>
+                </tr>
             }
-                </table>
+        </table>
 
     </form>
-    <h2>Список пользователей</h2>
-    <form name="userForm">
-        <input type="hidden" name="id" value="0" />
-        <div class="form-group">
-            <label for="name">Имя:</label>
-            <input class="form-control" name="name" />
-        </div>
-        <div class="form-group">
-            <label for="age">Возраст:</label>
-            <input class="form-control" name="age" />
-        </div>
-        <div class="panel-body">
-            <button type="submit" class="btn btn-sm btn-primary">Сохранить</button>
-            <a id="reset" class="btn btn-sm btn-primary">Сбросить</a>
-        </div>
-    </form>
-    <table class="table table-condensed table-striped table-bordered">
-        <thead><tr><th>Id</th><th>Имя</th><th>возраст</th><th></th></tr></thead>
-        <tbody></tbody>
-    </table>
+
 
     <script>
         // Получение всех пользователей
 
         $(document).ready(function () {
-            alert('Ваша версия jQuery ' + jQuery.fn.jquery);
+            // alert('Ваша версия jQuery ' + jQuery.fn.jquery);
+            raskras();
         });
 
 
@@ -85,7 +68,7 @@
 
             var collId = $(this).attr('id');
 
-       
+
 
 
 
@@ -100,45 +83,46 @@
                 dataType: "json",
                 data: UserModel,
                 success: function (status) {
-                    $('#status_' + collId).val(status);
-
+                    $('#status_' + collId).text(status);
+                    raskras();
                 }
             });
 
         });
-      
-            $('#formid [value="Ошибочное"]').click(function GetUsers() {
 
-                var collId = $(this).attr('id');
+        $('#formid [value="Ошибочное"]').click(function GetUsers() {
 
-              
+            var collId = $(this).attr('id');
+
+
             //    alert("1"."gdfg");
 
 
-                var UserModel =
-                {
-                    id: collId,
-                    tip: "2"
-                };
-                $.ajax({
-                    url: '/User/AddUser/',
-                    type: "POST",
-                    dataType: "json",
-                    data: UserModel,
-                    success: function (status) {
-                                           
-                        $('#status_' + collId).val(status);
-                    }
-                });
+            var UserModel =
+            {
+                id: collId,
+                tip: "2"
+            };
+            $.ajax({
+                url: '/User/AddUser/',
+                type: "POST",
+                dataType: "json",
+                data: UserModel,
+                success: function (status) {
 
-
+                    $('#status_' + collId).text(status);
+                    raskras();
+                }
             });
+
+
+        });
 
         $('#formid [value="Подлинное"]').click(function GetUsers() {
 
             var collId = $(this).attr('id');
 
-     
+
 
 
 
@@ -153,14 +137,50 @@
                 dataType: "json",
                 data: UserModel,
                 success: function (status) {
-                    $('#status_' + collId).val(status);
+                    $('#status_' + collId).text(status);
+                    raskras();
                 }
             });
 
 
         });
+
         // загрузка пользователей
-        GetUsers();
+        //GetUsers();
+
+        var VAL = "Заявление на рассмотрении";
+        var VAL2 = "Дубль";
+        var VAL3 = "Ошибочное заявление";
+        var VAL4 = "Отказано АК в приеме заявления";
+        var VAL5 = "Заявление подлинное";
+
+        var raskras = (function () {
+            $("#lk tr").each(function () {
+
+                var textValue = window.$(this).closest('tr').find('td:eq(7)').text();
+                // alert(textValue);
+                if (textValue == VAL) {
+                    // add css class or any manipulation to your dom.
+                    window.$(this).closest('tr').find('td').css('background-color', 'rgba(91, 243, 145, 0.15)');
+                }
+                if (textValue == VAL2) {
+                    // add css class or any manipulation to your dom.
+                    window.$(this).closest('tr').find('td').css('background-color', 'rgba(255, 0, 0, 0.24)');
+                }
+                if (textValue == VAL3) {
+                    // add css class or any manipulation to your dom.
+                    window.$(this).closest('tr').find('td').css('background-color', 'rgba(255, 0, 0, 0.24)');
+                }
+                if (textValue == VAL4) {
+                    // add css class or any manipulation to your dom.
+                    window.$(this).closest('tr').find('td').css('background-color', 'rgba(255, 0, 0, 0.24)');
+                }
+                if (textValue == VAL5) {
+                    // add css class or any manipulation to your dom.
+                    window.$(this).closest('tr').find('td').css('background-color', 'rgba(24, 239, 24, 0.36)');
+                }
+            });
+        });
 
     </script>
 </body>
