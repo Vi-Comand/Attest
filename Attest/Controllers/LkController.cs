@@ -20,80 +20,89 @@ namespace Attest.Controllers
 
             var Email = HttpContext.User.Identity.Name;
             Users user = db.Users.Where(p => p.Email == Email).First();
-            
+
             //CompositeModel compositeModel=new CompositeModel(db);
 
-
-            if (user.role == "1")
+            try
             {
-                ViewBag.LK = db.Zayavlen.Where(p => p.id_user == user.Id).OrderByDescending(p => p.data_podachi).ToList();
+                if (user.role == "1")
+                {
+                    ViewBag.LK = db.Zayavlen.Where(p => p.id_user == user.Id).OrderByDescending(p => p.data_podachi)
+                        .ToList();
 
-                return View("user");
+                    return View("user");
+                }
+
+                if (user.role == "2")
+                {
+
+
+
+
+                    var listotv = new ListOtv();
+                    listotv.ListOtvetstven = (from zaya in db.Zayavlen.Where(p => p.mo == user.mo)
+                                              join usr in db.Users on zaya.id_user equals usr.Id
+                                              join fl in db.File.Where(p => p.kategor_f == "PrevAttestCopy") on zaya.Id equals fl.id_zayavl
+                                                  into gj
+                                              from x in gj.DefaultIfEmpty()
+                                              select new Otvetstven
+                                              {
+                                                  Id = zaya.Id,
+                                                  name = usr.FIO,
+                                                  data_podachi = zaya.data_podachi,
+                                                  oo = zaya.oo,
+                                                  dolgnost = zaya.dolgnost_att,
+                                                  kategor = zaya.kategor,
+                                                  file = (x == null ? String.Empty : x.name_f),
+                                                  status = zaya.status
+                                              }).ToList();
+                    return View("otv", listotv);
+
+
+
+
+
+                }
+
+
+
+
+                if (user.role == "3")
+                {
+
+
+
+
+                    var listotv = new ListOtv();
+                    listotv.ListOtvetstven =
+                        (from zaya in db.Zayavlen.Where(p => p.spec == user.Id && p.status == "Заявление подлинное")
+                         join usr in db.Users on zaya.id_user equals usr.Id
+                         select new Otvetstven
+                         {
+                             Id = zaya.Id,
+                             name = usr.FIO,
+                             data_podachi = zaya.data_podachi,
+                             oo = zaya.oo,
+                             dolgnost = zaya.dolgnost_att,
+                             kategor = zaya.kategor,
+                             ball = zaya.ball
+                         }).ToList();
+                    return View("spec", listotv);
+
+
+
+
+
+
+                }
             }
-            if (user.role == "2")
+            catch
             {
 
-           
-           
-          
-           var listotv=new ListOtv();
-                listotv.ListOtvetstven = (from zaya in db.Zayavlen.Where(p => p.mo == user.mo)
-                                          join usr in db.Users on zaya.id_user equals usr.Id
-                                           join fl in db.File.Where(p => p.kategor_f == "PrevAttestCopy") on zaya.Id equals fl.id_zayavl 
-                                       into gj
-                                          from x in gj.DefaultIfEmpty() 
-                                          select new Otvetstven
-                                          {
-                                              Id = zaya.Id,
-                                              name = usr.FIO,
-                                              data_podachi = zaya.data_podachi,
-                                              oo = zaya.oo,
-                                              dolgnost=zaya.dolgnost_att,
-                                              kategor=zaya.kategor,
-                                             file=(x==null? String.Empty:x.name_f),
-                                             status=zaya.status
-                           }).ToList();
-                return View("otv", listotv);
-
-
-
-
-            
             }
-
-
-
-
-            if (user.role == "3")
-            {
-
-            
-
-
-                var listotv = new ListOtv();
-                listotv.ListOtvetstven = (from zaya in db.Zayavlen.Where(p => p.spec == user.Id && p.status == "Заявление подлинное")
-                                          join usr in db.Users on zaya.id_user equals usr.Id
-                                          select new Otvetstven
-                                          {
-                                              Id = zaya.Id,
-                                              name = usr.FIO,
-                                              data_podachi = zaya.data_podachi,
-                                              oo = zaya.oo,
-                                              dolgnost = zaya.dolgnost_att,
-                                              kategor = zaya.kategor,
-                                              ball = zaya.ball
-                                          }).ToList(); 
-                return View("spec", listotv);
-
-
-
-
-                return View("otv", ViewBag.users);
-            }
-
-
 
             return View("index");
+
             /* ViewBag.LK = db.Zayavlen.Where(p=>p.mo==1).ToList();
            return View("otv");*/
             /*  ViewBag.LK = db.Zayavlen.Where(p => p.spec == 1).ToList();
