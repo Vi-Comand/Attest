@@ -22,6 +22,7 @@ namespace Attest.Models
         public string dolgnost { get; set; }
         public string kategor { get; set; }
         public string file { get; set; }
-        public string status { get; internal set; }
+        public string status { get; set; }
+        public string ball { get; set; }
     }
 }

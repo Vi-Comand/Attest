@@ -1,32 +1,50 @@
-﻿@model Attest.Models.Zayavlen
-
+﻿@model Attest.Models.ListOtv
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <title>Lk-user</title>
 </head>
 <body>
-    <form method="post" asp-controller="User" asp-action="zayav">
-       
-        <table>
-            @foreach (var row in ViewBag.LK)
-            {
-            <tr>
-                <td>@row.Id</td>
-                <td>@row.dolgnost_att</td>
-                <td>@row.data_podachi</td>
-                <td>@row.data_obnovl</td>
-                <td>@row.status</td>
-                <td>@row.ball</td>
-                <td><button asp-controller="User" asp-action="Zayav" asp-route-id="@row.Id">Открыть</button></td>
+    <form method="post" id="formid" asp-controller="User" asp-action="OpenZayavProsmExp">
 
-                <td> <a asp-controller="User" asp-action="view" asp-route-id="@row.Id">View</a> |<a asp-controller="User" asp-action="edit" asp-route-id="@row.Id">Edit</a> | <a asp-controller="User" asp-action="Delete" asp-route-id="@row.Id" onclick="return confirm('Ты Серьезно ?')">Delete</a></td>
+        <table>
+            <tr>
+                <th>№ заявления</th>
+                <th>ФИО</th>
+                <th>Дата подачи</th>
+                <th>Место работы</th>
+                <th>Должность</th>
+                <th>Балл</th>
+               
+                <th colspan="2">Статус заявления</th>
+
             </tr>
+
+
+
+            @for (int i = 0; i < Model.ListOtvetstven.Count; i++)
+            {
+
+
+                <tr>
+
+                    <td> <input type="text" asp-for="ListOtvetstven[i].Id" /></td>
+                    <td> <input type="text" asp-for="ListOtvetstven[i].name" /></td>
+                    <td> <input type="text" asp-for="ListOtvetstven[i].data_podachi" /></td>
+                    <td> <input type="text" asp-for="ListOtvetstven[i].oo" /></td>
+                    <td> <input type="text" asp-for="ListOtvetstven[i].dolgnost" /></td>
+                    <td> <input type="text" asp-for="ListOtvetstven[i].kategor" /></td>
+                
+                    <td> <input type="text" asp-for="ListOtvetstven[i].ball" id="status_@Model.ListOtvetstven[i].Id" /></td>
+                    <td> <input type="submit" value="Открыть" asp-for="@Model.ListOtvetstven[i].Id" />
+                </tr>
             }
         </table>
 
     </form>
+    
 </body>
 </html>
