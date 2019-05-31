@@ -18,8 +18,7 @@
                 <th>Место работы</th>
                 <th>Должность</th>
                 <th>Балл</th>
-               
-                <th colspan="2">Статус заявления</th>
+
 
             </tr>
 
@@ -32,14 +31,13 @@
                 <tr>
 
                     <td> <input type="text" asp-for="ListOtvetstven[i].Id" /></td>
-                    <td> <input type="text" asp-for="ListOtvetstven[i].name" /></td>
+                    <td>  @Html.ActionLink(Model.ListOtvetstven[i].name, "OpenZayavProsmExp", "User", new { id= Model.ListOtvetstven[i].Id })</td>
                     <td> <input type="text" asp-for="ListOtvetstven[i].data_podachi" /></td>
                     <td> <input type="text" asp-for="ListOtvetstven[i].oo" /></td>
                     <td> <input type="text" asp-for="ListOtvetstven[i].dolgnost" /></td>
                     <td> <input type="text" asp-for="ListOtvetstven[i].kategor" /></td>
-                
-                    <td> <input type="text" asp-for="ListOtvetstven[i].ball" id="status_@Model.ListOtvetstven[i].Id" /></td>
-                    <td> <input type="submit" value="Открыть" asp-for="@Model.ListOtvetstven[i].Id" />
+                    <td> <input type="text" asp-for="ListOtvetstven[i].ball"  /></td>
+                  
                 </tr>
             }
         </table>

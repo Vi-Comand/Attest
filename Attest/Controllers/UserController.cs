@@ -91,11 +91,27 @@ namespace Attest.Controllers
             // Add user model
             return Json(status);
         }
-    
 
-   
+        public IActionResult OpenZayavProsmExp(int id)
+        {
 
-    [HttpPost]
+
+            var compositeModel = new CompositeModel(db);
+           
+            compositeModel.listFile = db.File.Where(p => p.id_zayavl == id).ToList();
+            compositeModel.listObrazovan = db.Obrazovan.Where(p => p.id_zayavl == id).ToList();
+            compositeModel.listNauch_deyat = db.Naucn_deyat.Where(p => p.id_zayavl == id).ToList();
+            compositeModel.listProfRazv = db.ProfRazv.Where(p => p.id_zayav == id).ToList();
+            compositeModel.Zayavlen = db.Zayavlen.Find(id);
+          //  ViewBag.compositeModel = compositeModel;
+            return View("ZayavProsmExp", compositeModel);
+
+
+        }
+
+
+
+        [HttpPost]
         public IActionResult Status([FromBody]Users Model)
         {
             int i = Model.Id;
