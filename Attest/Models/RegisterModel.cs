@@ -21,7 +21,7 @@ namespace Attest.Models
         public string ConfirmPassword { get; set; }
 
 
-        [Compare("Snils", ErrorMessage = "Не указан снилс")]
+
         public string Snils { get; set; }
 
         [Compare("Sogl", ErrorMessage = "Не подтверждено согласие на обработку персональных знаний")]
