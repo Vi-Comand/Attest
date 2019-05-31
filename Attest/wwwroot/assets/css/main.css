@@ -2636,6 +2636,14 @@ table {
         }
 
 
+.button_img {
+    border: none;
+    padding: 0;
+    box-shadow: inset 0 0 0 0px #f6a4a4;
+    border-radius: 0px;
+    padding: 0 0px;
+    height: 2.75em;
+}
 
 /* Button */
 input[type="submit"],
@@ -2698,6 +2706,8 @@ button {
     white-space: nowrap;
     margin-left: 1px;
 }
+
+
 
 .button_nav {
     -moz-appearance: none;

@@ -46,7 +46,16 @@
 
                     <td id="status_@Model.ListOtvetstven[i].Id">@Model.ListOtvetstven[i].status</td>
                     <td>
-                        <input type="image" value="Дубль" id="@Model.ListOtvetstven[i].Id" src="~/assets/icon/icons8-dubl.png" style="vertical-align:middle" /><input type="image" src="~/assets/icon/icons8-oshib.png" value="Ошибочное" id="@Model.ListOtvetstven[i].Id" /><input type="image" src="~/assets/icon/icons8-podl.png" value="Подлинное" id="@Model.ListOtvetstven[i].Id" />
+                        <input type="button" value="Дубль" alt="Дубль" id="@Model.ListOtvetstven[i].Id" class="button_img"
+                               style=" background: url('/assets/icon/icons8-dubl.png') no-repeat 0 0;  border: none;
+
+                                      box-shadow: inset 0 0 0 0px #f6a4a4;
+                                      border-radius: 0px;
+                                      padding: 0 0px;
+                                      height: 3.6em;
+                                      width: 3.6em;">
+                        <button value="Ошибочное" alt="Ошибочное" id="@Model.ListOtvetstven[i].Id"> <img src="~/assets/icon/icons8-oshib.png" /></button>
+                        <button value="Подлинное" alt="Подлинное" id="@Model.ListOtvetstven[i].Id"> <img src="~/assets/icon/icons8-podl.png" /></button>
                     </td>
                 </tr>
             }
