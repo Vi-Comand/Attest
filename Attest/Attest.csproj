@@ -28,6 +28,9 @@
     <Content Update="Views\LK\otv.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\LK\att.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\LK\spec.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

@@ -305,12 +305,7 @@
                                 <input type="text" asp-for="Zayavlen.status" readonly />
                             </td>
                         </tr>
-                        <tr>
-                            <td>Итоговый балл</td>
-                            <td>
-                                <input type="text" asp-for="Zayavlen.ball" readonly />
-                            </td>
-                        </tr>
+
                     </table>
                 </div>
             </div>
@@ -1107,13 +1102,29 @@
                     </div>
                 </div>
             </div>
+            <table>
+                <tr>
+                    <td>Итоговый балл</td>
+                    <td>
+                        <input type="text" asp-for="Zayavlen.ball" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="checkbox" id="Sogl" required /><label for="Sogl">Я потверждаю оценку и закрываю обработку заявления</label>
+
+                        <span for="Sogl" />
+                    </td>
+                </tr>
+            </table>
         </div>
         <input type="hidden" asp-for="Zayavlen.Id" />
 
         <input type="hidden" asp-for="Zayavlen.id_user" />
 
 
-        <input type="submit" asp-controller="User" asp-action="Update1" value="Обновить" data-toggle="tooltip" data-placement="top" title="Будут подгруженны данные из АИС Сетевой город. Ваши данные будут заменены" />
+
 
 
         <input type="submit" value="Сохранить" />

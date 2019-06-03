@@ -80,7 +80,8 @@ namespace Attest.Controllers
         //[HttpPost]
         //[AllowAnonymous]
         public IActionResult AddUser(UserModel model)
-        { string status = "";
+        {
+            string status = "";
             if (model.tip == "1")
                 status = "Дубль";
             if (model.tip == "2")
@@ -97,13 +98,13 @@ namespace Attest.Controllers
 
 
             var compositeModel = new CompositeModel(db);
-           
+
             compositeModel.listFile = db.File.Where(p => p.id_zayavl == id).ToList();
             compositeModel.listObrazovan = db.Obrazovan.Where(p => p.id_zayavl == id).ToList();
             compositeModel.listNauch_deyat = db.Naucn_deyat.Where(p => p.id_zayavl == id).ToList();
             compositeModel.listProfRazv = db.ProfRazv.Where(p => p.id_zayav == id).ToList();
             compositeModel.Zayavlen = db.Zayavlen.Find(id);
-          //  ViewBag.compositeModel = compositeModel;
+            //  ViewBag.compositeModel = compositeModel;
             return View("ZayavProsmExp", compositeModel);
 
 
@@ -1291,7 +1292,7 @@ namespace Attest.Controllers
             {
                 zayav.data_podachi = DateTime.Now;
             }
-            zayav.status = "Заявление созданно, заполните обязательные поля";
+            zayav.status = "Заявление создано, заполните обязательные поля";
 
             db.Entry(zayav).State = Microsoft.EntityFrameworkCore.EntityState.Added;
             db.SaveChanges();
