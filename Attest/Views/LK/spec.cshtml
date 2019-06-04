@@ -17,8 +17,9 @@
                 <th>Дата подачи</th>
                 <th>Место работы</th>
                 <th>Должность</th>
+                <th>Категория</th>
                 <th>Балл</th>
-
+                <th>Статус</th>
 
             </tr>
 
@@ -30,19 +31,19 @@
 
                 <tr>
 
-                    <td> <input type="text" asp-for="ListOtvetstven[i].Id" /></td>
-                    <td>  @Html.ActionLink(Model.ListOtvetstven[i].name, "OpenZayavProsmExp", "User", new { id= Model.ListOtvetstven[i].Id })</td>
-                    <td> <input type="text" asp-for="ListOtvetstven[i].data_podachi" /></td>
-                    <td> <input type="text" asp-for="ListOtvetstven[i].oo" /></td>
-                    <td> <input type="text" asp-for="ListOtvetstven[i].dolgnost" /></td>
-                    <td> <input type="text" asp-for="ListOtvetstven[i].kategor" /></td>
-                    <td> <input type="text" asp-for="ListOtvetstven[i].ball"  /></td>
-                  
+                    <td> @Model.ListOtvetstven[i].Id</td>
+                    <td>  @Html.ActionLink(Model.ListOtvetstven[i].name, "OpenZayavProsmExp", "User", new { id = Model.ListOtvetstven[i].Id })</td>
+                    <td> @Model.ListOtvetstven[i].data_podachi</td>
+                    <td> @Model.ListOtvetstven[i].oo</td>
+                    <td> @Model.ListOtvetstven[i].dolgnost</td>
+                    <td> @Model.ListOtvetstven[i].kategor</td>
+                    <td> @Model.ListOtvetstven[i].ball</td>
+                    <td> @Model.ListOtvetstven[i].status</td>
                 </tr>
             }
         </table>
 
     </form>
-    
+
 </body>
 </html>

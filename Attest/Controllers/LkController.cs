@@ -75,7 +75,7 @@ namespace Attest.Controllers
 
                     var listotv = new ListOtv();
                     listotv.ListOtvetstven =
-                        (from zaya in db.Zayavlen.Where(p => p.spec == user.Id && p.status == "Заявление подлинное")
+                        (from zaya in db.Zayavlen.Where(p => p.spec == user.Id && p.status == "Заявление подлинное" || p.status == "Анализ проведен")
                          join usr in db.Users on zaya.id_user equals usr.Id
                          select new Otvetstven
                          {
@@ -85,7 +85,8 @@ namespace Attest.Controllers
                              oo = zaya.oo,
                              dolgnost = zaya.dolgnost_att,
                              kategor = zaya.kategor,
-                             ball = zaya.ball
+                             ball = zaya.ball,
+                             status = zaya.status
                          }).ToList();
                     return View("spec", listotv);
 

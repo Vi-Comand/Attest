@@ -261,14 +261,15 @@
                                 <input type="text" asp-for="Zayavlen.data_last_att" id="date" required>
                                 <script>
 
-
+                                    dataN = new Date();
+                                    //alert(dataN);
                                     $(function () {
 
                                         $('#date').daterangepicker({
                                             singleDatePicker: true,
                                             showDropdowns: true,
-                                            minYear: 1980,
-
+                                            "minDate": "01/01/1970",
+                                            "maxDate": dataN,
                                             "autoApply": true,
                                             "applyLabel": "Выбрать",
                                             "cancelLabel": "Отменить",
@@ -324,7 +325,7 @@
                         Образование
                     </a>
 
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#obr" form="0"><strong>+</strong></button>
+                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(7, 255, 126, 0.2); background-size: 65%;" data-toggle="modal" data-target="#obr" form="0"></button>
                 </h4>
 
             </div>
@@ -433,8 +434,8 @@
                                                         $('#d_v_o_@i').daterangepicker({
                                                             singleDatePicker: true,
                                                             showDropdowns: true,
-                                                            minYear: 1970,
-
+                                                            "minDate": "01/01/1970",
+                                                            "maxDate": dataN,
                                                             "autoApply": true,
                                                             "applyLabel": "Выбрать",
                                                             "cancelLabel": "Отменить",
@@ -475,7 +476,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                         Курсы повышения квалификации
                     </a>
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#kurs" form="0"><strong>+</strong></button>
+                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(7, 255, 126, 0.2); background-size: 65%;" data-toggle="modal" data-target="#kurs" form="0"></button>
                 </h4>
             </div>
             <div id="collapseThree" class="panel-collapse collapse">
@@ -601,7 +602,7 @@
                                                         $('#d_v_k_@i').daterangepicker({
                                                             singleDatePicker: true,
                                                             showDropdowns: true,
-                                                            minYear: 1970,
+                                                           "minDate": "01/01/1970","maxDate": dataN,
 
                                                             "autoApply": true,
                                                             "applyLabel": "Выбрать",
@@ -637,7 +638,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
                         Второе высшее образование и профессиональная переподготовка
                     </a>
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#Vtor" form="0"><strong>+</strong></button>
+                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(7, 255, 126, 0.2); background-size: 65%;" data-toggle="modal" data-target="#Vtor" form="0"></button>
                 </h4>
             </div>
             <div id="collapse4" class="panel-collapse collapse">
@@ -737,7 +738,7 @@
                                                         $('#d_v_vw_@i').daterangepicker({
                                                             singleDatePicker: true,
                                                             showDropdowns: true,
-                                                            minYear: 1970,
+                                                           "minDate": "01/01/1970","maxDate": dataN,
 
                                                             "autoApply": true,
                                                             "applyLabel": "Выбрать",
@@ -774,7 +775,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
                         Файлы
                     </a>
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#File" form="0"><strong>+</strong></button>
+                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(7, 255, 126, 0.2); background-size: 65%;" data-toggle="modal" data-target="#File" form="0"></button>
                 </h4>
             </div>
             <div id="collapse5" class="panel-collapse collapse in">
@@ -915,7 +916,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
                         Научно-методическая деятельность
                     </a>
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#Nauch" form="0"><strong>+</strong></button>
+                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(7, 255, 126, 0.2); background-size: 65%;" data-toggle="modal" data-target="#Nauch" form="0"></button>
                 </h4>
             </div>
             <div id="collapse6" class="panel-collapse collapse in">
@@ -1000,7 +1001,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">
                         Профессиональное научное развитие
                     </a>
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#Prof" form="0"><strong>+</strong></button>
+                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(7, 255, 126, 0.2); background-size: 65%;" data-toggle="modal" data-target="#Prof" form="0"></button>
                 </h4>
             </div>
             <div id="collapse7" class="panel-collapse collapse in">
@@ -1010,7 +1011,7 @@
                         {
                             <li>
                                 <a href="#prof_@row.Id" style="float: left; " data-toggle="tab">Звание  @row.uch_zvanie</a>
-                                <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del_Prof" value="@row.Id" form="0"><strong>Х</strong></button>
+                                <button class="button_del" style="float: left; top:0em; margin-right:12px;  " data-toggle="modal" data-target="#Del_Prof" value="@row.Id" form="0"><strong>Х</strong></button>
                             </li>
 
                         }
@@ -1086,7 +1087,7 @@
 
                                                         singleDatePicker: true,
                                                         showDropdowns: true,
-                                                        minYear: 1970,
+                                                       "minDate": "01/01/1970","maxDate": dataN,
 
                                                         "autoApply": true,
                                                         "applyLabel": "Выбрать",
@@ -1113,10 +1114,11 @@
         <input type="hidden" asp-for="Zayavlen.id_user" />
 
 
-        <input type="submit" asp-controller="User" asp-action="Update1" value="Обновить" data-toggle="tooltip" data-placement="top" title="Будут подгруженны данные из АИС Сетевой город. Ваши данные будут заменены" />
+        <input type="submit" asp-controller="User" asp-action="Update1" value="Обновить" data-toggle="tooltip" data-placement="top" title="Будут подгруженны данные из АИС Сетевой город. Ваши данные будут заменены"
+               style=" background: url(/assets/icon/icons8-update.png) no-repeat 5px 10px rgba(7, 255, 126, 0.2); background-size: 20%;" />
 
 
-        <input type="submit" value="Сохранить" />
+        <input type="submit" value="Сохранить" style=" background: url('/assets/icon/icons8-save.png')  no-repeat 5px 10px rgba(7, 255, 126, 0.2); background-size: 20%;" />
 
 
 
@@ -1244,7 +1246,7 @@
                                             $('#md_v_o').daterangepicker({
                                                 singleDatePicker: true,
                                                 showDropdowns: true,
-                                                minYear: 1970,
+                                                "minDate": "01/01/1970", "maxDate": dataN,
 
                                                 autoApply: true,
                                                 locale: {
@@ -1307,7 +1309,7 @@
                                             $('#mdaterange').daterangepicker({
                                                 opens: 'left',
                                                 showDropdowns: true,
-                                                minYear: 1970,
+                                                "minDate": "01/01/1970", "maxDate": dataN,
 
 
                                                 locale: {
@@ -1381,7 +1383,7 @@
                                             $('#md_v_k').daterangepicker({
                                                 singleDatePicker: true,
                                                 showDropdowns: true,
-                                                minYear: 1970,
+                                                "minDate": "01/01/1970", "maxDate": dataN,
 
                                                 "autoApply": true,
 
@@ -1499,7 +1501,7 @@
                                             $('#md_v_vw_').daterangepicker({
                                                 singleDatePicker: true,
                                                 showDropdowns: true,
-                                                minYear: 1970,
+                                                "minDate": "01/01/1970", "maxDate": dataN,
 
                                                 "autoApply": true,
 
@@ -1674,7 +1676,7 @@
 
                                                 singleDatePicker: true,
                                                 showDropdowns: true,
-                                                minYear: 1970,
+                                                "minDate": "01/01/1970", "maxDate": dataN,
 
                                                 "autoApply": true,
 

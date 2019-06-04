@@ -98,11 +98,12 @@ namespace Attest.Controllers
 
 
             var compositeModel = new CompositeModel(db);
-
+            compositeModel.Users = new Users();
             compositeModel.listFile = db.File.Where(p => p.id_zayavl == id).ToList();
             compositeModel.listObrazovan = db.Obrazovan.Where(p => p.id_zayavl == id).ToList();
             compositeModel.listNauch_deyat = db.Naucn_deyat.Where(p => p.id_zayavl == id).ToList();
             compositeModel.listProfRazv = db.ProfRazv.Where(p => p.id_zayav == id).ToList();
+            compositeModel.Users = db.Users.Where(p => p.Email == HttpContext.User.Identity.Name).First();
             compositeModel.Zayavlen = db.Zayavlen.Find(id);
             //  ViewBag.compositeModel = compositeModel;
             return View("ZayavProsmExp", compositeModel);
@@ -1392,6 +1393,23 @@ namespace Attest.Controllers
             db.SaveChanges();
             return RedirectToAction("Lk", "Lk");
         }
+
+        public IActionResult ZayavSaveEditSpec(int id_user, CompositeModel compositeModel)
+        {
+
+            db.Entry(compositeModel.Zayavlen).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+
+            db.Zayavlen.Find(compositeModel.Zayavlen.Id).data_obnovl = DateTime.Now;
+            db.Zayavlen.Find(compositeModel.Zayavlen.Id).status = "Анализ проведен";
+            /*db.Entry(compositeModel.Nauch_Deyat).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+           db.Entry(compositeModel.Obrazovan).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+           db.Entry(compositeModel.ProfRazvModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;*/
+
+            db.SaveChanges();
+            return RedirectToAction("Lk", "Lk");
+        }
+
         public IActionResult Save_Prof(CompositeModel compositeModel)
         {
             ProfRazv prof = new ProfRazv();

@@ -14,7 +14,7 @@
                 <tr>
                     <td>
                         Дата начала
-                        <input type="text" asp-for="Zayavlen.data_last_att" id="date_nach">
+                        <input type="text" @*asp-for="Zayavlen.data_last_att" *@ id="date_nach">
                         <script>
 
 
@@ -38,7 +38,7 @@
                     </td>
                     <td>
                         Дата окончания
-                        <input type="text" asp-for="Zayavlen.data_last_att" id="date_okonch" required>
+                        <input type="text" @*asp-for="Zayavlen.data_last_att" *@ id="date_okonch" required>
                         <script>
 
 
@@ -64,7 +64,7 @@
                 <tr>
                     <td>
                         Должность
-                        <select id="dolg" asp-for="Zayavlen.dolgnost_att">
+                        <select id="dolg" @*asp-for="Zayavlen.dolgnost_att" *@>
 
                             <option value="">Выберите должность</option>
                             <option value="ВОСПИТАТЕЛЬ">ВОСПИТАТЕЛЬ</option>
@@ -94,7 +94,7 @@
                     </td>
                     <td id="naprtr">
                         Направление по должности «учитель»
-                        <select id="napr" asp-for="Zayavlen.uch_stepen">
+                        <select id="napr" @*asp-for="Zayavlen.uch_stepen" *@>
                             <option value="">Выберите напрвление</option>
                             <option value="Русский язык и литература">Русский язык и литература</option>
                             <option value="Математика">Математика</option>
@@ -121,12 +121,12 @@
                 <tr>
                     <td>
                         ФИО
-                        <input type="text" asp-for="User.Fio" />
+                        <input type="text" @*asp-for="User.Fio" *@ />
                     </td>
                     <td>
 
                         Ф.И.О. специалиста
-                        <select id="napr" asp-for="Zayavlen.uch_stepen"></select>
+                        <select id="napr" @*asp-for="Zayavlen.uch_stepen" *@></select>
                     </td>
                     <td>
                         Элементов на страницу
@@ -186,13 +186,13 @@
 
             <tr>
 
-                <td> <input type="text" asp-for="ListOtvetstven[i].Id" /></td>
+                <td> ListOtvetstven[i].Id" /></td>
                 <td>  @Html.ActionLink(Model.ListOtvetstven[i].name, "OpenZayavProsmExp", "User", new { id= Model.ListOtvetstven[i].Id })</td>
-                <td> <input type="text" asp-for="ListOtvetstven[i].data_podachi" /></td>
-                <td> <input type="text" asp-for="ListOtvetstven[i].oo" /></td>
-                <td> <input type="text" asp-for="ListOtvetstven[i].dolgnost" /></td>
-                <td> <input type="text" asp-for="ListOtvetstven[i].kategor" /></td>
-                <td> <input type="text" asp-for="ListOtvetstven[i].ball" /></td>
+                <td> ListOtvetstven[i].data_podachi</td>
+                <td> ListOtvetstven[i].oo</td>
+                <td> ListOtvetstven[i].dolgnost</td>
+                <td> ListOtvetstven[i].kategor</td>
+                <td> ListOtvetstven[i].ball</td>
 
             </tr>
             }
