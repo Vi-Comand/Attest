@@ -4,26 +4,26 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+   
     <title>Lk-user</title>
 </head>
 <body>
-    <form method="post" id="formid" asp-controller="User" asp-action="OpenZayavProsmExp">
+    <form method="post" id="formid" asp-controller="Lk" asp-action="Sort">
         <div>
             <table>
                 <tr>
                     <td>
                         Дата начала
-                        <input type="text" asp-for="Zayavlen.data_last_att" id="date_nach">
+                        <input type="text" id="date" asp-for="data_nachalo">
                         <script>
 
 
                             $(function () {
 
-                                $('#date_nach').daterangepicker({
+                                $('#date').daterangepicker({
                                     singleDatePicker: true,
                                     showDropdowns: true,
-                                    minYear: 2015,
+                                    minYear: 1980,
 
                                     "autoApply": true,
                                     "applyLabel": "Выбрать",
@@ -35,10 +35,11 @@
                                 });
                             });
                         </script>
+
                     </td>
                     <td>
                         Дата окончания
-                        <input type="text" asp-for="Zayavlen.data_last_att" id="date_okonch" required>
+                        <input type="text" id="date_okonch" asp-for="data_konec">
                         <script>
 
 
@@ -64,7 +65,7 @@
                 <tr>
                     <td>
                         Должность
-                        <select id="dolg" asp-for="Zayavlen.dolgnost_att">
+                        <select id="dolg" asp-action="Sort" asp-for="dolg">
 
                             <option value="">Выберите должность</option>
                             <option value="ВОСПИТАТЕЛЬ">ВОСПИТАТЕЛЬ</option>
@@ -94,7 +95,7 @@
                     </td>
                     <td id="naprtr">
                         Направление по должности «учитель»
-                        <select id="napr" asp-for="Zayavlen.uch_stepen">
+                        <select id="napr" asp-for="napr_po_dolg">
                             <option value="">Выберите напрвление</option>
                             <option value="Русский язык и литература">Русский язык и литература</option>
                             <option value="Математика">Математика</option>
@@ -121,17 +122,17 @@
                 <tr>
                     <td>
                         ФИО
-                        <input type="text" asp-for="User.Fio" />
+                        <input type="text" asp-for="FIO" />
                     </td>
                     <td>
 
                         Ф.И.О. специалиста
-                        <select id="napr" asp-for="Zayavlen.uch_stepen"></select>
+                        <select id="napr" asp-for="specFIO"></select>
                     </td>
                     <td>
                         Элементов на страницу
                         <select id="edit-items-per-page" name="items_per_page">
-                            <option value="20" selected="selected">20</option>
+                            <option value="5" selected="selected">5</option>
                             <option value="50">50</option>
                             <option value="100">100</option>
                             <option value="250">250</option>
@@ -139,6 +140,11 @@
                             <option value="1000">1000</option>
                             <option value="All">- Все -</option>
                         </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Фильтровать">
                     </td>
                 </tr>
             </table>
@@ -166,14 +172,28 @@
         </script>
 
 
-        <table>
+        <table id="table">
             <tr>
-                <th>№ заявления</th>
-                <th>ФИО</th>
-                <th>Дата подачи</th>
+
+
+
+
+
+
+
+                <th>№ по списку</th>
+                <th> @Html.ActionLink("№ заявления", "Sort", "Lk", new { data_nachalo = Model.data_nachalo, data_konec = Model.data_konec, dolg = Model.dolg, Fio = Model.FIO, specFio = Model.specFIO, sortOrder = ViewBag.NomZayav }) </th>
+                <th> @Html.ActionLink("ФИО", "Sort", "Lk", new { data_nachalo = Model.data_nachalo, data_konec = Model.data_konec, dolg = Model.dolg, Fio = Model.FIO, specFio = Model.specFIO, sortOrder = ViewBag.Name })</th>
+                <th> @Html.ActionLink("Дата подачи", "Sort", "Lk", new { data_nachalo = Model.data_nachalo, data_konec = Model.data_konec, dolg = Model.dolg, Fio = Model.FIO, specFio = Model.specFIO, sortOrder = ViewBag.DataPodach })</th>
+                <th> @Html.ActionLink("Муниципальное образование", "Sort", "Lk", new { data_nachalo = Model.data_nachalo, data_konec = Model.data_konec, dolg = Model.dolg, Fio = Model.FIO, specFio = Model.specFIO, sortOrder = ViewBag.Mo })</th>
                 <th>Место работы</th>
-                <th>Должность</th>
-                <th>Балл</th>
+                <th>Занимаемая должность и должность по которой прошу провести аттестацию</a></th>
+                <th>Направление по должности «учитель»</th>
+                <th>Аттестация на квалификационную категорию</th>
+                <th> @Html.ActionLink("Статус заявления", "Sort", "Lk", new { data_nachalo = Model.data_nachalo, data_konec = Model.data_konec, dolg = Model.dolg, Fio = Model.FIO, specFio = Model.specFIO, sortOrder = ViewBag.Status })</th>
+                <th>Копия приказа</th>
+                <th> @Html.ActionLink("Специалист", "Sort", "Lk", new { data_nachalo = Model.data_nachalo, data_konec = Model.data_konec, dolg = Model.dolg, Fio = Model.FIO, specFio = Model.specFIO, sortOrder = ViewBag.Spe })</th>
+                <th> @Html.ActionLink("Итоговый результат", "Sort", "Lk", new { data_nachalo = Model.data_nachalo, data_konec = Model.data_konec, dolg = Model.dolg, Fio = Model.FIO, specFio = Model.specFIO, sortOrder = ViewBag.Bal })</th>
 
 
             </tr>
@@ -184,21 +204,130 @@
             {
 
 
-            <tr>
+                <tr>
+                    <td> @(i + 1)</td>
+                    <td> @Model.ListOtvetstven[i].Id</td>
+                    <td>  @Html.ActionLink(Model.ListOtvetstven[i].name, "OpenZayavProsmExp", "User", new { id = Model.ListOtvetstven[i].Id })</td>
+                    <td> @Model.ListOtvetstven[i].data_podachi</td>
+                    <td> @Model.ListOtvetstven[i].mo</td>
+                    <td> @Model.ListOtvetstven[i].oo</td>
+                    <td> @Model.ListOtvetstven[i].dolgnost</td>
+                    <td> @Model.ListOtvetstven[i].narp_po_dolg</td>
+                    <td> @Model.ListOtvetstven[i].kategor</td>
+                    <td> @Model.ListOtvetstven[i].status</td>
+                    <td>
+                        @if (Model.ListOtvetstven[i].file != "")
+                        {
+                            @Html.ActionLink("Скачать", "file", "user", new { name_f = Model.ListOtvetstven[i].file, id = Model.ListOtvetstven[i].Id })
+                        }
+                    </td>
+                    <td> @Model.ListOtvetstven[i].spec</td>
+                    <td> @Model.ListOtvetstven[i].ball</td>
 
-                <td> <input type="text" asp-for="ListOtvetstven[i].Id" /></td>
-                <td>  @Html.ActionLink(Model.ListOtvetstven[i].name, "OpenZayavProsmExp", "User", new { id= Model.ListOtvetstven[i].Id })</td>
-                <td> <input type="text" asp-for="ListOtvetstven[i].data_podachi" /></td>
-                <td> <input type="text" asp-for="ListOtvetstven[i].oo" /></td>
-                <td> <input type="text" asp-for="ListOtvetstven[i].dolgnost" /></td>
-                <td> <input type="text" asp-for="ListOtvetstven[i].kategor" /></td>
-                <td> <input type="text" asp-for="ListOtvetstven[i].ball" /></td>
-
-            </tr>
+                </tr>
             }
         </table>
-
+        <table id="perekl">
+            <tr>
+                <td> <input type="button" id="nazad" onclick="addfunc();" value="Назад"></td>
+                <td> <input type="text" id="str" value="1"  onchange="isright(this);"  min="1" max="100"></td>
+                <td> <input type="button" id="vpered" onclick="addfunc();" value="Вперёд"></td>
+            </tr>
+        </table>
     </form>
+    <script>
 
+
+
+
+       /* function isright(obj) {
+            var value = +obj.value.replace(/\D/g, '') || 0;
+            var min = +obj.getAttribute('min');
+            var max = +obj.getAttribute('max');
+            obj.value = Math.min(max, Math.max(min, value));
+          obj.getAttribute('max').val = 110;
+        }*/
+       
+        var kol = parseInt(document.getElementById('edit-items-per-page').value);
+        var table = document.getElementById('table');
+        var rows = table.rows;
+        var kol_str = Math.floor(rows.length / kol); 
+     
+        document.getElementById('str').onchange = function () {
+        
+            if (this.value <= kol_str)
+                pereresovka();
+            else {
+                this.value = kol_str;
+                pereresovka();
+            }
+        }
+
+
+        document.getElementById('edit-items-per-page').onchange = function()
+        {
+            //getElementById('str').m
+            pereresovka();
+        };
+    
+       
+     
+        for (var i = 1; i < rows.length; i++) {
+          //  alert(rows.length);
+         //   alert(i);
+            if (i > 10)
+            rows[i].style.display = 'none';
+        };
+      document.addEventListener('DOMContentLoaded',function () {
+            
+            pereresovka();
+        });
+        function pereresovka() {
+            var str = parseInt(document.getElementById('str').value)-1;
+            var kol = parseInt(document.getElementById('edit-items-per-page').value);
+            for (var i = 1; i < rows.length; i++) {
+                //  alert(rows.length);
+                //   alert(i);
+               
+                if (i > kol * str && i <=parseInt(kol * str,10)+kol)
+                    rows[i].style.display = '';
+                else
+                    rows[i].style.display = 'none';
+            };
+        }
+   
+       
+
+
+
+           document.getElementById("vpered").addEventListener('click', function () {
+                var val = document.getElementById('str').value;
+               
+                document.getElementById('str').value = parseInt(val, 10) + 1;
+               if (document.getElementById('str').value <= kol_str)
+                   pereresovka();
+               else {
+                   document.getElementById('str').value = kol_str;
+                   pereresovka();
+               }
+            });
+
+            document.getElementById("nazad").addEventListener('click', function () {
+                var val = document.getElementById('str').value;
+               
+                document.getElementById('str').value = parseInt(val, 10) - 1;
+                if (document.getElementById('str').value>0)
+                    pereresovka();
+                else {
+                    document.getElementById('str').value = 1;
+                    pereresovka();
+                }
+
+            });
+        
+
+
+
+        </script>
 </body>
 </html>

@@ -8,14 +8,20 @@ namespace Attest.Models
     public enum SortState
     {
         NomZayavAsc,    // по имени по возрастанию
-        NomZayavDesc,   // по имени по убыванию
+        NomZayavDesc,
+        NameAsc,
+        NameDesc,// по имени по убыванию
         DataPodachAsc,
         DataPodachDesc,
-        DataObnovAsc,
-        DataObnovDesc,
+        MoAsc,
+        MoDesc,
+        //DataObnovAsc,
+        //DataObnovDesc,
         StatusAsc,
         StatusDesc,
+        SpecAsc,
+        SpecDesc,
         BalAsc,
-        BalDesc,
+        BalDesc
     }
 }

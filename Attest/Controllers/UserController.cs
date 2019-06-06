@@ -37,6 +37,38 @@ namespace Attest.Controllers
         }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         [Route("Update")]
         [Route("Update/{id }/{id_user}/{pvt}")]
 
