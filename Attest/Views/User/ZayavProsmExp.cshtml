@@ -16,7 +16,7 @@
 </head>
 <body>
 
-    <form method="post" id="formId" name="MainForm" onsubmit="return Check()" asp-controller="User" asp-action="ZayavSaveEdit">
+    <form method="post" id="formId" name="MainForm" asp-controller="User" asp-action="ZayavSaveEditSpec">
 
         <div class="panel-group" id="accordion">
 
@@ -36,33 +36,9 @@
                                 <td>Должность, по которой прошу провести аттестацию</td>
                                 <td>
 
-                                    <select id="dolg" asp-for="Zayavlen.dolgnost_att" required>
+                                    <input type="text" asp-for="Zayavlen.dolgnost_att" readonly>
 
-                                        <option value="">Выберите должность</option>
-                                        <option value="ВОСПИТАТЕЛЬ">ВОСПИТАТЕЛЬ</option>
-                                        <option value="СТАРШИЙ ВОСПИТАТЕЛЬ">СТАРШИЙ ВОСПИТАТЕЛЬ</option>
-                                        <option value="МУЗЫКАЛЬНЫЙ РУКОВОДИТЕЛЬ">МУЗЫКАЛЬНЫЙ РУКОВОДИТЕЛЬ</option>
-                                        <option value="ИНСТРУКТОР ПО ТРУДУ">ИНСТРУКТОР ПО ТРУДУ</option>
-                                        <option value="КОНЦЕРТМЕЙСТЕР">КОНЦЕРТМЕЙСТЕР</option>
-                                        <option value="МАСТЕР ПРОИЗВОДСТВЕННОГО ОБУЧЕНИЯ">МАСТЕР ПРОИЗВОДСТВЕННОГО ОБУЧЕНИЯ</option>
-                                        <option value="МЕТОДИСТ">МЕТОДИСТ</option>
-                                        <option value="ПЕДАГОГ-БИБЛИОТЕКАРЬ">ПЕДАГОГ-БИБЛИОТЕКАРЬ</option>
-                                        <option value="ПЕДАГОГ ДОПОЛНИТЕЛЬНОГО ОБРАЗОВАНИЯ">ПЕДАГОГ ДОПОЛНИТЕЛЬНОГО ОБРАЗОВАНИЯ</option>
-                                        <option value="ПЕДАГОГ-ОРГАНИЗАТОР">ПЕДАГОГ-ОРГАНИЗАТОР</option>
-                                        <option value="ПЕДАГОГ-ПСИХОЛОГ">ПЕДАГОГ-ПСИХОЛОГ</option>
-                                        <option value="ПРЕПОДАВАТЕЛЬ">ПРЕПОДАВАТЕЛЬ</option>
-                                        <option value="ПРЕПОДАВАТЕЛЬ-ОРГАНИЗАТОР ОБЖ">ПРЕПОДАВАТЕЛЬ-ОРГАНИЗАТОР ОБЖ</option>
-                                        <option value="РУКОВОДИТЕЛЬ ФИЗИЧЕСКОГО ВОСПИТАНИЯ">РУКОВОДИТЕЛЬ ФИЗИЧЕСКОГО ВОСПИТАНИЯ</option>
-                                        <option value="СОЦИАЛЬНЫЙ ПЕДАГОГ">СОЦИАЛЬНЫЙ ПЕДАГОГ</option>
-                                        <option value="СТАРШИЙ ВОЖАТЫЙ">СТАРШИЙ ВОЖАТЫЙ</option>
-                                        <option value="ТРЕНЕР-ПРЕПОДАВАТЕЛЬ">ТРЕНЕР-ПРЕПОДАВАТЕЛЬ</option>
-                                        <option value="УЧИТЕЛЬ">УЧИТЕЛЬ</option>
-                                        <option value="УЧИТЕЛЬ-ЛОГОПЕД (УЧИТЕЛЬ-ДЕФЕКТОЛОГ)">УЧИТЕЛЬ-ЛОГОПЕД (УЧИТЕЛЬ-ДЕФЕКТОЛОГ)</option>
-                                        <option value="ИНСТРУКТОР ПО ФИЗИЧЕСКОЙ КУЛЬТУРЕ">ИНСТРУКТОР ПО ФИЗИЧЕСКОЙ КУЛЬТУРЕ</option>
-                                        <option value="ПРЕПОДАВАТЕЛЬ образовательной организации культуры и искусства">ПРЕПОДАВАТЕЛЬ образовательной организации культуры и искусства</option>
-                                        <option value="КОНЦЕРТМЕЙСТЕР образовательной организации культуры и искусства">КОНЦЕРТМЕЙСТЕР образовательной организации культуры и искусства</option>
-                                        <option value="ИНСТРУКТОР-МЕТОДИСТ (включая старшего)">ИНСТРУКТОР-МЕТОДИСТ (включая старшего)</option>
-                                    </select>
+
 
 
                                 </td>
@@ -71,28 +47,8 @@
                             <tr id="naprtr">
                                 <td>Направление</td>
                                 <td>
-                                    <select id="napr" asp-for="Zayavlen.uch_stepen">
-                                        <option value="">Выберите напрвление</option>
-                                        <option value="Русский язык и литература">Русский язык и литература</option>
-                                        <option value="Математика">Математика</option>
-                                        <option value="Начальные классы">Начальные классы</option>
-                                        <option value="История">История</option>
-                                        <option value="Обществознание">Обществознание</option>
-                                        <option value="Кубановедение">Кубановедение</option>
-                                        <option value="Физика">Физика</option>
-                                        <option value="Химия">Химия</option>
-                                        <option value="Биология">Биология</option>
-                                        <option value="География">География</option>
-                                        <option value="Иностранный язык">Иностранный язык</option>
-                                        <option value="ИЗО, черчение">ИЗО, черчение</option>
-                                        <option value="Музыка">Музыка</option>
-                                        <option value="МХК">МХК</option>
-                                        <option value="Технология">Технология</option>
-                                        <option value="Информатика, ИКТ">Информатика, ИКТ</option>
-                                        <option value="Физическая культура">Физическая культура</option>
-                                        <option value="ОПК">ОПК</option>
-                                        <option value="ОБЖ">ОБЖ</option>
-                                    </select>
+                                    <input type="text" asp-for="Zayavlen.uch_stepen" readonly>
+
                                 </td>
                             </tr>
 
@@ -102,27 +58,7 @@
                 </div>
             </div>
         </div>
-        <script>
-            var select = document.getElementById("dolg");
-            var val = select.value;
-            if (val == "УЧИТЕЛЬ") {
-                $('#naprtr').show(); // показать
-            }
-            else {
-                $('#naprtr').hide(); // показать
-            }
-            $('#dolg').change(function () {
-                var select = document.getElementById("dolg");
-                var val = select.value;
-                if (val == "УЧИТЕЛЬ") {
-                    $('#naprtr').show(); // показать
-                }
-                else {
-                    $('#naprtr').hide(); // показать
-                }
-            })
 
-        </script>
 
         <div class="panel panel-default">
             <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
@@ -150,7 +86,7 @@
                         <tr>
                             <td>МО</td>
                             <td>
-                                <select id="napr" class="req" asp-for="Zayavlen.mo" required>
+                                <select id="napr" class="req" asp-for="Zayavlen.mo" disabled>
                                     <option value="">Выберите МО</option>
                                     <option value='1'>Абинский</option>
                                     <option value='2'>Анапский</option>
@@ -198,58 +134,31 @@
                                     <option value='44'>Щербиновский</option>
 
                                 </select>
-
+                                <input type="hidden" class="req" asp-for="Zayavlen.mo">
                             </td>
                         </tr>
                         <tr>
                             <td>ОО</td>
                             <td>
-                                <input type="text" class="req" asp-for="Zayavlen.oo" required />
+                                <input type="text" class="req" asp-for="Zayavlen.oo" readonly />
 
                             </td>
                         </tr>
                         <tr>
                             <td>Должность</td>
                             <td>
-                                <select id="dolg" asp-for="Zayavlen.dolgnost_imeyu" required>
+                                <input type="text" id="dolg" asp-for="Zayavlen.dolgnost_imeyu" readonly>
 
-                                    <option value="">Выберите текущую должность</option>
-                                    <option value="ВОСПИТАТЕЛЬ">ВОСПИТАТЕЛЬ</option>
-                                    <option value="СТАРШИЙ ВОСПИТАТЕЛЬ">СТАРШИЙ ВОСПИТАТЕЛЬ</option>
-                                    <option value="МУЗЫКАЛЬНЫЙ РУКОВОДИТЕЛЬ">МУЗЫКАЛЬНЫЙ РУКОВОДИТЕЛЬ</option>
-                                    <option value="ИНСТРУКТОР ПО ТРУДУ">ИНСТРУКТОР ПО ТРУДУ</option>
-                                    <option value="КОНЦЕРТМЕЙСТЕР">КОНЦЕРТМЕЙСТЕР</option>
-                                    <option value="МАСТЕР ПРОИЗВОДСТВЕННОГО ОБУЧЕНИЯ">МАСТЕР ПРОИЗВОДСТВЕННОГО ОБУЧЕНИЯ</option>
-                                    <option value="МЕТОДИСТ">МЕТОДИСТ</option>
-                                    <option value="ПЕДАГОГ-БИБЛИОТЕКАРЬ">ПЕДАГОГ-БИБЛИОТЕКАРЬ</option>
-                                    <option value="ПЕДАГОГ ДОПОЛНИТЕЛЬНОГО ОБРАЗОВАНИЯ">ПЕДАГОГ ДОПОЛНИТЕЛЬНОГО ОБРАЗОВАНИЯ</option>
-                                    <option value="ПЕДАГОГ-ОРГАНИЗАТОР">ПЕДАГОГ-ОРГАНИЗАТОР</option>
-                                    <option value="ПЕДАГОГ-ПСИХОЛОГ">ПЕДАГОГ-ПСИХОЛОГ</option>
-                                    <option value="ПРЕПОДАВАТЕЛЬ">ПРЕПОДАВАТЕЛЬ</option>
-                                    <option value="ПРЕПОДАВАТЕЛЬ-ОРГАНИЗАТОР ОБЖ">ПРЕПОДАВАТЕЛЬ-ОРГАНИЗАТОР ОБЖ</option>
-                                    <option value="РУКОВОДИТЕЛЬ ФИЗИЧЕСКОГО ВОСПИТАНИЯ">РУКОВОДИТЕЛЬ ФИЗИЧЕСКОГО ВОСПИТАНИЯ</option>
-                                    <option value="СОЦИАЛЬНЫЙ ПЕДАГОГ">СОЦИАЛЬНЫЙ ПЕДАГОГ</option>
-                                    <option value="СТАРШИЙ ВОЖАТЫЙ">СТАРШИЙ ВОЖАТЫЙ</option>
-                                    <option value="ТРЕНЕР-ПРЕПОДАВАТЕЛЬ">ТРЕНЕР-ПРЕПОДАВАТЕЛЬ</option>
-                                    <option value="УЧИТЕЛЬ">УЧИТЕЛЬ</option>
-                                    <option value="УЧИТЕЛЬ-ЛОГОПЕД (УЧИТЕЛЬ-ДЕФЕКТОЛОГ)">УЧИТЕЛЬ-ЛОГОПЕД (УЧИТЕЛЬ-ДЕФЕКТОЛОГ)</option>
-                                    <option value="ИНСТРУКТОР ПО ФИЗИЧЕСКОЙ КУЛЬТУРЕ">ИНСТРУКТОР ПО ФИЗИЧЕСКОЙ КУЛЬТУРЕ</option>
-                                    <option value="ПРЕПОДАВАТЕЛЬ образовательной организации культуры и искусства">ПРЕПОДАВАТЕЛЬ образовательной организации культуры и искусства</option>
-                                    <option value="КОНЦЕРТМЕЙСТЕР образовательной организации культуры и искусства">КОНЦЕРТМЕЙСТЕР образовательной организации культуры и искусства</option>
-                                    <option value="ИНСТРУКТОР-МЕТОДИСТ (включая старшего)">ИНСТРУКТОР-МЕТОДИСТ (включая старшего)</option>
-                                </select>
+
                             </td>
                         </tr>
                         <tr>
                             <td>Категория</td>
                             <td>
 
-                                <select id="kategor" asp-for="Zayavlen.kategor" required>
+                                <input type="text" id="kategor" asp-for="Zayavlen.kategor" readonly>
 
-                                    <option value="">Выберите категорию</option>
-                                    <option value="Первая">Первая</option>
-                                    <option value="Высшая">Высшая</option>
-                                </select>
+
 
                             </td>
                         </tr>
@@ -258,7 +167,7 @@
                             <td>
 
 
-                                <input type="text" asp-for="Zayavlen.data_last_att" id="date" required>
+                                <input type="text" asp-for="Zayavlen.data_last_att" id="date" readonly>
                                 <script>
 
 
@@ -284,7 +193,7 @@
                         <tr>
                             <td>Категория работника</td>
                             <td>
-                                <input type="text" asp-for="Zayavlen.kategor_rabot" />
+                                <input type="text" asp-for="Zayavlen.kategor_rabot" readonly />
                             </td>
                         </tr>
                         <tr>
@@ -319,7 +228,6 @@
                         Образование
                     </a>
 
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#obr" form="0"><strong>+</strong></button>
                 </h4>
 
             </div>
@@ -333,7 +241,6 @@
 
                                 <li>
                                     <a href="#Obr_@row.Id" style="float: left; " data-toggle="tab">@row.oo</a>
-                                    <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del" value="@row.Id" form="0"><strong>Х</strong></button>
                                 </li>
                             }
                         }
@@ -351,37 +258,37 @@
                                         <tr>
                                             <td>ОО</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].oo" value="@Model.listObrazovan[i].oo" required />
+                                                <input type="text" asp-for="listObrazovan[i].oo" value="@Model.listObrazovan[i].oo" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Период обучения</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].period" value="@Model.listObrazovan[i].period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
+                                                <input type="text" asp-for="listObrazovan[i].period" value="@Model.listObrazovan[i].period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Муниципалитет</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].mo" value="@Model.listObrazovan[i].mo" />
+                                                <input type="text" asp-for="listObrazovan[i].mo" value="@Model.listObrazovan[i].mo" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Специальность</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].special" value="@Model.listObrazovan[i].special" />
+                                                <input type="text" asp-for="listObrazovan[i].special" value="@Model.listObrazovan[i].special" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Квалификация</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].kvalif" value="@Model.listObrazovan[i].kvalif" />
+                                                <input type="text" asp-for="listObrazovan[i].kvalif" value="@Model.listObrazovan[i].kvalif" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Тип документа</td>
                                             <td>
-                                                <select asp-for="listObrazovan[i].nazv_doc">
+                                                <select asp-for="listObrazovan[i].nazv_doc" disabled>
                                                     <option label="Справка с места учебы" value="TrainingCertificate">Справка с места учебы</option>
                                                     <option label="Свидетельство об освоении предпрофессиональной программы в области искусств" value="PreprofessionalArtsMasteringCertificate">Свидетельство об освоении предпрофессиональной программы в области искусств</option>
                                                     <option label="Другой документ об образовании" value="AnotherEducationDocument" selected="selected">Другой документ об образовании</option>
@@ -400,27 +307,25 @@
                                                     <option label="Свидетельство о профессии рабочего, должности служащего" value="WorkerCertificate">Свидетельство о профессии рабочего, должности служащего</option>
                                                     <option label="Свидетельство об обучении для лиц с ограниченными возможностями здоровья (с различными формами умственной отсталости)" value="PersonsWithDisabilitiesEducationCertificate">Свидетельство об обучении для лиц с ограниченными возможностями здоровья (с различными формами умственной отсталости)</option>
                                                 </select>
-                                                @*<script>
-                                                    $("#nazv_doc_@row.Id").val("@row.nazv_doc").change()
-                                                        </script>*@
+                                                <input type="hidden" asp-for="listObrazovan[i].nazv_doc" readonly>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Серия</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].ser_doc" />
+                                                <input type="text" asp-for="listObrazovan[i].ser_doc" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Номер документа</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].nom_doc" />
+                                                <input type="text" asp-for="listObrazovan[i].nom_doc" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Дата выдачи</td>
                                             <td>
-                                                <input type="text" id="d_v_o_@i" asp-for="listObrazovan[i].data_doc" />
+                                                <input type="text" id="d_v_o_@i" asp-for="listObrazovan[i].data_doc" readonly />
                                                 <script>
 
 
@@ -428,7 +333,7 @@
                                                         $('#d_v_o_@i').daterangepicker({
                                                             singleDatePicker: true,
                                                             showDropdowns: true,
-                                                            minYear: 1970,
+                                                           "minDate": "01/01/1970","maxDate": dataN,
 
                                                             "autoApply": true,
                                                             "applyLabel": "Выбрать",
@@ -445,7 +350,7 @@
                                         <tr>
                                             <td>Регистрационный номер</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].reg_nom" />
+                                                <input type="text" asp-for="listObrazovan[i].reg_nom" readonly />
                                             </td>
                                         </tr>
 
@@ -470,7 +375,6 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                         Курсы повышения квалификации
                     </a>
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#kurs" form="0"><strong>+</strong></button>
                 </h4>
             </div>
             <div id="collapseThree" class="panel-collapse collapse">
@@ -482,7 +386,6 @@
                             {
                                 <li>
                                     <a href="#Kurs_@row.Id" style="float: left; " data-toggle="tab">@row.oo</a>
-                                    <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del" value="@row.Id" form="0"><strong>Х</strong></button>
                                 </li>
                             }
                         }
@@ -502,14 +405,14 @@
                                         <tr>
                                             <td>Организация</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].oo" required />
+                                                <input type="text" asp-for="listObrazovan[i].oo" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Периодобучения</td>
                                             <td>
 
-                                                <input type="text" id="daterange_@i" asp-for="listObrazovan[i].period" />
+                                                <input type="text" id="daterange_@i" asp-for="listObrazovan[i].period" readonly />
 
 
                                                 <script>
@@ -537,32 +440,33 @@
                                         <tr>
                                             <td>Место прохождения</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].mo" />
+                                                <input type="text" asp-for="listObrazovan[i].mo" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Кол-во часов</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].kol_chas" pattern="^[ 0-9]+$" />
+                                                <input type="text" asp-for="listObrazovan[i].kol_chas" pattern="^[ 0-9]+$" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Тема курсов</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].special" />
+                                                <input type="text" asp-for="listObrazovan[i].special" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Форма участия/проведения</td>
                                             <td>
 
-                                                <select asp-for="listObrazovan[i].kvalif">
+                                                <select asp-for="listObrazovan[i].kvalif" disabled>
                                                     <option value="">Выберите форму проведения</option>
                                                     <option label="Очная" value="FullTime">Очная</option>
                                                     <option label="Дистанционная" value="Distance">Дистанционная</option>
                                                     <option label="Очно-дистанционная" value="FullTimeDistance">Очно-дистанционная</option>
                                                     <option label="Заочная" value="Extramural">Заочная</option>
                                                 </select>
+                                                <input type="hidden" asp-for="listObrazovan[i].kvalif" readonly>
                                                 @*<script>
                                                     $("#kvalif_@row.Id").val("@row.kvalif").change()
                                                         </script>*@
@@ -571,32 +475,32 @@
                                         <tr>
                                             <td>Название документа</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].nazv_doc" />
+                                                <input type="text" asp-for="listObrazovan[i].nazv_doc" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Серия</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].ser_doc" />
+                                                <input type="text" asp-for="listObrazovan[i].ser_doc" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Номер документа</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].nom_doc" />
+                                                <input type="text" asp-for="listObrazovan[i].nom_doc" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Дата выдачи</td>
                                             <td>
-                                                <input type="text" id="d_v_k_@i" asp-for="listObrazovan[i].data_doc" />
+                                                <input type="text" id="d_v_k_@i" asp-for="listObrazovan[i].data_doc" readonly />
                                                 <script>
 
                                                     $(function () {
                                                         $('#d_v_k_@i').daterangepicker({
                                                             singleDatePicker: true,
                                                             showDropdowns: true,
-                                                            minYear: 1970,
+                                                           "minDate": "01/01/1970","maxDate": dataN,
 
                                                             "autoApply": true,
                                                             "applyLabel": "Выбрать",
@@ -613,7 +517,7 @@
                                         <tr>
                                             <td>Регистрационный номер</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].reg_nom" />
+                                                <input type="text" asp-for="listObrazovan[i].reg_nom" readonly />
                                             </td>
                                         </tr>
                                     </table>
@@ -632,7 +536,6 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
                         Второе высшее образование и профессиональная переподготовка
                     </a>
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#Vtor" form="0"><strong>+</strong></button>
                 </h4>
             </div>
             <div id="collapse4" class="panel-collapse collapse">
@@ -645,7 +548,6 @@
 
                                 <li>
                                     <a href="#Vtor_@row.Id" style="float: left; " data-toggle="tab">@row.oo</a>
-                                    <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del" value="@row.Id" form="0"><strong>Х</strong></button>
                                 </li>
                             }
                         }
@@ -664,75 +566,75 @@
                                         <tr>
                                             <td>Организация</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].oo" required />
+                                                <input type="text" asp-for="listObrazovan[i].oo" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Периодобучения</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
+                                                <input type="text" asp-for="listObrazovan[i].period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Место прохождения</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].mo" />
+                                                <input type="text" asp-for="listObrazovan[i].mo" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Кол-во часов</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].kol_chas" pattern="^[ 0-9]+$" />
+                                                <input type="text" asp-for="listObrazovan[i].kol_chas" pattern="^[ 0-9]+$" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Вид обучения</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].vid_obuch" />
+                                                <input type="text" asp-for="listObrazovan[i].vid_obuch" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                         <tr>
                                             <td>Специальность</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].special" />
+                                                <input type="text" asp-for="listObrazovan[i].special" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Квалификация</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].kvalif" />
+                                                <input type="text" asp-for="listObrazovan[i].kvalif" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Название документа</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].nazv_doc" />
+                                                <input type="text" asp-for="listObrazovan[i].nazv_doc" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Серия</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].ser_doc" />
+                                                <input type="text" asp-for="listObrazovan[i].ser_doc" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Номер документа</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].nom_doc" />
+                                                <input type="text" asp-for="listObrazovan[i].nom_doc" readonly />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Дата выдачи</td>
                                             <td>
-                                                <input type="text" id="d_v_vw_@i" asp-for="listObrazovan[i].data_doc" />
+                                                <input type="text" id="d_v_vw_@i" asp-for="listObrazovan[i].data_doc" readonly />
                                                 <script>
 
                                                     $(function () {
                                                         $('#d_v_vw_@i').daterangepicker({
                                                             singleDatePicker: true,
                                                             showDropdowns: true,
-                                                            minYear: 1970,
+                                                           "minDate": "01/01/1970","maxDate": dataN,
 
                                                             "autoApply": true,
                                                             "applyLabel": "Выбрать",
@@ -749,7 +651,7 @@
                                         <tr>
                                             <td>Регистрационный номер</td>
                                             <td>
-                                                <input type="text" asp-for="listObrazovan[i].reg_nom" />
+                                                <input type="text" asp-for="listObrazovan[i].reg_nom" readonly />
                                             </td>
                                         </tr>
                                     </table>
@@ -769,7 +671,6 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
                         Файлы
                     </a>
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#File" form="0"><strong>+</strong></button>
                 </h4>
             </div>
             <div id="collapse5" class="panel-collapse collapse in">
@@ -822,7 +723,6 @@
                         {
                             <li>
                                 <a href="#file_@row.Id" style="float: left; " data-toggle="tab">Файл  @row.name_f</a>
-                                <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del_file" value="@row.Id" form="0"><strong>Х</strong></button>
                             </li>
 
 
@@ -855,7 +755,7 @@
                                     <tr>
                                         <td>Тип файла</td>
                                         <td>
-                                            <select asp-for="listFile[i].kategor_f">
+                                            <select asp-for="listFile[i].kategor_f" disabled>
                                                 <option value="">Выберите категорию файла</option>
                                                 <option label="Заявление о проведении аттестации" value="AttestApplication">Заявление о проведении аттестации</option>
                                                 <option label="Копия аттестационного листа предыдущей аттестации" value="PrevAttestCopy">Копия аттестационного листа предыдущей аттестации</option>
@@ -866,7 +766,7 @@
                                                 <option label="Раздел V" value="Section5">Раздел V</option>
                                                 <option label="Согласие на обработку персональных данных" value="PersonalInfoAgreement">Согласие на обработку персональных данных</option>
                                             </select>
-
+                                            <input type="hidden" asp-for="listFile[i].kategor_f" readonly>
                                             <script>
                                                 //  alert(kateg.length);
 
@@ -910,7 +810,6 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
                         Научно-методическая деятельность
                     </a>
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#Nauch" form="0"><strong>+</strong></button>
                 </h4>
             </div>
             <div id="collapse6" class="panel-collapse collapse in">
@@ -921,7 +820,6 @@
 
                             <li>
                                 <a href="#nauch_@row.Id" style="float: left; " data-toggle="tab">@row.nazv</a>
-                                <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del_Nauch" value="@row.Id" form="0"><strong>Х</strong></button>
                             </li>
 
                         }
@@ -940,38 +838,38 @@
                                     <tr>
                                         <td>Период</td>
                                         <td>
-                                            <input type="text" asp-for="listNauch_deyat[i].period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
+                                            <input type="text" asp-for="listNauch_deyat[i].period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" readonly />
 
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Название работы</td>
                                         <td>
-                                            <input type="text" asp-for="listNauch_deyat[i].nazv" required />
+                                            <input type="text" asp-for="listNauch_deyat[i].nazv" readonly />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Название продукта</td>
                                         <td>
-                                            <input type="text" asp-for="listNauch_deyat[i].nazv_p" />
+                                            <input type="text" asp-for="listNauch_deyat[i].nazv_p" readonly />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Уровень</td>
                                         <td>
-                                            <input type="text" asp-for="listNauch_deyat[i].urov" />
+                                            <input type="text" asp-for="listNauch_deyat[i].urov" readonly />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Статус участия</td>
                                         <td>
-                                            <input type="text" asp-for="listNauch_deyat[i].status" />
+                                            <input type="text" asp-for="listNauch_deyat[i].status" readonly />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Реализовано</td>
                                         <td>
-                                            <input type="text" asp-for="listNauch_deyat[i].realiz" />
+                                            <input type="text" asp-for="listNauch_deyat[i].realiz" readonly />
                                         </td>
                                     </tr>
                                     <tr>
@@ -995,7 +893,6 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">
                         Профессиональное научное развитие
                     </a>
-                    <button style="position: absolute; right: 0.3em; top:0em; margin:0; " data-toggle="modal" data-target="#Prof" form="0"><strong>+</strong></button>
                 </h4>
             </div>
             <div id="collapse7" class="panel-collapse collapse in">
@@ -1005,7 +902,6 @@
                         {
                             <li>
                                 <a href="#prof_@row.Id" style="float: left; " data-toggle="tab">Звание  @row.uch_zvanie</a>
-                                <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del_Prof" value="@row.Id" form="0"><strong>Х</strong></button>
                             </li>
 
                         }
@@ -1024,74 +920,75 @@
                                     <tr>
                                         <td>Ученая степень</td>
                                         <td>
-                                            <input type="text" asp-for="listProfRazv[i].uch_stepen" />
+                                            <input type="text" asp-for="listProfRazv[i].uch_stepen" readonly />
 
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Ученое звание</td>
                                         <td>
-                                            <input type="text" asp-for="listProfRazv[i].uch_zvanie" required />
+                                            <input type="text" asp-for="listProfRazv[i].uch_zvanie" readonly />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Код научной специальности</td>
                                         <td>
-                                            <input type="text" asp-for="listProfRazv[i].kod_nauc_spec" />
+                                            <input type="text" asp-for="listProfRazv[i].kod_nauc_spec" readonly />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Название документа</td>
                                         <td>
-                                            <select asp-for="listProfRazv[i].nazv_doc">
+                                            <select asp-for="listProfRazv[i].nazv_doc" disabled>
                                                 <option value="?" label="Выберите документ" selected="selected"></option>
                                                 <option label="Удостоверение сданных экзаменов" value="ExamCertificate">Удостоверение сданных экзаменов</option>
                                                 <option label="Справка об обучении в аспирантуре" value="PostgraduateCertificate">Справка об обучении в аспирантуре</option>
                                                 <option label="Диплом" value="Diploma">Диплом</option>
                                             </select>
+                                            <input type="hidden" asp-for="listProfRazv[i].nazv_doc" readonly>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Организация</td>
                                         <td>
-                                            <input type="text" asp-for="listProfRazv[i].org_d" />
+                                            <input type="text" asp-for="listProfRazv[i].org_d" readonly />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Серия</td>
                                         <td>
-                                            <input type="text" asp-for="listProfRazv[i].ser_d" />
+                                            <input type="text" asp-for="listProfRazv[i].ser_d" readonly />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Номер документа</td>
                                         <td>
-                                            <input type="text" asp-for="listProfRazv[i].non_d" />
+                                            <input type="text" asp-for="listProfRazv[i].non_d" readonly />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Дата выдачи</td>
                                         <td>
-                                            <input type="text" id="d_v_rw_@i" asp-for="listProfRazv[i].data_vid_d" />
+                                            <input type="text" id="d_v_rw_@i" asp-for="listProfRazv[i].data_vid_d" readonly />
                                             <script>
 
-                                                $(function () {
-                                                    /**/
-                                                    $('#d_v_rw_@i').daterangepicker({
+                                            $(function () {
+                                                /**/
+                                                $('#d_v_rw_@i').daterangepicker({
 
-                                                        singleDatePicker: true,
-                                                        showDropdowns: true,
-                                                        minYear: 1970,
+                                                    singleDatePicker: true,
+                                                    showDropdowns: true,
+                                                   "minDate": "01/01/1970","maxDate": dataN,
 
-                                                        "autoApply": true,
-                                                        "applyLabel": "Выбрать",
-                                                        "cancelLabel": "Отменить",
-                                                        locale: {
-                                                            format: 'DD.MM.YYYY',
-                                                            "firstDay": 1
-                                                        }
-                                                    });
+                                                    "autoApply": true,
+                                                    "applyLabel": "Выбрать",
+                                                    "cancelLabel": "Отменить",
+                                                    locale: {
+                                                        format: 'DD.MM.YYYY',
+                                                        "firstDay": 1
+                                                    }
                                                 });
+                                            });
                                             </script>
                                         </td>
                                     </tr>
@@ -1102,23 +999,35 @@
                     </div>
                 </div>
             </div>
-            <table>
+
+
+        </div>
+
+        <table>
+            <tr>
+                <td>Итоговый балл</td>
+                <td>
+                    <input type="text" asp-for="Zayavlen.ball" required />
+                </td>
+            </tr>
+
+            @if (Model.Zayavlen.status == "Заявление подлинное" && Model.Users.role == "3")
+            {
                 <tr>
-                    <td>Итоговый балл</td>
                     <td>
-                        <input type="text" asp-for="Zayavlen.ball" />
+                        <input type="hidden" asp-for="Users.role" />
                     </td>
-                </tr>
-                <tr>
-                    <td></td>
+
                     <td>
                         <input type="checkbox" id="Sogl" required /><label for="Sogl">Я потверждаю оценку и закрываю обработку заявления</label>
 
                         <span for="Sogl" />
                     </td>
+
                 </tr>
-            </table>
-        </div>
+
+            }
+        </table>
         <input type="hidden" asp-for="Zayavlen.Id" />
 
         <input type="hidden" asp-for="Zayavlen.id_user" />
@@ -1126,812 +1035,16 @@
 
 
 
-
-        <input type="submit" value="Сохранить" />
-
-
-
-
-        <script>
-
-            $('#formId [type="submit"]').click(function () {
-                // выбираем все невидимые обязательные поля
-
-                $('input, textarea, select').filter('[required]:hidden').each(function () {
-                    // проверяем их заполненность
-                    if (!$(this)[0].checkValidity()) {
-                        //id collapse
-                        var collId = $(this).closest('.collapse').attr('id');
-                        //id taba
-                        var tabId = $(this).closest('.tab-pane').attr('id');
-                        // переключаем collapse
-                        $('#' + collId).removeClass('in collapse');
-                        $('#' + collId).addClass('collapsed');
-                        // переключаем таб
-                        $('.nav-tabs a[href="#' + tabId + '"]').tab('show');
-
-                        // прерываем обработку остальных обязательных полей
-                        return false;
-                    }
-                });
+        @if (Model.Zayavlen.status == "Заявление подлинное" && Model.Users.role == "3")
+        {
+            <input id="sohr" type="submit" value="Сохранить" />
+        }
 
 
 
-                $('input, textarea, select').filter('[pattern]').each(function () {
-                    // проверяем их заполненность
-                    if (!$(this)[0].checkValidity()) {
-                        //id collapse
-                        var collId = $(this).closest('.collapse').attr('id');
-                        //id taba
-                        var tabId = $(this).closest('.tab-pane').attr('id');
-
-                        // переключаем таб
-                        $('.nav-tabs a[href="#' + tabId + '"]').tab('show');
-                        // переключаем collapse
-                        $('#' + collId).removeClass('in collapse');
-                        $('#' + collId).addClass('collapsed');
-
-                        // прерываем обработку остальных обязательных полей
-                        return false;
-                    }
-                });
-            });
-
-        </script>
     </form>
 
 
-
-    <!-- Modal Obr -->
-    <div class="modal fade bs-example-modal-lg" id="obr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Образование</h4>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <form method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <input type="hidden" asp-for="Zayavlen.Id" />
-                        <table>
-                            <tr>
-                                <td>ОО</td>
-                                <td>
-                                    <input type="text" value="" asp-for="Obrazovan.oo" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Периодобучения</td>
-                                <td>
-                                    <input type="text" value="" asp-for="Obrazovan.period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
-
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Муниципалитет</td>
-                                <td>
-                                    <input type="text" value="" asp-for="Obrazovan.mo" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Специальность</td>
-                                <td>
-                                    <input type="text" value="" asp-for="Obrazovan.special" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Квалификация</td>
-                                <td>
-                                    <input type="text" value="" asp-for="Obrazovan.kvalif" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Тип документа</td>
-                                <td>
-                                    <input type="text" value="" asp-for="Obrazovan.nazv_doc" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Серия</td>
-                                <td>
-                                    <input type="text" value="" asp-for="Obrazovan.ser_doc" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Номер документа</td>
-                                <td>
-                                    <input type="text" value="" asp-for="Obrazovan.nom_doc" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Дата выдачи</td>
-                                <td>
-                                    <input type="text" id="md_v_o" value="" asp-for="Obrazovan.data_doc" />
-                                    <script>
-
-                                        $(function () {
-                                            $('#md_v_o').daterangepicker({
-                                                singleDatePicker: true,
-                                                showDropdowns: true,
-                                                minYear: 1970,
-
-                                                autoApply: true,
-                                                locale: {
-                                                    format: 'DD.MM.YYYY',
-                                                    "firstDay": 1
-                                                }
-                                            });
-                                        });
-                                    </script>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Регистрационный номер</td>
-                                <td>
-                                    <input type="text" value="" asp-for="Obrazovan.reg_nom" />
-                                </td>
-                            </tr>
-                        </table>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                        <button type="submit" class="" asp-controller="User" asp-action="Save_Obr">Сохранить изменения</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Modal Kurs -->
-    <div class="modal fade bs-example-modal-lg" id="kurs" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Курсы повышения квалификации</h4>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <form method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <input type="hidden" asp-for="Zayavlen.Id" />
-                        <table>
-                            <tr>
-                                <td>Организация</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.oo" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Периодобучения</td>
-                                <td>
-
-                                    <input type="text" id="mdaterange" asp-for="Obrazovan.period" />
-
-
-                                    <script>
-
-                                        $(function () {
-                                            $('#mdaterange').daterangepicker({
-                                                opens: 'left',
-                                                showDropdowns: true,
-                                                minYear: 1970,
-
-
-                                                locale: {
-                                                    "format": "DD.MM.YYYY",
-                                                    "applyLabel": "Выбрать",
-                                                    "cancelLabel": "Отменить",
-                                                    "firstDay": 1
-                                                }
-                                            });
-                                        });
-                                    </script>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Место прохождения</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.mo" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Кол-во часов</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.kol_chas" pattern="^[ 0-9]+$" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Тема курсов</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.special" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Форма участия/проведения</td>
-                                <td>
-
-                                    <select asp-for="Obrazovan.kvalif">
-                                        <option value="">Выберите форму проведения</option>
-                                        <option label="Очная" value="FullTime">Очная</option>
-                                        <option label="Дистанционная" value="Distance">Дистанционная</option>
-                                        <option label="Очно-дистанционная" value="FullTimeDistance">Очно-дистанционная</option>
-                                        <option label="Заочная" value="Extramural">Заочная</option>
-                                    </select>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Название документа</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.nazv_doc" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Серия</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.ser_doc" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Номер документа</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.nom_doc" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Дата выдачи</td>
-                                <td>
-                                    <input type="text" id="md_v_k" asp-for="Obrazovan.data_doc" />
-                                    <script>
-
-                                        $(function () {
-                                            $('#md_v_k').daterangepicker({
-                                                singleDatePicker: true,
-                                                showDropdowns: true,
-                                                minYear: 1970,
-
-                                                "autoApply": true,
-
-                                                locale: {
-                                                    format: 'DD.MM.YYYY',
-                                                    "firstDay": 1
-                                                }
-                                            });
-                                        });
-                                    </script>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Регистрационный номер</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.reg_nom" />
-                                </td>
-                            </tr>
-                        </table>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                        <button type="submit" class="" asp-controller="User" asp-action="Save_Kurs">Сохранить изменения</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-
-
-    <!-- Modal Vtor -->
-    <div class="modal fade bs-example-modal-lg" id="Vtor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Второе высшее образование и профессиональная переподготовка</h4>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <form method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <input type="hidden" asp-for="Zayavlen.Id" />
-                        <table>
-                            <tr>
-                                <td>Организация</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.oo" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Период обучения</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Место прохождения</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.mo" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Кол-во часов</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.kol_chas" pattern="^[ 0-9]+$" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Вид обучения</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.vid_obuch" />
-                                </td>
-                            </tr>
-                            <tr>
-                            <tr>
-                                <td>Специальность</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.special" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Квалификация</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.kvalif" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Название документа</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.nazv_doc" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Серия</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.ser_doc" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Номер документа</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.nom_doc" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Дата выдачи</td>
-                                <td>
-                                    <input type="text" id="md_v_vw_" asp-for="Obrazovan.data_doc" />
-                                    <script>
-
-                                        $(function () {
-                                            $('#md_v_vw_').daterangepicker({
-                                                singleDatePicker: true,
-                                                showDropdowns: true,
-                                                minYear: 1970,
-
-                                                "autoApply": true,
-
-                                                locale: {
-                                                    format: 'DD.MM.YYYY',
-                                                    "firstDay": 1
-                                                }
-                                            });
-                                        });
-                                    </script>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Регистрационный номер</td>
-                                <td>
-                                    <input type="text" asp-for="Obrazovan.reg_nom" />
-                                </td>
-                            </tr>
-                        </table>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                        <button type="submit" class="" asp-controller="User" asp-action="Save_VV">Сохранить изменения</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-
-    <!-- Modal Nauch -->
-    <div class="modal fade bs-example-modal-lg" id="Nauch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Научно-методическая деятельность</h4>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <form method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <input type="hidden" asp-for="Zayavlen.Id" />
-                        <table>
-                            <tr>
-                                <td>Период</td>
-                                <td>
-                                    <input type="text" asp-for="Nauch_Deyat.period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Название работы</td>
-                                <td>
-                                    <input type="text" asp-for="Nauch_Deyat.nazv" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Название продукта</td>
-                                <td>
-                                    <input type="text" asp-for="Nauch_Deyat.nazv_p" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Уровень</td>
-                                <td>
-                                    <input type="text" asp-for="Nauch_Deyat.urov" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Статус участия</td>
-                                <td>
-                                    <input type="text" asp-for="Nauch_Deyat.status" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Реализовано</td>
-                                <td>
-                                    <input type="text" asp-for="Nauch_Deyat.realiz" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Электронный адрес публикации</td>
-                                <td>
-                                    <input type="text" asp-for="Nauch_Deyat.el_adr" />
-                                </td>
-                            </tr>
-                        </table>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                        <button type="submit" class="" asp-controller="User" asp-action="Save_Nauch">Сохранить изменения</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Modal Prof -->
-    <div class="modal fade bs-example-modal-lg" id="Prof" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Профессиональное научное развитие</h4>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <form method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <input type="hidden" asp-for="Zayavlen.Id" />
-                        <table>
-                            <tr>
-                                <td>Ученая степень</td>
-                                <td>
-                                    <input type="text" asp-for="ProfRazv.uch_stepen" />
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Ученое звание</td>
-                                <td>
-                                    <input type="text" asp-for="ProfRazv.uch_zvanie" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Код научной специальности</td>
-                                <td>
-                                    <input type="text" asp-for="ProfRazv.kod_nauc_spec" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Название документа</td>
-                                <td>
-                                    <select asp-for="ProfRazv.nazv_doc">
-                                        <option value="?" selected="selected"></option>
-                                        <option label="Удостоверение сданных экзаменов" value="ExamCertificate">Удостоверение сданных экзаменов</option>
-                                        <option label="Справка об обучении в аспирантуре" value="PostgraduateCertificate">Справка об обучении в аспирантуре</option>
-                                        <option label="Диплом" value="Diploma">Диплом</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Организация</td>
-                                <td>
-                                    <input type="text" asp-for="ProfRazv.org_d" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Серия</td>
-                                <td>
-                                    <input type="text" asp-for="ProfRazv.ser_d" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Номер документа</td>
-                                <td>
-                                    <input type="text" asp-for="ProfRazv.non_d" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Дата выдачи</td>
-                                <td>
-                                    <input type="text" id="md_v_rw_" asp-for="ProfRazv.data_vid_d" />
-                                    <script>
-
-                                        $(function () {
-                                            /**/
-                                            $('#md_v_rw_').daterangepicker({
-
-                                                singleDatePicker: true,
-                                                showDropdowns: true,
-                                                minYear: 1970,
-
-                                                "autoApply": true,
-
-                                                locale: {
-                                                    format: 'DD.MM.YYYY',
-                                                    "firstDay": 1
-                                                }
-                                            });
-                                        });
-                                    </script>
-                                </td>
-                            </tr>
-                        </table>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                        <button type="submit" class="" asp-controller="User" asp-action="Save_Prof">Сохранить изменения</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-    <!-- Modal file-->
-    <div class="modal fade bs-example-modal-lg" id="File" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Файлы</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
-                </div>
-                <div class="modal-body">
-
-                    <form asp-action="AddFile" asp-controller="User" method="post" enctype="multipart/form-data">
-
-                        <input type="hidden" asp-for="Zayavlen.Id" />
-                        <input type="text" asp-for="FileModel.name_f" id="find" />
-                        <select asp-for="FileModel.kategor_f" id="file-category_AddFile" required>
-                            <option value="">Выберите категорию файла</option>
-                            <option label="Заявление о проведении аттестации" value="AttestApplication">Заявление о проведении аттестации</option>
-                            <option label="Копия аттестационного листа предыдущей аттестации" value="PrevAttestCopy">Копия аттестационного листа предыдущей аттестации</option>
-                            <option label="Раздел I" value="Section1">Раздел I</option>
-                            <option label="Раздел II" value="Section2">Раздел II</option>
-                            <option label="Раздел III" value="Section3">Раздел III</option>
-                            <option label="Раздел IV" value="Section4">Раздел IV</option>
-                            <option label="Раздел V" value="Section5">Раздел V</option>
-                            <option label="Согласие на обработку персональных данных" value="PersonalInfoAgreement">Согласие на обработку персональных данных</option>
-                        </select>
-
-                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
-                        <div class="file">
-                            <div class="form-group">
-                                <input type="file" name="uploadedFile" id="uploadedFile" class="input-file" required>
-                                <label for="uploadedFile" class="btn btn-tertiary js-labelFile">
-                                    <i class="icon fa fa-check"></i>
-                                    <span class="js-fileName">Загрузить файл</span>
-                                </label>
-                            </div>
-                        </div>
-                        <script>
-                            (function () {
-
-                                'use strict';
-
-                                $('.input-file').each(function () {
-                                    var $input = $(this),
-                                        $label = $input.next('.js-labelFile'),
-                                        labelVal = $label.html();
-
-                                    $input.on('change', function (element) {
-                                        var fileName = '';
-                                        if (element.target.value) fileName = element.target.value.split('\\').pop();
-                                        fileName ? $label.addClass('has-file').find('.js-fileName').html(fileName) : $label.removeClass('has-file').html(labelVal);
-
-                                        document.getElementById('find').value = fileName;
-
-
-                                    });
-                                });
-
-                            })();
-                        </script>
-
-
-                        <input type="submit" value="Загрузить" />
-                    </form>
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                    <button type="button" class="">Сохранить изменения</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Modal del_obr -->
-    <div class="modal fade bs-example-modal-sm" id="Del" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Выдействительно хотите удалить запись?</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <form asp-action="Del_Obr" asp-controller="User" method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <input type="hidden" asp-for="Zayavlen.Id" />
-                        <input type="hidden" class="result" asp-for="Obrazovan.Id" />
-                    </div>
-                    <div class="modal-footer">
-
-                        <button type="submit" style="background-color: #ffb4bb; box-shadow: inset 0 0 0 3px #ff0000" class="" asp-controller="User" asp-route-id="#obr_del" asp-action="Del_Obr">Удалить запись</button>
-                    </div>
-                </form>
-                <script>
-                    window.addEventListener("DOMContentLoaded", function () {
-                        var but = document.querySelectorAll(".button_del"),
-                            res = document.querySelector(".result");
-                        [].forEach.call(but, function (item) {
-                            item.addEventListener("click", function () {
-                                res.value = item.value
-                            })
-                        })
-                    });
-                </script>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal del_file -->
-    <div class="modal fade bs-example-modal-sm" id="Del_file" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Выдействительно хотите удалить файл?</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <form asp-action="Del_Obr" asp-controller="User" method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <input type="hidden" asp-for="Zayavlen.Id" />
-                        <input type="text" class="result_file" asp-for="FileModel.Id" />
-                    </div>
-                    <div class="modal-footer">
-
-                        <button type="submit" style="background-color: #ffb4bb; box-shadow: inset 0 0 0 3px #ff0000" class="" asp-controller="User" asp-action="Del_File">Удалить файл</button>
-                    </div>
-                </form>
-                <script>
-                    window.addEventListener("DOMContentLoaded", function () {
-                        var but = document.querySelectorAll(".button_del"),
-                            res = document.querySelector(".result_file");
-                        [].forEach.call(but, function (item) {
-                            item.addEventListener("click", function () {
-                                res.value = item.value;
-                            })
-                        })
-                    });
-                </script>
-
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Modal del_nauch -->
-    <div class="modal fade bs-example-modal-sm" id="Del_Nauch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Выдействительно хотите удалить запись?</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <form asp-action="Del_Obr" asp-controller="User" method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <input type="hidden" asp-for="Zayavlen.Id" />
-                        <input type="text" class="result_nauch" asp-for="Nauch_Deyat.Id" />
-                    </div>
-                    <div class="modal-footer">
-
-                        <button type="submit" style="background-color: #ffb4bb; box-shadow: inset 0 0 0 3px #ff0000" class="" asp-controller="User" asp-action="Del_Nauch">Удалить запись</button>
-                    </div>
-                </form>
-                <script>
-                    window.addEventListener("DOMContentLoaded", function () {
-                        var but = document.querySelectorAll(".button_del"),
-                            res = document.querySelector(".result_nauch");
-                        [].forEach.call(but, function (item) {
-                            item.addEventListener("click", function () {
-                                res.value = item.value
-                            })
-                        })
-                    });
-                </script>
-
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Modal del_prof -->
-    <div class="modal fade bs-example-modal-sm" id="Del_Prof" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Выдействительно хотите удалить запись?</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <form asp-action="Del_Obr" asp-controller="User" method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <input type="hidden" asp-for="Zayavlen.Id" />
-                        <input type="text" class="result_prof" asp-for="ProfRazv.Id" />
-                    </div>
-                    <div class="modal-footer">
-
-                        <button type="submit" style="background-color: #ffb4bb; box-shadow: inset 0 0 0 3px #ff0000" class="" asp-controller="User" asp-action="Del_Prof">Удалить запись</button>
-                    </div>
-                </form>
-                <script>
-                    window.addEventListener("DOMContentLoaded", function () {
-                        var but = document.querySelectorAll(".button_del"),
-                            res = document.querySelector(".result_prof");
-                        [].forEach.call(but, function (item) {
-                            item.addEventListener("click", function () {
-                                res.value = item.value
-                            })
-                        })
-                    });
-                </script>
-
-            </div>
-        </div>
-    </div>
 
 
 

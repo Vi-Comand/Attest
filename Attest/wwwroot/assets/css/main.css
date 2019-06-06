@@ -1993,7 +1993,7 @@ textarea {
     input[type="password"]:read-only,
     input[type="email"]:read-only,
     input[type="tel"]:read-only {
-        background: rgba(204, 204, 204, 0.470);
+        background: rgba(10, 249, 116, 0.07);
     }
 
     input[type="text"]:focus,
